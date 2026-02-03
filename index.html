@@ -528,7 +528,7 @@
             if (!text) return '';
             let formatted = text.replace(/\n/g, '<br>');
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
             return formatted.replace(urlRegex, (url) => {
                 try {
                     // Decode URL to show readable Hindi text
