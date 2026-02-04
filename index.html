@@ -67,6 +67,53 @@
         .gradient-header {
             background: linear-gradient(135deg, #008069 0%, #00a884 100%);
         }
+
+        /* Autocomplete dropdown styles */
+        .autocomplete-dropdown {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 30;
+        }
+        
+        .autocomplete-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .autocomplete-item:hover {
+            background: #f0f9ff;
+        }
+        
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-highlight {
+            color: #008069;
+            font-weight: 600;
+        }
+        
+        .autocomplete-dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .autocomplete-dropdown::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="min-h-screen md:flex md:justify-center md:items-center" style="background: #008069;">
@@ -118,7 +165,7 @@
                 </div>
             </div>
 
-            <!-- Welcome Message (only shown on first load) -->
+            <!-- Welcome Message -->
             <div id="welcome-message" class="flex justify-start">
                 <div class="max-w-[85%] p-3 rounded-lg rounded-tl-none shadow-sm bg-white message-box triangle-left">
                     <div class="text-gray-800 text-[14px] leading-relaxed">
@@ -156,7 +203,7 @@
             <div class="flex justify-center gap-1.5" id="indicators"></div>
         </div>
 
-        <!-- Toggle Suggestions Button (shown after chips are hidden) -->
+        <!-- Toggle Suggestions Button -->
         <div id="toggle-chips-btn" class="hidden absolute bottom-[72px] right-4 z-10">
             <button onclick="toggleChipsVisibility()" class="bg-white text-[#008069] border-2 border-[#008069] rounded-full px-3 py-1.5 text-xs font-semibold shadow-lg hover:bg-[#008069] hover:text-white transition-all flex items-center gap-1">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
@@ -164,489 +211,26 @@
             </button>
         </div>
 
-        <!-- Input Area -->
-        <div class="bg-[#f0f2f5] p-2 flex items-center gap-2 z-20 shadow-lg">
+        <!-- Input Area with Autocomplete -->
+        <div class="bg-[#f0f2f5] p-2 flex items-center gap-2 z-20 shadow-lg relative">
+            <!-- Autocomplete Dropdown -->
+            <div id="autocomplete-dropdown" class="autocomplete-dropdown hidden"></div>
+            
             <button class="text-gray-500 p-1 hover:bg-gray-200 rounded-full transition">
                 <i data-lucide="smile" class="w-6 h-6"></i>
             </button>
             <input type="text" id="user-input" placeholder="Ask me anything about Kurukshetra..." 
                 class="flex-1 py-2 px-4 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-[#008069]/20 text-sm h-10 shadow-sm"
-                onkeypress="handleKeyPress(event)">
+                onkeypress="handleKeyPress(event)"
+                oninput="handleAutocomplete(event)"
+                autocomplete="off">
             <button onclick="sendMessage()" class="bg-gradient-to-r from-[#008069] to-[#00a884] p-2.5 rounded-full text-white hover:shadow-md transition-all">
                 <i data-lucide="send" class="w-5 h-5"></i>
             </button>
         </div>
     </div>
 
-    <script>
-        // CONFIGURATION
-        const N8N_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/chat"; 
-
-        // LANGUAGE SUPPORT
-        let currentLanguage = localStorage.getItem('preferred_language') || 'en';
-        
-        const translations = {
-            en: {
-                title: "Kurukshetra InfoBot",
-                subtitle: "Powered by AI • 24/7 Available",
-                officialInfo: "Official Information",
-                officialDesc: "All responses are sourced from",
-                welcomeTitle: "Namaste!",
-                welcomeText: "I'm your AI assistant for Kurukshetra district. Ask me about:",
-                welcomeOfficers: "Officers & Departments",
-                welcomeTourist: "Tourist Places & Heritage",
-                welcomeServices: "Services & Schemes",
-                welcomeDistrict: "District Information",
-                welcomeEmergency: "Emergency Contacts",
-                welcomeSuggestion: "Try the suggestions below to get started!",
-                inputPlaceholder: "Ask me anything about Kurukshetra...",
-                clearChat: "Clear chat",
-                visitWebsite: "Visit Website",
-                suggestions: "Suggestions",
-                typing: "Typing...",
-                categories: {
-                    general: "🏛️ General Info",
-                    services: "📋 Services",
-                    heritage: "🕉️ Heritage",
-                    government: "🏢 Government"
-                }
-            },
-            hi: {
-                title: "कुरुक्षेत्र इन्फोबॉट",
-                subtitle: "AI द्वारा संचालित • 24/7 उपलब्ध",
-                officialInfo: "आधिकारिक जानकारी",
-                officialDesc: "सभी उत्तर यहाँ से प्राप्त किए गए हैं",
-                welcomeTitle: "नमस्ते!",
-                welcomeText: "मैं कुरुक्षेत्र जिले के लिए आपका AI सहायक हूँ। मुझसे पूछें:",
-                welcomeOfficers: "अधिकारी और विभाग",
-                welcomeTourist: "पर्यटन स्थल और विरासत",
-                welcomeServices: "सेवाएं और योजनाएं",
-                welcomeDistrict: "जिला जानकारी",
-                welcomeEmergency: "आपातकालीन संपर्क",
-                welcomeSuggestion: "शुरू करने के लिए नीचे दिए गए सुझाव आज़माएं!",
-                inputPlaceholder: "कुरुक्षेत्र के बारे में कुछ भी पूछें...",
-                clearChat: "चैट साफ़ करें",
-                visitWebsite: "वेबसाइट पर जाएं",
-                suggestions: "सुझाव",
-                typing: "टाइप कर रहा है...",
-                categories: {
-                    general: "🏛️ सामान्य जानकारी",
-                    services: "📋 सेवाएं",
-                    heritage: "🕉️ विरासत",
-                    government: "🏢 सरकार"
-                }
-            }
-        }; 
-
-        // ROTATING QUESTION SETS - Auto-cycles through different categories
-        const QUESTION_SETS = {
-            en: [
-                {
-                    title: "🏛️ General Info",
-                    questions: [
-                        { icon: "👤", text: "Who is DC?" },
-                        { icon: "🚨", text: "Emergency" },
-                        { icon: "🏛️", text: "Tourist Places" },
-                        { icon: "📊", text: "Population" }
-                    ]
-                },
-                {
-                    title: "📋 Services",
-                    questions: [
-                        { icon: "📋", text: "Birth Certificate" },
-                        { icon: "🏥", text: "Hospitals" },
-                        { icon: "🎓", text: "Universities" },
-                        { icon: "🚍", text: "How to reach?" }
-                    ]
-                },
-                {
-                    title: "🕉️ Heritage",
-                    questions: [
-                        { icon: "🕉️", text: "48 Kos Parikrama" },
-                        { icon: "🛕", text: "Brahma Sarovar" },
-                        { icon: "🏺", text: "Archaeological sites" },
-                        { icon: "📿", text: "Gita Jayanti" }
-                    ]
-                },
-                {
-                    title: "🏢 Government",
-                    questions: [
-                        { icon: "🏢", text: "SDM Office" },
-                        { icon: "📝", text: "Latest Tenders" },
-                        { icon: "💼", text: "Job Vacancies" },
-                        { icon: "🌾", text: "Agriculture Dept" }
-                    ]
-                }
-            ],
-            hi: [
-                {
-                    title: "🏛️ सामान्य जानकारी",
-                    questions: [
-                        { icon: "👤", text: "DC कौन हैं?" },
-                        { icon: "🚨", text: "आपातकालीन नंबर" },
-                        { icon: "🏛️", text: "पर्यटन स्थल" },
-                        { icon: "📊", text: "जनसंख्या" }
-                    ]
-                },
-                {
-                    title: "📋 सेवाएं",
-                    questions: [
-                        { icon: "📋", text: "जन्म प्रमाण पत्र" },
-                        { icon: "🏥", text: "अस्पताल" },
-                        { icon: "🎓", text: "विश्वविद्यालय" },
-                        { icon: "🚍", text: "कैसे पहुंचें?" }
-                    ]
-                },
-                {
-                    title: "🕉️ विरासत",
-                    questions: [
-                        { icon: "🕉️", text: "48 कोस परिक्रमा" },
-                        { icon: "🛕", text: "ब्रह्म सरोवर" },
-                        { icon: "🏺", text: "पुरातात्विक स्थल" },
-                        { icon: "📿", text: "गीता जयंती" }
-                    ]
-                },
-                {
-                    title: "🏢 सरकारी",
-                    questions: [
-                        { icon: "🏢", text: "SDM कार्यालय" },
-                        { icon: "📝", text: "नवीनतम निविदाएं" },
-                        { icon: "💼", text: "नौकरी रिक्तियां" },
-                        { icon: "🌾", text: "कृषि विभाग" }
-                    ]
-                }
-            ]
-        };
-        
-        let currentSetIndex = 0;
-        let rotationInterval;
-
-        let messages = JSON.parse(localStorage.getItem('kwr_chat_history')) || [];
-
-        // --- Initialization ---
-        document.addEventListener("DOMContentLoaded", () => {
-            lucide.createIcons();
-            
-            // Apply language on load
-            updateUI();
-            
-            // Hide welcome message and chips if chat history exists
-            if (messages.length > 0) {
-                document.getElementById('welcome-message').style.display = 'none';
-                document.getElementById('chips-container').classList.add('hidden');
-                document.getElementById('toggle-chips-btn').classList.remove('hidden');
-                stopRotation();
-            } else {
-                // Only show chips and start rotation if no chat history
-                renderChips();
-                renderIndicators();
-                startRotation();
-            }
-            
-            renderMessages();
-            scrollToBottom();
-        });
-
-        // --- Rendering ---
-        function renderMessages() {
-            const container = document.getElementById('messages-list');
-            container.innerHTML = messages.map(msg => `
-                <div class="flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}">
-                    <div class="max-w-[85%] p-2 px-3 rounded-lg shadow-sm text-[14px] leading-relaxed relative message-box 
-                        ${msg.role === 'user' ? 'bg-[#d9fdd3] rounded-tr-none triangle-right' : 'bg-white rounded-tl-none triangle-left'}">
-                        <div class="text-gray-800 break-words">${formatText(msg.content)}</div>
-                        <div class="text-[10px] text-gray-500 text-right mt-1 flex justify-end gap-1">
-                            ${msg.time} ${msg.role === 'user' ? '<span class="text-[#53bdeb]">✓✓</span>' : ''}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderChips(skipAnimation = false) {
-            const grid = document.getElementById('chips-grid');
-            const titleEl = document.getElementById('chips-title');
-            
-            // Safety check: ensure valid language and index
-            if (!QUESTION_SETS[currentLanguage]) {
-                console.error('Invalid language:', currentLanguage);
-                currentLanguage = 'en'; // Fallback to English
-            }
-            
-            if (currentSetIndex >= QUESTION_SETS[currentLanguage].length) {
-                currentSetIndex = 0; // Reset to first set
-            }
-            
-            const currentSet = QUESTION_SETS[currentLanguage][currentSetIndex];
-            
-            if (!currentSet || !currentSet.questions) {
-                console.error('Invalid question set:', currentSet);
-                return;
-            }
-            
-            if (skipAnimation) {
-                // Immediate render without animation (for toggling visibility)
-                titleEl.textContent = currentSet.title;
-                grid.innerHTML = currentSet.questions.map(q => `
-                    <button onclick="handleChipClick('${q.text.replace(/'/g, "\\'")}')" 
-                        class="chip-button w-full bg-white text-[#008069] border-2 border-[#008069] px-3 py-2.5 rounded-xl text-sm shadow-md font-semibold hover:bg-[#008069] hover:text-white flex items-center justify-center gap-2">
-                        <span class="text-lg">${q.icon}</span>
-                        <span>${q.text}</span>
-                    </button>
-                `).join('');
-                grid.style.opacity = '1';
-                titleEl.style.opacity = '1';
-                grid.style.transform = 'translateY(0)';
-            } else {
-                // Animated render (for rotation)
-                grid.style.opacity = '0';
-                titleEl.style.opacity = '0';
-                grid.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    titleEl.textContent = currentSet.title;
-                    grid.innerHTML = currentSet.questions.map(q => `
-                        <button onclick="handleChipClick('${q.text.replace(/'/g, "\\'")}')" 
-                            class="chip-button w-full bg-white text-[#008069] border-2 border-[#008069] px-3 py-2.5 rounded-xl text-sm shadow-md font-semibold hover:bg-[#008069] hover:text-white flex items-center justify-center gap-2">
-                            <span class="text-lg">${q.icon}</span>
-                            <span>${q.text}</span>
-                        </button>
-                    `).join('');
-                    
-                    // Fade in
-                    grid.style.transition = 'all 0.5s ease';
-                    titleEl.style.transition = 'all 0.5s ease';
-                    grid.style.opacity = '1';
-                    titleEl.style.opacity = '1';
-                    grid.style.transform = 'translateY(0)';
-                }, 300);
-            }
-        }
-        
-        function renderIndicators() {
-            const container = document.getElementById('indicators');
-            
-            // Safety check
-            if (!QUESTION_SETS[currentLanguage]) {
-                currentLanguage = 'en'; // Fallback
-            }
-            
-            container.innerHTML = QUESTION_SETS[currentLanguage].map((_, index) => `
-                <div class="w-2 h-2 rounded-full transition-all ${index === currentSetIndex ? 'bg-[#008069] w-6' : 'bg-gray-400'}"></div>
-            `).join('');
-        }
-        
-        function rotateQuestions() {
-            currentSetIndex = (currentSetIndex + 1) % QUESTION_SETS[currentLanguage].length;
-            renderChips();
-            renderIndicators();
-        }
-        
-        function startRotation() {
-            rotationInterval = setInterval(rotateQuestions, 4000); // Change every 4 seconds
-        }
-        
-        function stopRotation() {
-            if (rotationInterval) {
-                clearInterval(rotationInterval);
-            }
-        }
-
-        function toggleChipsVisibility() {
-            const chipsContainer = document.getElementById('chips-container');
-            const toggleBtn = document.getElementById('toggle-chips-btn');
-            
-            if (chipsContainer.classList.contains('hidden')) {
-                // Render chips first WITHOUT animation, then show container
-                currentSetIndex = 0; // Reset to first set
-                renderChips(true); // Skip animation for instant render
-                renderIndicators();
-                
-                // Show immediately
-                chipsContainer.classList.remove('hidden');
-                toggleBtn.classList.add('hidden');
-                startRotation();
-            } else {
-                // Hide chips
-                chipsContainer.classList.add('hidden');
-                toggleBtn.classList.remove('hidden');
-                stopRotation();
-            }
-            
-            // Recreate icons for the toggle button
-            lucide.createIcons();
-        }
-
-        // Language Functions
-        function toggleLanguage() {
-            currentLanguage = currentLanguage === 'en' ? 'hi' : 'en';
-            localStorage.setItem('preferred_language', currentLanguage);
-            currentSetIndex = 0; // Reset to first set when changing language
-            updateUI();
-            renderChips();
-            renderIndicators();
-        }
-
-        function updateUI() {
-            const t = translations[currentLanguage];
-            
-            // Update header
-            document.getElementById('header-title').textContent = t.title;
-            document.getElementById('header-subtitle').textContent = t.subtitle;
-            document.getElementById('lang-flag').textContent = currentLanguage === 'en' ? '🇬🇧' : '🇮🇳';
-            document.getElementById('lang-code').textContent = currentLanguage.toUpperCase();
-            
-            // Update official info badge
-            document.getElementById('official-info-title').textContent = t.officialInfo;
-            document.getElementById('official-info-desc').textContent = t.officialDesc;
-            
-            // Update welcome message
-            document.getElementById('welcome-title').textContent = t.welcomeTitle;
-            document.getElementById('welcome-text').textContent = t.welcomeText;
-            document.getElementById('welcome-officers').textContent = t.welcomeOfficers;
-            document.getElementById('welcome-tourist').textContent = t.welcomeTourist;
-            document.getElementById('welcome-services').textContent = t.welcomeServices;
-            document.getElementById('welcome-district').textContent = t.welcomeDistrict;
-            document.getElementById('welcome-emergency').textContent = t.welcomeEmergency;
-            document.getElementById('welcome-suggestion').textContent = t.welcomeSuggestion;
-            
-            // Update input placeholder
-            document.getElementById('user-input').placeholder = t.inputPlaceholder;
-            
-            // Update menu items
-            document.getElementById('menu-clear').textContent = t.clearChat;
-            document.getElementById('menu-visit').textContent = t.visitWebsite;
-            
-            // Update suggestions button
-            document.getElementById('suggestions-btn-text').textContent = t.suggestions;
-            
-            // Update typing indicator
-            document.getElementById('typing-text').textContent = t.typing + '...';
-        }
-
-        function formatText(text) {
-            if (!text) return '';
-            let formatted = text.replace(/\n/g, '<br>');
-            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
-            return formatted.replace(urlRegex, (url) => {
-                try {
-                    // Decode URL to show readable Hindi text
-                    const decodedUrl = decodeURIComponent(url);
-                    // Shorten if too long
-                    const displayText = decodedUrl.length > 60 
-                        ? decodedUrl.substring(0, 57) + '...' 
-                        : decodedUrl;
-                    return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium break-all">🔗 ${displayText}</a>`;
-                } catch (e) {
-                    // If decoding fails, use original
-                    return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium">🔗 ${url}</a>`;
-                }
-            });
-        }
-
-        // --- Logic ---
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
-
-        function handleChipClick(text) {
-            document.getElementById('user-input').value = text;
-            // Hide chips immediately when clicked
-            document.getElementById('chips-container').classList.add('hidden');
-            stopRotation();
-            sendMessage();
-        }
-
-        async function sendMessage() {
-            const inputEl = document.getElementById('user-input');
-            const text = inputEl.value.trim();
-            if (!text) return;
-
-            // Hide welcome message after first interaction
-            document.getElementById('welcome-message').style.display = 'none';
-            
-            // Stop rotation after first message to avoid distraction
-            stopRotation();
-
-            // 1. Add User Message
-            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            messages.push({ role: 'user', content: text, time: time });
-            saveChat();
-            renderMessages();
-            scrollToBottom();
-            inputEl.value = '';
-
-            // 2. Show Loading
-            document.getElementById('loading-indicator').classList.remove('hidden');
-            document.getElementById('chips-container').classList.add('hidden');
-            scrollToBottom();
-
-            try {
-                // 3. Call n8n
-                const response = await fetch(N8N_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        message: text,
-                        language: currentLanguage // Send language preference
-                    })
-                });
-                
-                const data = await response.json();
-                console.log('API Response:', data);
-                
-                // 4. Add Bot Message
-                let botContent = (Array.isArray(data) ? data[0].response : data.response) || 'No response received';
-                
-                const botTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                messages.push({ role: 'bot', content: botContent, time: botTime });
-                saveChat();
-
-            } catch (error) {
-                console.error('Error:', error);
-                const errorTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                messages.push({ role: 'bot', content: "⚠️ Unable to connect to server. Please try again later.", time: errorTime });
-                saveChat();
-            } finally {
-                document.getElementById('loading-indicator').classList.add('hidden');
-                // Show toggle button instead of chips after first message
-                document.getElementById('toggle-chips-btn').classList.remove('hidden');
-                lucide.createIcons();
-                renderMessages();
-                scrollToBottom();
-            }
-        }
-
-        // --- Utilities ---
-        function saveChat() {
-            localStorage.setItem('kwr_chat_history', JSON.stringify(messages));
-        }
-
-        function clearChat() {
-            if(confirm("🗑️ Delete all chat history?")) {
-                messages = [];
-                localStorage.removeItem('kwr_chat_history');
-                document.getElementById('welcome-message').style.display = 'flex';
-                renderMessages();
-                toggleMenu();
-            }
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('menu-dropdown');
-            menu.classList.toggle('hidden');
-            if (!menu.classList.contains('hidden')) {
-                lucide.createIcons();
-            }
-        }
-
-        function scrollToBottom() {
-            const container = document.getElementById('chat-container');
-            setTimeout(() => {
-                container.scrollTop = container.scrollHeight;
-            }, 100);
-        }
-    </script>
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
