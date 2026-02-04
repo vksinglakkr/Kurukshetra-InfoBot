@@ -1,0 +1,560 @@
+// ============================================
+// KURUKSHETRA INFOBOT - Main JavaScript File
+// ============================================
+
+// CONFIGURATION
+const N8N_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/chat";
+
+// GLOBAL STATE
+let currentLanguage = localStorage.getItem('preferred_language') || 'en';
+let currentSetIndex = 0;
+let rotationInterval;
+let messages = JSON.parse(localStorage.getItem('kwr_chat_history')) || [];
+let autocompleteData = { en: [], hi: [] };
+
+// TRANSLATIONS
+const translations = {
+    en: {
+        title: "Kurukshetra InfoBot",
+        subtitle: "Powered by AI • 24/7 Available",
+        officialInfo: "Official Information",
+        officialDesc: "All responses are sourced from",
+        welcomeTitle: "Namaste!",
+        welcomeText: "I'm your AI assistant for Kurukshetra district. Ask me about:",
+        welcomeOfficers: "Officers & Departments",
+        welcomeTourist: "Tourist Places & Heritage",
+        welcomeServices: "Services & Schemes",
+        welcomeDistrict: "District Information",
+        welcomeEmergency: "Emergency Contacts",
+        welcomeSuggestion: "Try the suggestions below to get started!",
+        inputPlaceholder: "Ask me anything about Kurukshetra...",
+        clearChat: "Clear chat",
+        visitWebsite: "Visit Website",
+        suggestions: "Suggestions",
+        typing: "Typing..."
+    },
+    hi: {
+        title: "कुरुक्षेत्र इन्फोबॉट",
+        subtitle: "AI द्वारा संचालित • 24/7 उपलब्ध",
+        officialInfo: "आधिकारिक जानकारी",
+        officialDesc: "सभी उत्तर यहाँ से प्राप्त किए गए हैं",
+        welcomeTitle: "नमस्ते!",
+        welcomeText: "मैं कुरुक्षेत्र जिले के लिए आपका AI सहायक हूँ। मुझसे पूछें:",
+        welcomeOfficers: "अधिकारी और विभाग",
+        welcomeTourist: "पर्यटन स्थल और विरासत",
+        welcomeServices: "सेवाएं और योजनाएं",
+        welcomeDistrict: "जिला जानकारी",
+        welcomeEmergency: "आपातकालीन संपर्क",
+        welcomeSuggestion: "शुरू करने के लिए नीचे दिए गए सुझाव आज़माएं!",
+        inputPlaceholder: "कुरुक्षेत्र के बारे में कुछ भी पूछें...",
+        clearChat: "चैट साफ़ करें",
+        visitWebsite: "वेबसाइट पर जाएं",
+        suggestions: "सुझाव",
+        typing: "टाइप कर रहा है..."
+    }
+};
+
+// ROTATING QUESTION SETS
+const QUESTION_SETS = {
+    en: [
+        {
+            title: "🏛️ General Info",
+            questions: [
+                { icon: "👤", text: "Who is DC?" },
+                { icon: "🚨", text: "Emergency" },
+                { icon: "🏛️", text: "Tourist Places" },
+                { icon: "📊", text: "Population" }
+            ]
+        },
+        {
+            title: "📋 Services",
+            questions: [
+                { icon: "📋", text: "Birth Certificate" },
+                { icon: "🏥", text: "Hospitals" },
+                { icon: "🎓", text: "Universities" },
+                { icon: "🚍", text: "How to reach?" }
+            ]
+        },
+        {
+            title: "🕉️ Heritage",
+            questions: [
+                { icon: "🕉️", text: "48 Kos Parikrama" },
+                { icon: "🛕", text: "Brahma Sarovar" },
+                { icon: "🏺", text: "Archaeological sites" },
+                { icon: "📿", text: "Gita Jayanti" }
+            ]
+        },
+        {
+            title: "🏢 Government",
+            questions: [
+                { icon: "🏢", text: "SDM Office" },
+                { icon: "📝", text: "Latest Tenders" },
+                { icon: "💼", text: "Job Vacancies" },
+                { icon: "🌾", text: "Agriculture Dept" }
+            ]
+        }
+    ],
+    hi: [
+        {
+            title: "🏛️ सामान्य जानकारी",
+            questions: [
+                { icon: "👤", text: "DC कौन हैं?" },
+                { icon: "🚨", text: "आपातकालीन नंबर" },
+                { icon: "🏛️", text: "पर्यटन स्थल" },
+                { icon: "📊", text: "जनसंख्या" }
+            ]
+        },
+        {
+            title: "📋 सेवाएं",
+            questions: [
+                { icon: "📋", text: "जन्म प्रमाण पत्र" },
+                { icon: "🏥", text: "अस्पताल" },
+                { icon: "🎓", text: "विश्वविद्यालय" },
+                { icon: "🚍", text: "कैसे पहुंचें?" }
+            ]
+        },
+        {
+            title: "🕉️ विरासत",
+            questions: [
+                { icon: "🕉️", text: "48 कोस परिक्रमा" },
+                { icon: "🛕", text: "ब्रह्म सरोवर" },
+                { icon: "🏺", text: "पुरातात्विक स्थल" },
+                { icon: "📿", text: "गीता जयंती" }
+            ]
+        },
+        {
+            title: "🏢 सरकारी",
+            questions: [
+                { icon: "🏢", text: "SDM कार्यालय" },
+                { icon: "📝", text: "नवीनतम निविदाएं" },
+                { icon: "💼", text: "नौकरी रिक्तियां" },
+                { icon: "🌾", text: "कृषि विभाग" }
+            ]
+        }
+    ]
+};
+
+// ============================================
+// INITIALIZATION
+// ============================================
+
+document.addEventListener("DOMContentLoaded", async () => {
+    lucide.createIcons();
+    
+    // Load autocomplete data
+    await loadAutocompleteData();
+    
+    // Apply language on load
+    updateUI();
+    
+    // Hide welcome message and chips if chat history exists
+    if (messages.length > 0) {
+        document.getElementById('welcome-message').style.display = 'none';
+        document.getElementById('chips-container').classList.add('hidden');
+        document.getElementById('toggle-chips-btn').classList.remove('hidden');
+        stopRotation();
+    } else {
+        // Only show chips and start rotation if no chat history
+        renderChips();
+        renderIndicators();
+        startRotation();
+    }
+    
+    renderMessages();
+    scrollToBottom();
+    
+    // Close autocomplete when clicking outside
+    document.addEventListener('click', (e) => {
+        const dropdown = document.getElementById('autocomplete-dropdown');
+        const input = document.getElementById('user-input');
+        if (e.target !== input && e.target !== dropdown) {
+            dropdown.classList.add('hidden');
+        }
+    });
+});
+
+// ============================================
+// AUTOCOMPLETE FUNCTIONS
+// ============================================
+
+async function loadAutocompleteData() {
+    try {
+        const response = await fetch('autocomplete-data.json');
+        autocompleteData = await response.json();
+        console.log('Autocomplete data loaded:', autocompleteData);
+    } catch (error) {
+        console.error('Failed to load autocomplete data:', error);
+        // Fallback to empty arrays if file doesn't exist
+        autocompleteData = { en: [], hi: [] };
+    }
+}
+
+function handleAutocomplete(event) {
+    const input = event.target;
+    const value = input.value.trim().toLowerCase();
+    const dropdown = document.getElementById('autocomplete-dropdown');
+    
+    // Hide dropdown if input is empty or less than 2 characters
+    if (value.length < 2) {
+        dropdown.classList.add('hidden');
+        return;
+    }
+    
+    // Get suggestions based on current language
+    const suggestions = getSuggestions(value);
+    
+    if (suggestions.length === 0) {
+        dropdown.classList.add('hidden');
+        return;
+    }
+    
+    // Render suggestions
+    dropdown.innerHTML = suggestions.slice(0, 5).map(item => {
+        const highlighted = highlightMatch(item.text, value);
+        return `
+            <div class="autocomplete-item" onclick="selectSuggestion('${escapeHtml(item.text)}')">
+                <span class="text-lg">${item.icon}</span>
+                <span class="text-sm">${highlighted}</span>
+            </div>
+        `;
+    }).join('');
+    
+    dropdown.classList.remove('hidden');
+}
+
+function getSuggestions(query) {
+    const data = autocompleteData[currentLanguage] || [];
+    
+    // Filter suggestions that match the query
+    return data.filter(item => 
+        item.text.toLowerCase().includes(query) ||
+        item.keywords.some(keyword => keyword.toLowerCase().includes(query))
+    );
+}
+
+function highlightMatch(text, query) {
+    const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+    return text.replace(regex, '<span class="autocomplete-highlight">$1</span>');
+}
+
+function selectSuggestion(text) {
+    document.getElementById('user-input').value = text;
+    document.getElementById('autocomplete-dropdown').classList.add('hidden');
+    document.getElementById('user-input').focus();
+}
+
+function escapeHtml(text) {
+    return text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function escapeRegex(text) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// ============================================
+// RENDERING FUNCTIONS
+// ============================================
+
+function renderMessages() {
+    const container = document.getElementById('messages-list');
+    container.innerHTML = messages.map(msg => `
+        <div class="flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}">
+            <div class="max-w-[85%] p-2 px-3 rounded-lg shadow-sm text-[14px] leading-relaxed relative message-box 
+                ${msg.role === 'user' ? 'bg-[#d9fdd3] rounded-tr-none triangle-right' : 'bg-white rounded-tl-none triangle-left'}">
+                <div class="text-gray-800 break-words">${formatText(msg.content)}</div>
+                <div class="text-[10px] text-gray-500 text-right mt-1 flex justify-end gap-1">
+                    ${msg.time} ${msg.role === 'user' ? '<span class="text-[#53bdeb]">✓✓</span>' : ''}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderChips(skipAnimation = false) {
+    const grid = document.getElementById('chips-grid');
+    const titleEl = document.getElementById('chips-title');
+    
+    // Safety check
+    if (!QUESTION_SETS[currentLanguage]) {
+        currentLanguage = 'en';
+    }
+    
+    if (currentSetIndex >= QUESTION_SETS[currentLanguage].length) {
+        currentSetIndex = 0;
+    }
+    
+    const currentSet = QUESTION_SETS[currentLanguage][currentSetIndex];
+    
+    if (!currentSet || !currentSet.questions) {
+        console.error('Invalid question set');
+        return;
+    }
+    
+    if (skipAnimation) {
+        titleEl.textContent = currentSet.title;
+        grid.innerHTML = currentSet.questions.map(q => `
+            <button onclick="handleChipClick('${q.text.replace(/'/g, "\\'")}')" 
+                class="chip-button w-full bg-white text-[#008069] border-2 border-[#008069] px-3 py-2.5 rounded-xl text-sm shadow-md font-semibold hover:bg-[#008069] hover:text-white flex items-center justify-center gap-2">
+                <span class="text-lg">${q.icon}</span>
+                <span>${q.text}</span>
+            </button>
+        `).join('');
+        grid.style.opacity = '1';
+        titleEl.style.opacity = '1';
+        grid.style.transform = 'translateY(0)';
+    } else {
+        grid.style.opacity = '0';
+        titleEl.style.opacity = '0';
+        grid.style.transform = 'translateY(10px)';
+        
+        setTimeout(() => {
+            titleEl.textContent = currentSet.title;
+            grid.innerHTML = currentSet.questions.map(q => `
+                <button onclick="handleChipClick('${q.text.replace(/'/g, "\\'")}')" 
+                    class="chip-button w-full bg-white text-[#008069] border-2 border-[#008069] px-3 py-2.5 rounded-xl text-sm shadow-md font-semibold hover:bg-[#008069] hover:text-white flex items-center justify-center gap-2">
+                    <span class="text-lg">${q.icon}</span>
+                    <span>${q.text}</span>
+                </button>
+            `).join('');
+            
+            grid.style.transition = 'all 0.5s ease';
+            titleEl.style.transition = 'all 0.5s ease';
+            grid.style.opacity = '1';
+            titleEl.style.opacity = '1';
+            grid.style.transform = 'translateY(0)';
+        }, 300);
+    }
+}
+
+function renderIndicators() {
+    const container = document.getElementById('indicators');
+    
+    if (!QUESTION_SETS[currentLanguage]) {
+        currentLanguage = 'en';
+    }
+    
+    container.innerHTML = QUESTION_SETS[currentLanguage].map((_, index) => `
+        <div class="w-2 h-2 rounded-full transition-all ${index === currentSetIndex ? 'bg-[#008069] w-6' : 'bg-gray-400'}"></div>
+    `).join('');
+}
+
+function formatText(text) {
+    if (!text) return '';
+    let formatted = text.replace(/\n/g, '<br>');
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+    const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
+    return formatted.replace(urlRegex, (url) => {
+        try {
+            const decodedUrl = decodeURIComponent(url);
+            const displayText = decodedUrl.length > 60 
+                ? decodedUrl.substring(0, 57) + '...' 
+                : decodedUrl;
+            return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium break-all">🔗 ${displayText}</a>`;
+        } catch (e) {
+            return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium">🔗 ${url}</a>`;
+        }
+    });
+}
+
+// ============================================
+// ROTATION FUNCTIONS
+// ============================================
+
+function rotateQuestions() {
+    currentSetIndex = (currentSetIndex + 1) % QUESTION_SETS[currentLanguage].length;
+    renderChips();
+    renderIndicators();
+}
+
+function startRotation() {
+    rotationInterval = setInterval(rotateQuestions, 4000);
+}
+
+function stopRotation() {
+    if (rotationInterval) {
+        clearInterval(rotationInterval);
+    }
+}
+
+function toggleChipsVisibility() {
+    const chipsContainer = document.getElementById('chips-container');
+    const toggleBtn = document.getElementById('toggle-chips-btn');
+    
+    if (chipsContainer.classList.contains('hidden')) {
+        currentSetIndex = 0;
+        renderChips(true);
+        renderIndicators();
+        chipsContainer.classList.remove('hidden');
+        toggleBtn.classList.add('hidden');
+        startRotation();
+    } else {
+        chipsContainer.classList.add('hidden');
+        toggleBtn.classList.remove('hidden');
+        stopRotation();
+    }
+    
+    lucide.createIcons();
+}
+
+// ============================================
+// LANGUAGE FUNCTIONS
+// ============================================
+
+function toggleLanguage() {
+    currentLanguage = currentLanguage === 'en' ? 'hi' : 'en';
+    localStorage.setItem('preferred_language', currentLanguage);
+    currentSetIndex = 0;
+    updateUI();
+    renderChips();
+    renderIndicators();
+}
+
+function updateUI() {
+    const t = translations[currentLanguage];
+    
+    // Update header
+    document.getElementById('header-title').textContent = t.title;
+    document.getElementById('header-subtitle').textContent = t.subtitle;
+    document.getElementById('lang-flag').textContent = currentLanguage === 'en' ? '🇬🇧' : '🇮🇳';
+    document.getElementById('lang-code').textContent = currentLanguage.toUpperCase();
+    
+    // Update official info badge
+    document.getElementById('official-info-title').textContent = t.officialInfo;
+    document.getElementById('official-info-desc').textContent = t.officialDesc;
+    
+    // Update welcome message
+    document.getElementById('welcome-title').textContent = t.welcomeTitle;
+    document.getElementById('welcome-text').textContent = t.welcomeText;
+    document.getElementById('welcome-officers').textContent = t.welcomeOfficers;
+    document.getElementById('welcome-tourist').textContent = t.welcomeTourist;
+    document.getElementById('welcome-services').textContent = t.welcomeServices;
+    document.getElementById('welcome-district').textContent = t.welcomeDistrict;
+    document.getElementById('welcome-emergency').textContent = t.welcomeEmergency;
+    document.getElementById('welcome-suggestion').textContent = t.welcomeSuggestion;
+    
+    // Update input placeholder
+    document.getElementById('user-input').placeholder = t.inputPlaceholder;
+    
+    // Update menu items
+    document.getElementById('menu-clear').textContent = t.clearChat;
+    document.getElementById('menu-visit').textContent = t.visitWebsite;
+    
+    // Update suggestions button
+    document.getElementById('suggestions-btn-text').textContent = t.suggestions;
+    
+    // Update typing indicator
+    document.getElementById('typing-text').textContent = t.typing;
+}
+
+// ============================================
+// MESSAGE HANDLING
+// ============================================
+
+function handleKeyPress(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function handleChipClick(text) {
+    document.getElementById('user-input').value = text;
+    document.getElementById('chips-container').classList.add('hidden');
+    document.getElementById('autocomplete-dropdown').classList.add('hidden');
+    stopRotation();
+    sendMessage();
+}
+
+async function sendMessage() {
+    const inputEl = document.getElementById('user-input');
+    const text = inputEl.value.trim();
+    if (!text) return;
+
+    // Hide autocomplete
+    document.getElementById('autocomplete-dropdown').classList.add('hidden');
+    
+    // Hide welcome message after first interaction
+    document.getElementById('welcome-message').style.display = 'none';
+    
+    // Stop rotation after first message
+    stopRotation();
+
+    // Add User Message
+    const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    messages.push({ role: 'user', content: text, time: time });
+    saveChat();
+    renderMessages();
+    scrollToBottom();
+    inputEl.value = '';
+
+    // Show Loading
+    document.getElementById('loading-indicator').classList.remove('hidden');
+    document.getElementById('chips-container').classList.add('hidden');
+    scrollToBottom();
+
+    try {
+        // Call n8n
+        const response = await fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                message: text,
+                language: currentLanguage
+            })
+        });
+        
+        const data = await response.json();
+        console.log('API Response:', data);
+        
+        // Add Bot Message
+        let botContent = (Array.isArray(data) ? data[0].response : data.response) || 'No response received';
+        
+        const botTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        messages.push({ role: 'bot', content: botContent, time: botTime });
+        saveChat();
+
+    } catch (error) {
+        console.error('Error:', error);
+        const errorTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        messages.push({ role: 'bot', content: "⚠️ Unable to connect to server. Please try again later.", time: errorTime });
+        saveChat();
+    } finally {
+        document.getElementById('loading-indicator').classList.add('hidden');
+        document.getElementById('toggle-chips-btn').classList.remove('hidden');
+        lucide.createIcons();
+        renderMessages();
+        scrollToBottom();
+    }
+}
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+function saveChat() {
+    localStorage.setItem('kwr_chat_history', JSON.stringify(messages));
+}
+
+function clearChat() {
+    if(confirm("🗑️ Delete all chat history?")) {
+        messages = [];
+        localStorage.removeItem('kwr_chat_history');
+        document.getElementById('welcome-message').style.display = 'flex';
+        renderMessages();
+        toggleMenu();
+    }
+}
+
+function toggleMenu() {
+    const menu = document.getElementById('menu-dropdown');
+    menu.classList.toggle('hidden');
+    if (!menu.classList.contains('hidden')) {
+        lucide.createIcons();
+    }
+}
+
+function scrollToBottom() {
+    const container = document.getElementById('chat-container');
+    setTimeout(() => {
+        container.scrollTop = container.scrollHeight;
+    }, 100);
+}
