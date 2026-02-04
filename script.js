@@ -5,6 +5,7 @@
 // CONFIGURATION
 const N8N_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/chat";
 const FEEDBACK_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/Feed";
+const GITA_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/InfoBot_AskGita";
 
 // GLOBAL STATE
 let currentLanguage = localStorage.getItem('preferred_language') || 'en';
@@ -110,6 +111,15 @@ const QUESTION_SETS = {
             ]
         },
         {
+            title: "📖 Bhagavad Gita",
+            questions: [
+                { icon: "📖", text: "What is Bhagavad Gita?" },
+                { icon: "🙏", text: "Karma Yoga meaning" },
+                { icon: "🧘", text: "Meditation in Gita" },
+                { icon: "⚔️", text: "Arjuna's dilemma" }
+            ]
+        },
+        {
             title: "🏢 Government",
             questions: [
                 { icon: "🏢", text: "SDM Office" },
@@ -145,6 +155,15 @@ const QUESTION_SETS = {
                 { icon: "🛕", text: "ब्रह्म सरोवर" },
                 { icon: "🏺", text: "पुरातात्विक स्थल" },
                 { icon: "📿", text: "गीता जयंती" }
+            ]
+        },
+        {
+            title: "📖 भगवद गीता",
+            questions: [
+                { icon: "📖", text: "भगवद गीता क्या है?" },
+                { icon: "🙏", text: "कर्म योग का अर्थ" },
+                { icon: "🧘", text: "गीता में ध्यान" },
+                { icon: "⚔️", text: "अर्जुन की दुविधा" }
             ]
         },
         {
@@ -461,9 +480,9 @@ function updateUI() {
     document.getElementById('user-input').placeholder = t.inputPlaceholder;
     
     // Update menu items
+    document.getElementById('menu-feedback').textContent = t.menuFeedback;
     document.getElementById('menu-clear').textContent = t.clearChat;
     document.getElementById('menu-visit').textContent = t.visitWebsite;
-    document.getElementById('menu-feedback').textContent = t.menuFeedback;
     
     // Update suggestions button
     document.getElementById('suggestions-btn-text').textContent = t.suggestions;
@@ -482,6 +501,34 @@ function updateUI() {
         document.getElementById('feedback-additional').textContent = t.feedbackAdditional;
         document.getElementById('feedback-submit-text').textContent = t.feedbackSubmit;
     }
+}
+
+// ============================================
+// GITA DETECTION
+// ============================================
+
+function isGitaQuery(text) {
+    const lowerText = text.toLowerCase();
+    
+    // English Gita keywords
+    const englishKeywords = [
+        'gita', 'geeta', 'bhagavad', 'bhagwad', 'krishna', 'arjuna', 'arjun',
+        'karma yoga', 'bhakti yoga', 'jnana yoga', 'dhyana yoga',
+        'chapter', 'shlok', 'verse', 'mahabharata', 'mahabharat',
+        'dharma', 'moksha', 'atman', 'brahman', 'yoga'
+    ];
+    
+    // Hindi Gita keywords
+    const hindiKeywords = [
+        'गीता', 'भगवद', 'भगवान', 'कृष्ण', 'अर्जुन',
+        'कर्म योग', 'भक्ति योग', 'ज्ञान योग', 'ध्यान योग',
+        'अध्याय', 'श्लोक', 'महाभारत',
+        'धर्म', 'मोक्ष', 'आत्मा', 'ब्रह्म', 'योग'
+    ];
+    
+    const allKeywords = [...englishKeywords, ...hindiKeywords];
+    
+    return allKeywords.some(keyword => lowerText.includes(keyword));
 }
 
 // ============================================
@@ -516,6 +563,10 @@ async function sendMessage() {
     // Stop rotation after first message
     stopRotation();
 
+    // Detect if this is a Gita query
+    const isGita = isGitaQuery(text);
+    const webhookUrl = isGita ? GITA_WEBHOOK_URL : N8N_WEBHOOK_URL;
+
     // Add User Message
     const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     messages.push({ role: 'user', content: text, time: time });
@@ -530,12 +581,13 @@ async function sendMessage() {
     scrollToBottom();
 
     try {
-        // Call n8n
-        const response = await fetch(N8N_WEBHOOK_URL, {
+        // Call appropriate webhook (Gita or District)
+        const response = await fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-                message: text,
+                question: text,  // Gita webhook uses 'question'
+                message: text,   // District webhook uses 'message'
                 language: currentLanguage
             })
         });
@@ -543,8 +595,20 @@ async function sendMessage() {
         const data = await response.json();
         console.log('API Response:', data);
         
-        // Add Bot Message
-        let botContent = (Array.isArray(data) ? data[0].response : data.response) || 'No response received';
+        // Extract bot response (handle both formats)
+        let botContent;
+        if (isGita) {
+            // Gita webhook returns { answer: "..." } or { response: "..." }
+            botContent = data.answer || data.response || 'No response received';
+        } else {
+            // District webhook returns array with { response: "..." }
+            botContent = (Array.isArray(data) ? data[0].response : data.response) || 'No response received';
+        }
+        
+        // Add indicator if Gita response
+        if (isGita) {
+            botContent = `📖 **Gita Wisdom**\n\n${botContent}`;
+        }
         
         const botTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         messages.push({ role: 'bot', content: botContent, time: botTime });
