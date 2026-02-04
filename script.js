@@ -4,6 +4,7 @@
 
 // CONFIGURATION
 const N8N_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/chat";
+const FEEDBACK_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/Feed";
 
 // GLOBAL STATE
 let currentLanguage = localStorage.getItem('preferred_language') || 'en';
@@ -31,7 +32,19 @@ const translations = {
         clearChat: "Clear chat",
         visitWebsite: "Visit Website",
         suggestions: "Suggestions",
-        typing: "Typing..."
+        typing: "Typing...",
+        menuFeedback: "Give Feedback",
+        feedbackTitle: "Feedback Form",
+        feedbackSubtitle: "Help us improve",
+        feedbackPersonalInfo: "Personal Information",
+        feedbackUsage: "Usage Information",
+        feedbackPerformance: "Bot Performance",
+        feedbackIssues: "Issues & Rating",
+        feedbackAdditional: "Additional Feedback",
+        feedbackSubmit: "Submit Feedback",
+        feedbackSubmitting: "Submitting...",
+        feedbackSuccess: "✅ Thank you for your feedback!",
+        feedbackError: "❌ Failed to submit. Please try again."
     },
     hi: {
         title: "कुरुक्षेत्र इन्फोबॉट",
@@ -50,7 +63,19 @@ const translations = {
         clearChat: "चैट साफ़ करें",
         visitWebsite: "वेबसाइट पर जाएं",
         suggestions: "सुझाव",
-        typing: "टाइप कर रहा है..."
+        typing: "टाइप कर रहा है...",
+        menuFeedback: "फीडबैक दें",
+        feedbackTitle: "फीडबैक फॉर्म",
+        feedbackSubtitle: "हमें बेहतर बनाने में मदद करें",
+        feedbackPersonalInfo: "व्यक्तिगत जानकारी",
+        feedbackUsage: "उपयोग की जानकारी",
+        feedbackPerformance: "बॉट प्रदर्शन",
+        feedbackIssues: "समस्याएं और रेटिंग",
+        feedbackAdditional: "अतिरिक्त फीडबैक",
+        feedbackSubmit: "फीडबैक सबमिट करें",
+        feedbackSubmitting: "सबमिट हो रहा है...",
+        feedbackSuccess: "✅ आपके फीडबैक के लिए धन्यवाद!",
+        feedbackError: "❌ सबमिट विफल। कृपया पुनः प्रयास करें।"
     }
 };
 
@@ -436,6 +461,7 @@ function updateUI() {
     document.getElementById('user-input').placeholder = t.inputPlaceholder;
     
     // Update menu items
+    document.getElementById('menu-feedback').textContent = t.menuFeedback;
     document.getElementById('menu-clear').textContent = t.clearChat;
     document.getElementById('menu-visit').textContent = t.visitWebsite;
     
@@ -444,6 +470,18 @@ function updateUI() {
     
     // Update typing indicator
     document.getElementById('typing-text').textContent = t.typing;
+    
+    // Update feedback modal
+    if (document.getElementById('feedback-title')) {
+        document.getElementById('feedback-title').textContent = t.feedbackTitle;
+        document.getElementById('feedback-subtitle').textContent = t.feedbackSubtitle;
+        document.getElementById('feedback-personal-info').textContent = t.feedbackPersonalInfo;
+        document.getElementById('feedback-usage').textContent = t.feedbackUsage;
+        document.getElementById('feedback-performance').textContent = t.feedbackPerformance;
+        document.getElementById('feedback-issues').textContent = t.feedbackIssues;
+        document.getElementById('feedback-additional').textContent = t.feedbackAdditional;
+        document.getElementById('feedback-submit-text').textContent = t.feedbackSubmit;
+    }
 }
 
 // ============================================
@@ -558,3 +596,93 @@ function scrollToBottom() {
         container.scrollTop = container.scrollHeight;
     }, 100);
 }
+
+// ============================================
+// FEEDBACK MODAL FUNCTIONS
+// ============================================
+
+function openFeedbackModal() {
+    document.getElementById('feedback-modal').classList.remove('hidden');
+    document.getElementById('menu-dropdown').classList.add('hidden');
+    lucide.createIcons();
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedback-modal').classList.add('hidden');
+    document.getElementById('feedback-form').reset();
+    document.getElementById('feedback-problem-details').classList.add('hidden');
+}
+
+function toggleProblemDetails() {
+    const hadProblems = document.getElementById('feedback-problems').value;
+    const detailsField = document.getElementById('feedback-problem-details');
+    
+    if (hadProblems === 'Yes') {
+        detailsField.classList.remove('hidden');
+    } else {
+        detailsField.classList.add('hidden');
+    }
+}
+
+// Handle feedback form submission
+document.addEventListener('DOMContentLoaded', () => {
+    const feedbackForm = document.getElementById('feedback-form');
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('feedback-submit-btn');
+            const submitText = document.getElementById('feedback-submit-text');
+            const originalText = submitText.textContent;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitText.textContent = translations[currentLanguage].feedbackSubmitting;
+            
+            // Collect form data
+            const formData = new FormData(feedbackForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                country: formData.get('country') || '',
+                state: formData.get('state') || '',
+                city: formData.get('city') || '',
+                usageFrequency: formData.get('usageFrequency'),
+                purpose: formData.get('purpose') || '',
+                understood: formData.get('understood') || '',
+                helpful: formData.get('helpful') || '',
+                responseSpeed: formData.get('responseSpeed'),
+                easyToUse: formData.get('easyToUse'),
+                hadProblems: formData.get('hadProblems') || 'No',
+                problemDetails: formData.get('problemDetails') || '',
+                rating: formData.get('rating'),
+                useAgain: formData.get('useAgain'),
+                improvements: formData.get('improvements') || '',
+                comments: formData.get('comments') || ''
+            };
+            
+            try {
+                const response = await fetch(FEEDBACK_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    // Success
+                    alert(translations[currentLanguage].feedbackSuccess);
+                    closeFeedbackModal();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                console.error('Feedback submission error:', error);
+                alert(translations[currentLanguage].feedbackError);
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitText.textContent = originalText;
+            }
+        });
+    }
+});
