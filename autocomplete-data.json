@@ -26,11 +26,6 @@
       "keywords": ["jyotisar", "gita", "krishna", "bhagavad", "arjuna", "birthplace"]
     },
     {
-      "icon": "📿",
-      "text": "Anubhav Kendra",
-      "keywords": ["jyotisar", "gita", "krishna", "bhagavad", "arjuna", "birthplace", "Anubhav", "Museum", "Mahabharat", "Show", "Gallery"]
-    },
-    {
       "icon": "📊",
       "text": "Population of Kurukshetra",
       "keywords": ["population", "census", "people", "demographics", "statistics"]
@@ -154,6 +149,41 @@
       "icon": "🚌",
       "text": "Bus stand location",
       "keywords": ["bus", "stand", "depot", "isbt", "transport"]
+    },
+    {
+      "icon": "📖",
+      "text": "What is Bhagavad Gita?",
+      "keywords": ["gita", "geeta", "bhagavad", "bhagwad", "holy", "book", "scripture"]
+    },
+    {
+      "icon": "🙏",
+      "text": "Karma Yoga in Gita",
+      "keywords": ["karma", "yoga", "action", "duty", "gita"]
+    },
+    {
+      "icon": "⚔️",
+      "text": "Arjuna's dilemma in Gita",
+      "keywords": ["arjuna", "arjun", "dilemma", "war", "kurukshetra", "gita"]
+    },
+    {
+      "icon": "🧘",
+      "text": "Meditation teachings in Gita",
+      "keywords": ["meditation", "dhyana", "yoga", "gita", "mind"]
+    },
+    {
+      "icon": "🕉️",
+      "text": "Gita chapters summary",
+      "keywords": ["chapter", "adhyay", "summary", "gita", "18"]
+    },
+    {
+      "icon": "📿",
+      "text": "Krishna's teachings",
+      "keywords": ["krishna", "lord", "teaching", "gita", "wisdom"]
+    },
+    {
+      "icon": "🎯",
+      "text": "Dharma meaning in Gita",
+      "keywords": ["dharma", "duty", "righteousness", "gita"]
     }
   ],
   "hi": [
@@ -306,6 +336,41 @@
       "icon": "🚌",
       "text": "बस स्टैंड का स्थान",
       "keywords": ["बस", "स्टैंड", "डिपो", "आईएसबीटी", "परिवहन"]
+    },
+    {
+      "icon": "📖",
+      "text": "भगवद गीता क्या है?",
+      "keywords": ["गीता", "भगवद", "भगवान", "पवित्र", "ग्रंथ"]
+    },
+    {
+      "icon": "🙏",
+      "text": "गीता में कर्म योग",
+      "keywords": ["कर्म", "योग", "कर्तव्य", "गीता"]
+    },
+    {
+      "icon": "⚔️",
+      "text": "गीता में अर्जुन की दुविधा",
+      "keywords": ["अर्जुन", "दुविधा", "युद्ध", "कुरुक्षेत्र", "गीता"]
+    },
+    {
+      "icon": "🧘",
+      "text": "गीता में ध्यान की शिक्षा",
+      "keywords": ["ध्यान", "योग", "गीता", "मन"]
+    },
+    {
+      "icon": "🕉️",
+      "text": "गीता के अध्यायों का सारांश",
+      "keywords": ["अध्याय", "सारांश", "गीता", "18"]
+    },
+    {
+      "icon": "📿",
+      "text": "कृष्ण की शिक्षाएं",
+      "keywords": ["कृष्ण", "भगवान", "शिक्षा", "गीता", "ज्ञान"]
+    },
+    {
+      "icon": "🎯",
+      "text": "गीता में धर्म का अर्थ",
+      "keywords": ["धर्म", "कर्तव्य", "गीता"]
     }
   ]
 }
