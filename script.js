@@ -384,8 +384,9 @@ function renderIndicators() {
 
 function formatText(text) {
     if (!text) return '';
-    let formatted = text.replace(/\n/g, '<br>');
+  let formatted = text.replace(/\n/g, '<br>');
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+    formatted = formatted.replace(/_(.*?)_/g, '<i>$1</i>');
     const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
     return formatted.replace(urlRegex, (url) => {
         try {
@@ -605,11 +606,13 @@ async function sendMessage() {
             botContent = (Array.isArray(data) ? data[0].response : data.response) || 'No response received';
         }
         
-        // Add indicator if Gita response
+        // Add indicator and disclaimer if Gita response
         if (isGita) {
-            botContent = `📖 **Gita Wisdom**\n\n${botContent}`;
+            const disclaimer = currentLanguage === 'hi' 
+                ? '_यह AI द्वारा उत्पन्न प्रतिक्रिया है। कृपया विद्वानों से सत्यापन करें।_'
+                : '_This is an AI-generated response. Please verify with scholars._';
+            botContent = `📖 **Gita Wisdom**\n\n${botContent}\n\n${disclaimer}`;
         }
-        
         const botTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         messages.push({ role: 'bot', content: botContent, time: botTime });
         saveChat();
