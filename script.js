@@ -461,9 +461,9 @@ function updateUI() {
     document.getElementById('user-input').placeholder = t.inputPlaceholder;
     
     // Update menu items
-    document.getElementById('menu-feedback').textContent = t.menuFeedback;
     document.getElementById('menu-clear').textContent = t.clearChat;
     document.getElementById('menu-visit').textContent = t.visitWebsite;
+    document.getElementById('menu-feedback').textContent = t.menuFeedback;
     
     // Update suggestions button
     document.getElementById('suggestions-btn-text').textContent = t.suggestions;
