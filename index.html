@@ -141,6 +141,9 @@
                 <button onclick="toggleMenu()"><i data-lucide="more-vertical" class="w-5 h-5"></i></button>
                 
                 <div id="menu-dropdown" class="hidden absolute right-0 top-10 bg-white text-gray-800 shadow-xl rounded-lg py-2 w-48 z-30">
+                    <button onclick="openFeedbackModal()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i> <span id="menu-feedback">Give Feedback</span>
+                    </button>
                     <button onclick="clearChat()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
                         <i data-lucide="trash-2" class="w-4 h-4"></i> <span id="menu-clear">Clear chat</span>
                     </button>
@@ -227,6 +230,172 @@
             <button onclick="sendMessage()" class="bg-gradient-to-r from-[#008069] to-[#00a884] p-2.5 rounded-full text-white hover:shadow-md transition-all">
                 <i data-lucide="send" class="w-5 h-5"></i>
             </button>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
+            <!-- Modal Header -->
+            <div class="gradient-header p-4 flex items-center justify-between text-white sticky top-0 z-10">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                    <div>
+                        <h2 class="font-semibold text-lg" id="feedback-title">Feedback Form</h2>
+                        <p class="text-xs opacity-90" id="feedback-subtitle">Help us improve</p>
+                    </div>
+                </div>
+                <button onclick="closeFeedbackModal()" class="hover:bg-white/20 rounded-full p-2 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Feedback Form -->
+            <form id="feedback-form" class="p-4 space-y-4">
+                <!-- Personal Information -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-personal-info">Personal Information</h3>
+                    
+                    <input type="text" id="feedback-name" name="name" required
+                        placeholder="Your Name *"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] focus:border-transparent">
+                    
+                    <input type="email" id="feedback-email" name="email" required
+                        placeholder="Email Address *"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] focus:border-transparent">
+                    
+                    <div class="grid grid-cols-3 gap-2">
+                        <input type="text" id="feedback-country" name="country"
+                            placeholder="Country"
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <input type="text" id="feedback-state" name="state"
+                            placeholder="State"
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <input type="text" id="feedback-city" name="city"
+                            placeholder="City"
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                    </div>
+                </div>
+
+                <!-- Usage Information -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-usage">Usage Information</h3>
+                    
+                    <select id="feedback-frequency" name="usageFrequency" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-frequency-default">How often do you use this chatbot? *</option>
+                        <option value="First time">First time</option>
+                        <option value="Daily">Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                        <option value="Rarely">Rarely</option>
+                    </select>
+                    
+                    <input type="text" id="feedback-purpose" name="purpose"
+                        placeholder="Purpose of using this chatbot"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                </div>
+
+                <!-- Performance Rating -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-performance">Bot Performance</h3>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-700" id="feedback-understood-label">Did the bot understand your questions?</label>
+                        <div class="flex gap-2">
+                            <label class="flex-1"><input type="radio" name="understood" value="Yes" class="mr-1"> <span id="feedback-yes">Yes</span></label>
+                            <label class="flex-1"><input type="radio" name="understood" value="No" class="mr-1"> <span id="feedback-no">No</span></label>
+                            <label class="flex-1"><input type="radio" name="understood" value="Mostly" class="mr-1"> <span id="feedback-mostly">Mostly</span></label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-700" id="feedback-helpful-label">Were the answers helpful?</label>
+                        <div class="flex gap-2">
+                            <label class="flex-1"><input type="radio" name="helpful" value="Very helpful" class="mr-1"> <span id="feedback-very">Very</span></label>
+                            <label class="flex-1"><input type="radio" name="helpful" value="Somewhat" class="mr-1"> <span id="feedback-somewhat">Somewhat</span></label>
+                            <label class="flex-1"><input type="radio" name="helpful" value="Not helpful" class="mr-1"> <span id="feedback-not">Not</span></label>
+                        </div>
+                    </div>
+
+                    <select id="feedback-speed" name="responseSpeed" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-speed-default">Response speed *</option>
+                        <option value="Very fast">Very fast</option>
+                        <option value="Fast">Fast</option>
+                        <option value="Average">Average</option>
+                        <option value="Slow">Slow</option>
+                    </select>
+
+                    <select id="feedback-ease" name="easyToUse" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-ease-default">Easy to use? *</option>
+                        <option value="Very easy">Very easy</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Difficult">Difficult</option>
+                    </select>
+                </div>
+
+                <!-- Problems & Rating -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-issues">Issues & Rating</h3>
+                    
+                    <select id="feedback-problems" name="hadProblems" onchange="toggleProblemDetails()"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="No" id="feedback-problems-default">Did you face any problems?</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <textarea id="feedback-problem-details" name="problemDetails"
+                        placeholder="Please describe the problem..."
+                        rows="2"
+                        class="hidden w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] resize-none"></textarea>
+
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-700" id="feedback-rating-label">Overall Rating *</label>
+                        <div class="flex gap-2 text-2xl">
+                            <label><input type="radio" name="rating" value="⭐" required class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐⭐⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐⭐⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐⭐⭐⭐</span></label>
+                        </div>
+                    </div>
+
+                    <select id="feedback-again" name="useAgain" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-again-default">Would you use this chatbot again? *</option>
+                        <option value="Definitely">Definitely</option>
+                        <option value="Probably">Probably</option>
+                        <option value="Maybe">Maybe</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <!-- Additional Feedback -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-additional">Additional Feedback</h3>
+                    
+                    <textarea id="feedback-improvements" name="improvements"
+                        placeholder="Suggestions for improvement"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] resize-none"></textarea>
+
+                    <textarea id="feedback-comments" name="comments"
+                        placeholder="Any other comments"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="feedback-submit-btn"
+                    class="w-full bg-gradient-to-r from-[#008069] to-[#00a884] text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span id="feedback-submit-text">Submit Feedback</span>
+                </button>
+            </form>
         </div>
     </div>
 
