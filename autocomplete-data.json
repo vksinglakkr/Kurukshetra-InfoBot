@@ -1,345 +1,376 @@
 {
-  "suggestions": [
-    
-    // ========================================
-    // SMART CATEGORY SUGGESTIONS (NEW!)
-    // ========================================
-    
+  "en": [
     {
-      "text": "All Sarovars (sacred lakes)",
-      "keywords": "sarovar sarovars lakes all list sacred holy सरोवर"
+      "icon": "👤",
+      "text": "Who is the DC?",
+      "keywords": ["dc", "deputy commissioner", "collector", "district magistrate", "officer"]
     },
     {
-      "text": "All Mahabharata sites",
-      "keywords": "mahabharata sites all mahabharat epic कुरुक्षेत्र युद्ध"
+      "icon": "🚨",
+      "text": "Emergency numbers",
+      "keywords": ["emergency", "ambulance", "police", "fire", "helpline", "108", "112", "101", "102"]
     },
     {
-      "text": "All Shiva temples",
-      "keywords": "shiva temples all mahadev mandir शिव मंदिर"
+      "icon": "🏛️",
+      "text": "Tourist places in Kurukshetra",
+      "keywords": ["tourist", "tourism", "places", "visit", "attractions", "heritage", "sightseeing"]
     },
     {
-      "text": "All temples in Kurukshetra",
-      "keywords": "temples all mandir religious मंदिर सभी"
-    },
-    {
-      "text": "All museums in Kurukshetra",
-      "keywords": "museums all museum list संग्रहालय"
-    },
-    {
-      "text": "All Gurdwaras in Kurukshetra",
-      "keywords": "gurdwara gurdwaras all sikh gurudwara गुरुद्वारा"
-    },
-    {
-      "text": "All 48 Kos Parikrama sites",
-      "keywords": "48 kos parikrama sites all pilgrimage कोस परिक्रमा"
-    },
-    {
-      "text": "All Tirthas (sacred water sites)",
-      "keywords": "tirtha tirthas all sacred water तीर्थ सभी"
-    },
-    {
-      "text": "Historical monuments list",
-      "keywords": "historical monuments heritage sites ऐतिहासिक स्मारक"
-    },
-    {
-      "text": "Places to visit in Kurukshetra",
-      "keywords": "visit places tourism tourist attractions घूमने"
-    },
-    
-    // ========================================
-    // GENERAL DISTRICT INFO
-    // ========================================
-    
-    {
-      "text": "About Kurukshetra district",
-      "keywords": "about kurukshetra district information general के बारे"
-    },
-    {
-      "text": "History of Kurukshetra",
-      "keywords": "history historical kurukshetra battle epic इतिहास"
-    },
-    {
-      "text": "Population of Kurukshetra",
-      "keywords": "population people total district जनसंख्या"
-    },
-    {
-      "text": "Area of Kurukshetra district",
-      "keywords": "area size square kilometers क्षेत्रफल"
-    },
-    {
-      "text": "Weather in Kurukshetra",
-      "keywords": "weather climate temperature मौसम"
-    },
-    {
-      "text": "How to reach Kurukshetra",
-      "keywords": "reach travel distance delhi chandigarh कैसे पहुंचें"
-    },
-    
-    // ========================================
-    // TOP TOURIST SITES (INDIVIDUAL)
-    // ========================================
-    
-    {
+      "icon": "🛕",
       "text": "Brahma Sarovar",
-      "keywords": "brahma sarovar lake holy sacred ब्रह्म सरोवर"
+      "keywords": ["brahma", "sarovar", "temple", "holy", "sacred", "tank", "water"]
     },
     {
-      "text": "Jyotisar (Bhagavad Gita birthplace)",
-      "keywords": "jyotisar gita bhagavad krishna arjuna ज्योतिसर गीता"
+      "icon": "📿",
+      "text": "Jyotisar temple",
+      "keywords": ["jyotisar", "gita", "krishna", "bhagavad", "arjuna", "birthplace"]
     },
     {
+      "icon": "📊",
+      "text": "Population of Kurukshetra",
+      "keywords": ["population", "census", "people", "demographics", "statistics"]
+    },
+    {
+      "icon": "📋",
+      "text": "How to get birth certificate?",
+      "keywords": ["birth", "certificate", "registration", "apply", "document"]
+    },
+    {
+      "icon": "🏥",
+      "text": "List of hospitals",
+      "keywords": ["hospital", "medical", "health", "clinic", "doctor", "healthcare"]
+    },
+    {
+      "icon": "🎓",
+      "text": "Universities in Kurukshetra",
+      "keywords": ["university", "college", "education", "kurukshetra university", "kuk"]
+    },
+    {
+      "icon": "🚍",
+      "text": "How to reach Kurukshetra?",
+      "keywords": ["reach", "travel", "transport", "bus", "train", "railway", "airport"]
+    },
+    {
+      "icon": "🕉️",
+      "text": "48 Kos Parikrama",
+      "keywords": ["48", "kos", "parikrama", "pilgrimage", "holy", "circuit"]
+    },
+    {
+      "icon": "🏺",
+      "text": "Archaeological sites",
+      "keywords": ["archaeological", "history", "heritage", "ancient", "excavation", "monuments"]
+    },
+    {
+      "icon": "📿",
+      "text": "Gita Jayanti Mahotsav",
+      "keywords": ["gita", "jayanti", "festival", "mahotsav", "event", "celebration"]
+    },
+    {
+      "icon": "🏢",
+      "text": "SDM office contact",
+      "keywords": ["sdm", "sub divisional magistrate", "office", "contact", "address"]
+    },
+    {
+      "icon": "📝",
+      "text": "Latest tenders",
+      "keywords": ["tender", "bid", "procurement", "contract", "latest"]
+    },
+    {
+      "icon": "💼",
+      "text": "Job vacancies",
+      "keywords": ["job", "vacancy", "recruitment", "employment", "career", "opening"]
+    },
+    {
+      "icon": "🌾",
+      "text": "Agriculture department",
+      "keywords": ["agriculture", "farming", "krishi", "crop", "farmer"]
+    },
+    {
+      "icon": "🏪",
+      "text": "Ration card application",
+      "keywords": ["ration", "card", "pds", "food", "apply"]
+    },
+    {
+      "icon": "🚗",
+      "text": "Driving license",
+      "keywords": ["driving", "license", "dl", "vehicle", "rto"]
+    },
+    {
+      "icon": "🏠",
+      "text": "Property tax payment",
+      "keywords": ["property", "tax", "house", "municipal", "payment"]
+    },
+    {
+      "icon": "⚡",
+      "text": "Electricity bill payment",
+      "keywords": ["electricity", "bill", "power", "uhbvn", "dhbvn"]
+    },
+    {
+      "icon": "💧",
+      "text": "Water supply complaint",
+      "keywords": ["water", "supply", "complaint", "jal", "board"]
+    },
+    {
+      "icon": "🏫",
+      "text": "School admission",
+      "keywords": ["school", "admission", "education", "student", "enroll"]
+    },
+    {
+      "icon": "👮",
+      "text": "Police stations",
+      "keywords": ["police", "station", "thana", "law", "enforcement"]
+    },
+    {
+      "icon": "🏛️",
       "text": "Sthaneshwar Mahadev Temple",
-      "keywords": "sthaneshwar mahadev temple shiva lord स्थानेश्वर शिव"
+      "keywords": ["sthaneshwar", "mahadev", "shiva", "temple", "shrine"]
     },
     {
-      "text": "Baan Ganga sacred site",
-      "keywords": "baan ganga ban tirtha holy water बाण गंगा तीर्थ"
+      "icon": "🎭",
+      "text": "Kurukshetra Panorama",
+      "keywords": ["panorama", "museum", "science", "planetarium"]
     },
     {
-      "text": "Sannihit Sarovar",
-      "keywords": "sannihit sarovar sanihit lake eclipse सन्निहित सरोवर"
+      "icon": "🏨",
+      "text": "Hotels in Kurukshetra",
+      "keywords": ["hotel", "accommodation", "stay", "lodge", "guest house"]
     },
     {
-      "text": "Karn Ka Tila (Karna's Mound)",
-      "keywords": "karn karna tila mound mahabharata कर्ण टीला महाभारत"
+      "icon": "🍽️",
+      "text": "Restaurants and dhabas",
+      "keywords": ["restaurant", "dhaba", "food", "eating", "dining"]
     },
     {
-      "text": "Panorama and Science Centre",
-      "keywords": "panorama science centre museum exhibition पैनोरमा"
+      "icon": "📞",
+      "text": "Helpline numbers",
+      "keywords": ["helpline", "toll free", "contact", "number", "support"]
     },
     {
-      "text": "Bhishma Kund Narkatari",
-      "keywords": "bhishma kund narkatari tirtha भीष्म कुंड तीर्थ"
+      "icon": "🚌",
+      "text": "Bus stand location",
+      "keywords": ["bus", "stand", "depot", "isbt", "transport"]
     },
     {
-      "text": "Sheikh Chilli Tomb",
-      "keywords": "sheikh chilli chaheli tomb monument मकबरा शेख"
-    },
-    {
-      "text": "Krishna Museum Kurukshetra",
-      "keywords": "krishna museum shri kurukshetra कृष्ण संग्रहालय"
-    },
-    {
-      "text": "Bhadrakali Shaktipeeth Temple",
-      "keywords": "bhadrakali shaktipeeth devikoop temple goddess भद्रकाली शक्तिपीठ"
-    },
-    {
-      "text": "Krishna Arjun Rath",
-      "keywords": "krishna arjun rath chariot कृष्ण अर्जुन रथ"
-    },
-    
-    // ========================================
-    // CULTURAL & MODERN SITES
-    // ========================================
-    
-    {
-      "text": "Kurukshetra University",
-      "keywords": "university ku campus college education विश्वविद्यालय"
-    },
-    {
-      "text": "Kalpana Chawla Planetarium",
-      "keywords": "kalpana chawla planetarium space astronaut कल्पना तारामंडल"
-    },
-    {
-      "text": "1857 War Memorial Museum",
-      "keywords": "1857 war memorial museum freedom struggle स्वतंत्रता संग्राम"
-    },
-    {
-      "text": "Dharohar Haryana Museum",
-      "keywords": "dharohar museum haryana culture heritage धरोहर संग्रहालय"
-    },
-    {
-      "text": "Gurdwara Raj Ghat Patshahi",
-      "keywords": "gurdwara raj ghat sikh gurudwara गुरुद्वारा राज घाट"
-    },
-    {
-      "text": "Birla Mandir Kurukshetra",
-      "keywords": "birla mandir temple lakshmi narayan बिड़ला मंदिर"
-    },
-    {
-      "text": "Hanuman Mandir (Dakshinmukhi)",
-      "keywords": "hanuman mandir dakshinmukhi temple हनुमान मंदिर दक्षिणमुखी"
-    },
-    {
-      "text": "Tirupati Balaji Temple",
-      "keywords": "tirupati balaji temple venkateswara तिरुपति बालाजी"
-    },
-    
-    // ========================================
-    // 48 KOS SITES & TIRTHAS
-    // ========================================
-    
-    {
-      "text": "48 Kos Parikrama route map",
-      "keywords": "48 kos parikrama route map pilgrimage circuit कोस परिक्रमा मार्ग"
-    },
-    {
-      "text": "Pehowa Saraswati Tirtha",
-      "keywords": "pehowa saraswati tirtha river पेहोवा सरस्वती तीर्थ"
-    },
-    {
-      "text": "Kamyak Tirtha Kamauda",
-      "keywords": "kamyak tirtha kamauda कामयक तीर्थ कमौदा"
-    },
-    {
-      "text": "Nabhi Kamal sacred lotus site",
-      "keywords": "nabhi kamal lotus brahma नाभि कमल"
-    },
-    
-    // ========================================
-    // BHAGAVAD GITA SECTION
-    // ========================================
-    
-    {
+      "icon": "📖",
       "text": "What is Bhagavad Gita?",
-      "keywords": "bhagavad gita what is about भगवद गीता क्या है"
+      "keywords": ["gita", "geeta", "bhagavad", "bhagwad", "holy", "book", "scripture"]
     },
     {
-      "text": "Bhagavad Gita teachings summary",
-      "keywords": "gita teachings summary lessons भगवद गीता शिक्षा"
+      "icon": "🙏",
+      "text": "Karma Yoga in Gita",
+      "keywords": ["karma", "yoga", "action", "duty", "gita"]
     },
     {
-      "text": "Karma Yoga in Bhagavad Gita",
-      "keywords": "karma yoga meaning path action कर्म योग अर्थ"
-    },
-    {
-      "text": "Bhakti Yoga in Bhagavad Gita",
-      "keywords": "bhakti yoga devotion path भक्ति योग"
-    },
-    {
-      "text": "Meditation teachings in Gita",
-      "keywords": "meditation dhyana yoga gita ध्यान योग गीता"
-    },
-    {
+      "icon": "⚔️",
       "text": "Arjuna's dilemma in Gita",
-      "keywords": "arjuna dilemma vishada yoga अर्जुन विषाद संकट"
+      "keywords": ["arjuna", "arjun", "dilemma", "war", "kurukshetra", "gita"]
     },
     {
-      "text": "Krishna's teachings to Arjuna",
-      "keywords": "krishna teachings arjuna कृष्ण उपदेश अर्जुन"
+      "icon": "🧘",
+      "text": "Meditation teachings in Gita",
+      "keywords": ["meditation", "dhyana", "yoga", "gita", "mind"]
     },
     {
-      "text": "Bhagavad Gita chapters summary",
-      "keywords": "gita chapters 18 summary अध्याय सारांश"
-    },
-    
-    // ========================================
-    // ADMINISTRATIVE QUERIES
-    // ========================================
-    
-    {
-      "text": "DC office Kurukshetra contact",
-      "keywords": "dc deputy commissioner office contact phone number उपायुक्त"
+      "icon": "🕉️",
+      "text": "Gita chapters summary",
+      "keywords": ["chapter", "adhyay", "summary", "gita", "18"]
     },
     {
-      "text": "SDM offices in Kurukshetra",
-      "keywords": "sdm sub divisional magistrate offices एसडीएम कार्यालय"
+      "icon": "📿",
+      "text": "Krishna's teachings",
+      "keywords": ["krishna", "lord", "teaching", "gita", "wisdom"]
     },
     {
-      "text": "Police stations in Kurukshetra",
-      "keywords": "police station thana emergency पुलिस थाना"
+      "icon": "🎯",
+      "text": "Dharma meaning in Gita",
+      "keywords": ["dharma", "duty", "righteousness", "gita"]
+    }
+  ],
+  "hi": [
+    {
+      "icon": "👤",
+      "text": "DC कौन हैं?",
+      "keywords": ["dc", "उपायुक्त", "कलेक्टर", "जिला अधिकारी", "अधिकारी"]
     },
     {
-      "text": "Hospitals in Kurukshetra",
-      "keywords": "hospital medical health care emergency अस्पताल चिकित्सा"
+      "icon": "🚨",
+      "text": "आपातकालीन नंबर",
+      "keywords": ["आपातकालीन", "एम्बुलेंस", "पुलिस", "अग्निशमन", "हेल्पलाइन", "108", "112", "101", "102"]
     },
     {
-      "text": "Schools in Kurukshetra",
-      "keywords": "schools education list स्कूल शिक्षा"
+      "icon": "🏛️",
+      "text": "कुरुक्षेत्र के पर्यटन स्थल",
+      "keywords": ["पर्यटन", "स्थल", "घूमने", "दर्शनीय", "विरासत", "आकर्षण"]
     },
     {
-      "text": "Government offices Kurukshetra",
-      "keywords": "government offices सरकारी कार्यालय"
-    },
-    {
-      "text": "Emergency numbers Kurukshetra",
-      "keywords": "emergency numbers helpline ambulance आपातकालीन नंबर"
-    },
-    
-    // ========================================
-    // HINDI CATEGORY SUGGESTIONS
-    // ========================================
-    
-    {
-      "text": "सभी सरोवर (पवित्र झीलें)",
-      "keywords": "सरोवर सभी पवित्र झील sarovar lakes"
-    },
-    {
-      "text": "सभी महाभारत स्थल",
-      "keywords": "महाभारत स्थल सभी कुरुक्षेत्र युद्ध mahabharata sites"
-    },
-    {
-      "text": "सभी शिव मंदिर",
-      "keywords": "शिव मंदिर सभी महादेव shiva temples"
-    },
-    {
-      "text": "सभी मंदिर कुरुक्षेत्र में",
-      "keywords": "मंदिर सभी धार्मिक स्थल temples all"
-    },
-    {
-      "text": "सभी संग्रहालय",
-      "keywords": "संग्रहालय सभी म्यूजियम museums"
-    },
-    {
-      "text": "48 कोस परिक्रमा स्थल",
-      "keywords": "48 कोस परिक्रमा स्थल तीर्थ parikrama sites"
-    },
-    {
-      "text": "घूमने के स्थान कुरुक्षेत्र",
-      "keywords": "घूमने स्थान पर्यटन दर्शनीय visit places"
-    },
-    
-    // ========================================
-    // HINDI INDIVIDUAL SITES
-    // ========================================
-    
-    {
+      "icon": "🛕",
       "text": "ब्रह्म सरोवर",
-      "keywords": "ब्रह्म सरोवर पवित्र झील brahma sarovar"
+      "keywords": ["ब्रह्म", "सरोवर", "मंदिर", "पवित्र", "पानी", "तालाब"]
     },
     {
-      "text": "ज्योतिसर (गीता जन्मस्थली)",
-      "keywords": "ज्योतिसर गीता जन्मस्थली कृष्ण jyotisar gita"
+      "icon": "📿",
+      "text": "ज्योतिसर मंदिर",
+      "keywords": ["ज्योतिसर", "गीता", "कृष्ण", "भगवद", "अर्जुन", "जन्मस्थान"]
     },
     {
+      "icon": "📊",
+      "text": "कुरुक्षेत्र की जनसंख्या",
+      "keywords": ["जनसंख्या", "जनगणना", "लोग", "आंकड़े", "संख्या"]
+    },
+    {
+      "icon": "📋",
+      "text": "जन्म प्रमाण पत्र कैसे बनवाएं?",
+      "keywords": ["जन्म", "प्रमाण", "पत्र", "पंजीकरण", "आवेदन", "दस्तावेज"]
+    },
+    {
+      "icon": "🏥",
+      "text": "अस्पतालों की सूची",
+      "keywords": ["अस्पताल", "चिकित्सा", "स्वास्थ्य", "डॉक्टर", "क्लिनिक"]
+    },
+    {
+      "icon": "🎓",
+      "text": "कुरुक्षेत्र के विश्वविद्यालय",
+      "keywords": ["विश्वविद्यालय", "कॉलेज", "शिक्षा", "कुरुक्षेत्र यूनिवर्सिटी"]
+    },
+    {
+      "icon": "🚍",
+      "text": "कुरुक्षेत्र कैसे पहुंचें?",
+      "keywords": ["पहुंचना", "यात्रा", "परिवहन", "बस", "ट्रेन", "रेलवे"]
+    },
+    {
+      "icon": "🕉️",
+      "text": "48 कोस परिक्रमा",
+      "keywords": ["48", "कोस", "परिक्रमा", "तीर्थयात्रा", "पवित्र"]
+    },
+    {
+      "icon": "🏺",
+      "text": "पुरातात्विक स्थल",
+      "keywords": ["पुरातात्विक", "इतिहास", "विरासत", "प्राचीन", "स्मारक"]
+    },
+    {
+      "icon": "📿",
+      "text": "गीता जयंती महोत्सव",
+      "keywords": ["गीता", "जयंती", "उत्सव", "महोत्सव", "कार्यक्रम", "समारोह"]
+    },
+    {
+      "icon": "🏢",
+      "text": "SDM कार्यालय संपर्क",
+      "keywords": ["sdm", "उप प्रभागीय अधिकारी", "कार्यालय", "संपर्क", "पता"]
+    },
+    {
+      "icon": "📝",
+      "text": "नवीनतम निविदाएं",
+      "keywords": ["निविदा", "बोली", "खरीद", "अनुबंध", "नवीनतम"]
+    },
+    {
+      "icon": "💼",
+      "text": "नौकरी रिक्तियां",
+      "keywords": ["नौकरी", "रिक्ति", "भर्ती", "रोजगार", "करियर"]
+    },
+    {
+      "icon": "🌾",
+      "text": "कृषि विभाग",
+      "keywords": ["कृषि", "खेती", "किसान", "फसल"]
+    },
+    {
+      "icon": "🏪",
+      "text": "राशन कार्ड आवेदन",
+      "keywords": ["राशन", "कार्ड", "पीडीएस", "खाद्य", "आवेदन"]
+    },
+    {
+      "icon": "🚗",
+      "text": "ड्राइविंग लाइसेंस",
+      "keywords": ["ड्राइविंग", "लाइसेंस", "वाहन", "आरटीओ"]
+    },
+    {
+      "icon": "🏠",
+      "text": "संपत्ति कर भुगतान",
+      "keywords": ["संपत्ति", "कर", "घर", "नगर", "भुगतान"]
+    },
+    {
+      "icon": "⚡",
+      "text": "बिजली बिल भुगतान",
+      "keywords": ["बिजली", "बिल", "विद्युत", "भुगतान"]
+    },
+    {
+      "icon": "💧",
+      "text": "पानी आपूर्ति शिकायत",
+      "keywords": ["पानी", "आपूर्ति", "शिकायत", "जल", "बोर्ड"]
+    },
+    {
+      "icon": "🏫",
+      "text": "स्कूल प्रवेश",
+      "keywords": ["स्कूल", "प्रवेश", "शिक्षा", "छात्र", "दाखिला"]
+    },
+    {
+      "icon": "👮",
+      "text": "पुलिस स्टेशन",
+      "keywords": ["पुलिस", "थाना", "कानून", "सुरक्षा"]
+    },
+    {
+      "icon": "🏛️",
       "text": "स्थानेश्वर महादेव मंदिर",
-      "keywords": "स्थानेश्वर महादेव मंदिर शिव sthaneshwar shiva"
+      "keywords": ["स्थानेश्वर", "महादेव", "शिव", "मंदिर"]
     },
     {
-      "text": "बाण गंगा पवित्र स्थल",
-      "keywords": "बाण गंगा तीर्थ पवित्र ban ganga"
+      "icon": "🎭",
+      "text": "कुरुक्षेत्र पैनोरमा",
+      "keywords": ["पैनोरमा", "संग्रहालय", "विज्ञान", "तारामंडल"]
     },
     {
-      "text": "सन्निहित सरोवर",
-      "keywords": "सन्निहित सरोवर ग्रहण स्नान sannihit eclipse"
+      "icon": "🏨",
+      "text": "कुरुक्षेत्र में होटल",
+      "keywords": ["होटल", "आवास", "ठहरना", "लॉज", "गेस्ट हाउस"]
     },
     {
-      "text": "कर्ण का टीला",
-      "keywords": "कर्ण टीला महाभारत karna tila mahabharata"
+      "icon": "🍽️",
+      "text": "रेस्टोरेंट और ढाबे",
+      "keywords": ["रेस्टोरेंट", "ढाबा", "खाना", "भोजन"]
     },
     {
-      "text": "भीष्म कुंड नरकटारी",
-      "keywords": "भीष्म कुंड नरकटारी तीर्थ bhishma kund"
+      "icon": "📞",
+      "text": "हेल्पलाइन नंबर",
+      "keywords": ["हेल्पलाइन", "टोल फ्री", "संपर्क", "नंबर", "सहायता"]
     },
     {
-      "text": "शेख चिल्ली का मकबरा",
-      "keywords": "शेख चिल्ली मकबरा स्मारक sheikh chilli tomb"
+      "icon": "🚌",
+      "text": "बस स्टैंड का स्थान",
+      "keywords": ["बस", "स्टैंड", "डिपो", "आईएसबीटी", "परिवहन"]
     },
     {
-      "text": "कुरुक्षेत्र विश्वविद्यालय",
-      "keywords": "विश्वविद्यालय यूनिवर्सिटी शिक्षा university"
+      "icon": "📖",
+      "text": "भगवद गीता क्या है?",
+      "keywords": ["गीता", "भगवद", "भगवान", "पवित्र", "ग्रंथ"]
     },
     {
-      "text": "कल्पना चावला तारामंडल",
-      "keywords": "कल्पना चावला तारामंडल अंतरिक्ष planetarium"
+      "icon": "🙏",
+      "text": "गीता में कर्म योग",
+      "keywords": ["कर्म", "योग", "कर्तव्य", "गीता"]
     },
     {
-      "text": "धरोहर हरियाणा संग्रहालय",
-      "keywords": "धरोहर संग्रहालय हरियाणा संस्कृति dharohar museum"
+      "icon": "⚔️",
+      "text": "गीता में अर्जुन की दुविधा",
+      "keywords": ["अर्जुन", "दुविधा", "युद्ध", "कुरुक्षेत्र", "गीता"]
     },
     {
-      "text": "भद्रकाली शक्तिपीठ मंदिर",
-      "keywords": "भद्रकाली शक्तिपीठ देवी कूप bhadrakali shaktipeeth"
+      "icon": "🧘",
+      "text": "गीता में ध्यान की शिक्षा",
+      "keywords": ["ध्यान", "योग", "गीता", "मन"]
+    },
+    {
+      "icon": "🕉️",
+      "text": "गीता के अध्यायों का सारांश",
+      "keywords": ["अध्याय", "सारांश", "गीता", "18"]
+    },
+    {
+      "icon": "📿",
+      "text": "कृष्ण की शिक्षाएं",
+      "keywords": ["कृष्ण", "भगवान", "शिक्षा", "गीता", "ज्ञान"]
+    },
+    {
+      "icon": "🎯",
+      "text": "गीता में धर्म का अर्थ",
+      "keywords": ["धर्म", "कर्तव्य", "गीता"]
     }
   ]
 }
