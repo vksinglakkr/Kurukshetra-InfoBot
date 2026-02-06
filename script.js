@@ -424,17 +424,22 @@ function stopRotation() {
 function toggleChipsVisibility() {
     const chipsContainer = document.getElementById('chips-container');
     const toggleBtn = document.getElementById('toggle-chips-btn');
+    const btnText = document.getElementById('suggestions-btn-text');
     
     if (chipsContainer.classList.contains('hidden')) {
+        // CHIPS ARE HIDDEN → Show them
         currentSetIndex = 0;
         renderChips(true);
         renderIndicators();
-        chipsContainer.classList.remove('hidden');
-        toggleBtn.classList.add('hidden');
+        chipsContainer.classList.remove('hidden');  // Show chips
+        // toggleBtn.classList.add('hidden');        // ❌ DON'T hide button!
+        btnText.textContent = currentLanguage === 'hi' ? 'छुपाएं' : 'Hide'; // Change text
         startRotation();
     } else {
-        chipsContainer.classList.add('hidden');
-        toggleBtn.classList.remove('hidden');
+        // CHIPS ARE VISIBLE → Hide them
+        chipsContainer.classList.add('hidden');     // Hide chips
+        // toggleBtn.classList.remove('hidden');     // Button stays visible
+        btnText.textContent = currentLanguage === 'hi' ? 'सुझाव' : 'Suggestions'; // Reset text
         stopRotation();
     }
     
