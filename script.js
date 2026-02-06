@@ -218,18 +218,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // ============================================
-// AUTOCOMPLETE FUNCTIONS (FIXED)
+// AUTOCOMPLETE FUNCTIONS
 // ============================================
-
-let autocompleteData = {};
 
 async function loadAutocompleteData() {
     try {
         const response = await fetch('autocomplete-data.json');
         autocompleteData = await response.json();
-        console.log('✅ Autocomplete data loaded:', autocompleteData);
+        console.log('Autocomplete data loaded:', autocompleteData);
     } catch (error) {
-        console.error('❌ Failed to load autocomplete data:', error);
+        console.error('Failed to load autocomplete data:', error);
+        // Fallback to empty arrays if file doesn't exist
         autocompleteData = { en: [], hi: [] };
     }
 }
@@ -239,11 +238,9 @@ function handleAutocomplete(event) {
     const value = input.value.trim().toLowerCase();
     const dropdown = document.getElementById('autocomplete-dropdown');
     
-    if (!dropdown) return;
-    
     // Hide dropdown if input is empty or less than 2 characters
     if (value.length < 2) {
-        dropdown.style.display = 'none';
+        dropdown.classList.add('hidden');
         return;
     }
     
@@ -251,51 +248,32 @@ function handleAutocomplete(event) {
     const suggestions = getSuggestions(value);
     
     if (suggestions.length === 0) {
-        dropdown.style.display = 'none';
+        dropdown.classList.add('hidden');
         return;
     }
     
     // Render suggestions
-    dropdown.innerHTML = suggestions.slice(0, 8).map(item => {
+    dropdown.innerHTML = suggestions.slice(0, 5).map(item => {
         const highlighted = highlightMatch(item.text, value);
         return `
             <div class="autocomplete-item" onclick="selectSuggestion('${escapeHtml(item.text)}')">
-                <span class="autocomplete-item-icon">${item.icon || '🔍'}</span>
-                <span class="autocomplete-item-text">${highlighted}</span>
+                <span class="text-lg">${item.icon}</span>
+                <span class="text-sm">${highlighted}</span>
             </div>
         `;
     }).join('');
     
-    dropdown.style.display = 'block';
+    dropdown.classList.remove('hidden');
 }
 
-// FIXED: Works with BOTH array and string keywords
 function getSuggestions(query) {
     const data = autocompleteData[currentLanguage] || [];
     
-    return data.filter(item => {
-        // Check text match
-        if (item.text.toLowerCase().includes(query)) {
-            return true;
-        }
-        
-        // Check keywords (handles BOTH formats)
-        if (item.keywords) {
-            // Array format: ["brahma", "sarovar"]
-            if (Array.isArray(item.keywords)) {
-                return item.keywords.some(kw => 
-                    kw.toLowerCase().includes(query)
-                );
-            }
-            
-            // String format: "brahma sarovar temple"
-            if (typeof item.keywords === 'string') {
-                return item.keywords.toLowerCase().includes(query);
-            }
-        }
-        
-        return false;
-    });
+    // Filter suggestions that match the query
+    return data.filter(item => 
+        item.text.toLowerCase().includes(query) ||
+        item.keywords.some(keyword => keyword.toLowerCase().includes(query))
+    );
 }
 
 function highlightMatch(text, query) {
@@ -304,20 +282,9 @@ function highlightMatch(text, query) {
 }
 
 function selectSuggestion(text) {
-    const input = document.getElementById('user-input');
-    const dropdown = document.getElementById('autocomplete-dropdown');
-    
-    if (input) {
-        input.value = text;
-        input.focus();
-    }
-    
-    if (dropdown) {
-        dropdown.style.display = 'none';
-    }
-    
-    // Optionally trigger send
-    // sendMessage();
+    document.getElementById('user-input').value = text;
+    document.getElementById('autocomplete-dropdown').classList.add('hidden');
+    document.getElementById('user-input').focus();
 }
 
 function escapeHtml(text) {
@@ -328,17 +295,6 @@ function escapeRegex(text) {
     return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// Hide dropdown when clicking outside
-document.addEventListener('click', function(e) {
-    const input = document.getElementById('user-input');
-    const dropdown = document.getElementById('autocomplete-dropdown');
-    
-    if (dropdown && input) {
-        if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-            dropdown.style.display = 'none';
-        }
-    }
-});
 // ============================================
 // RENDERING FUNCTIONS
 // ============================================
