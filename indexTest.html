@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kurukshetra InfoBot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Reset and base styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { 
+            margin: 0; 
+            padding: 0; 
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        /* WhatsApp-specific tweaks */
+        .wa-bg { 
+            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); 
+            background-opacity: 0.4; 
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .message-box { box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); }
+        .triangle-left::before {
+            content: ""; position: absolute; left: -8px; top: 0; width: 0; height: 0;
+            border-top: 0px solid transparent; border-bottom: 15px solid transparent; border-right: 15px solid white;
+        }
+        .triangle-right::before {
+            content: ""; position: absolute; right: -8px; top: 0; width: 0; height: 0;
+            border-top: 0px solid transparent; border-bottom: 15px solid transparent; border-left: 15px solid #d9fdd3;
+        }
+        
+        /* Enhanced chip styles */
+        .chip-button {
+            transition: all 0.25s ease;
+            font-weight: 600;
+        }
+        .chip-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 128, 105, 0.25);
+        }
+        .chip-button:active {
+            transform: scale(0.98);
+        }
+        
+        /* Chips container gradient background */
+        #chips-container {
+            pointer-events: auto;
+        }
+        
+        #chips-grid {
+            pointer-events: auto;
+        }
+        
+        /* Language switcher animation */
+        #lang-flag {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        button:has(#lang-flag):hover #lang-flag {
+            transform: scale(1.2);
+        }
+        
+        /* Gradient header */
+        .gradient-header {
+            background: linear-gradient(135deg, #008069 0%, #00a884 100%);
+        }
+
+        /* Autocomplete dropdown styles */
+        .autocomplete-dropdown {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 30;
+        }
+        
+        .autocomplete-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .autocomplete-item:hover {
+            background: #f0f9ff;
+        }
+        
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-highlight {
+            color: #008069;
+            font-weight: 600;
+        }
+        
+        .autocomplete-dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .autocomplete-dropdown::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
+      /* ========================================
+   POPULAR SEARCH PILLS (Always Visible)
+   ======================================== */
+
+.popular-searches-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.popular-searches-section h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #666;
+    font-weight: 600;
+}
+
+.search-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.search-pill {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.search-pill:hover {
+    background: #e3f2fd;
+    border-color: #2196F3;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+}
+
+.search-pill:active {
+    transform: translateY(0);
+}
+
+/* Responsive: Stack on mobile */
+@media (max-width: 768px) {
+    .search-pills {
+        flex-direction: column;
+    }
+    
+    .search-pill {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+
+/* ========================================
+   AUTOCOMPLETE DROPDOWN (Shows When Typing)
+   ======================================== */
+
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.autocomplete-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background: #f5f5f5;
+}
+
+.autocomplete-item-icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.autocomplete-item-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.autocomplete-no-results {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Scrollbar styling */
+.autocomplete-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+
+/* ========================================
+   KEEP YOUR EXISTING STYLES
+   ======================================== */
+
+/* Your existing suggestions button styles */
+#suggestions-btn {
+    /* Keep as is */
+}
+
+/* Your existing modal styles */
+.suggestions-modal {
+    /* Keep as is */
+}
+    </style>
+</head>
+<body class="min-h-screen md:flex md:justify-center md:items-center" style="background: #008069;">
+
+    <div class="w-full h-[100dvh] md:max-w-md md:h-[90vh] bg-[#efeae2] relative flex flex-col md:shadow-2xl md:rounded-xl overflow-hidden">
+        
+        <!-- Enhanced Header -->
+        <div class="gradient-header p-3 flex items-center justify-between text-white shadow-lg z-20">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#008069] font-bold text-xl shadow-md">
+                    <i data-lucide="bot" class="w-6 h-6"></i>
+                </div>
+                <div class="leading-tight">
+                    <h1 class="font-semibold text-base" id="header-title">Kurukshetra InfoBot</h1>
+                    <p class="text-[11px] opacity-90" id="header-subtitle">Powered by AI • 24/7 Available</p>
+                </div>
+            </div>
+            <div class="flex gap-3 items-center relative">
+                <!-- Language Switcher -->
+                <button onclick="toggleLanguage()" class="bg-white/20 hover:bg-white/30 rounded-lg px-2 py-1 text-xs font-semibold transition-all flex items-center gap-1 backdrop-blur-sm">
+                    <span id="lang-flag">🇬🇧</span>
+                    <span id="lang-code">EN</span>
+                </button>
+                
+                <button onclick="toggleMenu()"><i data-lucide="more-vertical" class="w-5 h-5"></i></button>
+                
+                <div id="menu-dropdown" class="hidden absolute right-0 top-10 bg-white text-gray-800 shadow-xl rounded-lg py-2 w-48 z-30">
+                     <button onclick="clearChat()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i> <span id="menu-clear">Clear chat</span>
+                    </button>
+                    <button onclick="window.open('https://kurukshetra.gov.in', '_blank')" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
+                        <i data-lucide="external-link" class="w-4 h-4"></i> <span id="menu-visit">Visit Website</span>
+                    </button>
+                  <button onclick="openFeedbackModal()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i> <span id="menu-feedback">Give Feedback</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-3 wa-bg relative">
+            
+            <!-- Enhanced Welcome Badge -->
+            <div class="flex justify-center mb-4">
+                <div class="bg-gradient-to-r from-blue-50 to-green-50 border border-[#008069]/20 px-4 py-2 rounded-xl shadow-sm text-center max-w-[85%]">
+                    <div class="flex items-center justify-center gap-2 mb-1">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-[#008069]"></i>
+                        <span class="text-xs font-semibold text-gray-700" id="official-info-title">Official Information</span>
+                    </div>
+                    <p class="text-[10px] text-gray-600"><span id="official-info-desc">All responses are sourced from</span> <b>kurukshetra.gov.in</b></p>
+                </div>
+            </div>
+
+            <!-- Welcome Message -->
+            <div id="welcome-message" class="flex justify-start">
+                <div class="max-w-[85%] p-3 rounded-lg rounded-tl-none shadow-sm bg-white message-box triangle-left">
+                    <div class="text-gray-800 text-[14px] leading-relaxed">
+                        👋 <b id="welcome-title">Namaste!</b><br><br>
+                        <span id="welcome-text">I'm your AI assistant for Kurukshetra district. Ask me about:</span>
+                        <br>• 👤 <span id="welcome-officers">Officers & Departments</span>
+                        <br>• 🏛️ <span id="welcome-tourist">Tourist Places & Heritage</span>
+                        <br>• 📋 <span id="welcome-services">Services & Schemes</span>
+                        <br>• 📊 <span id="welcome-district">District Information</span>
+                        <br>• 🚨 <span id="welcome-emergency">Emergency Contacts</span>
+                        <br><br>
+                        <span class="text-xs text-gray-500" id="welcome-suggestion">Try the suggestions below to get started!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="messages-list" class="space-y-2 pb-12"></div>
+            
+            <div id="loading-indicator" class="hidden flex justify-start animate-pulse">
+                <div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm text-sm text-gray-500 flex items-center gap-2">
+                    <div class="flex gap-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                    <span id="typing-text">Typing...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Quick Questions Chips -->
+        <div id="chips-container" class="absolute bottom-[75px] left-0 right-0 px-4 py-2 bg-gradient-to-t from-[#efeae2] from-90% to-transparent z-10 transition-all">
+            <div id="chips-title" class="text-center text-xs font-bold text-[#008069]/80 mb-1.5 tracking-wide"></div>
+            <div class="grid grid-cols-2 gap-2.5 mb-1.5" id="chips-grid"></div>
+            <div class="flex justify-center gap-1.5" id="indicators"></div>
+        </div>
+
+        <!-- Toggle Suggestions Button -->
+        <div id="toggle-chips-btn" class="hidden absolute bottom-[72px] right-4 z-10">
+            <button onclick="toggleChipsVisibility()" class="bg-white text-[#008069] border-2 border-[#008069] rounded-full px-3 py-1.5 text-xs font-semibold shadow-lg hover:bg-[#008069] hover:text-white transition-all flex items-center gap-1">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span id="suggestions-btn-text">Suggestions</span>
+            </button>
+        </div>
+
+        <!-- Input Area with Autocomplete -->
+        <div class="bg-[#f0f2f5] p-2 flex items-center gap-2 z-20 shadow-lg relative">
+            <!-- Autocomplete Dropdown -->
+            <div id="autocomplete-dropdown" class="autocomplete-dropdown hidden"></div>
+            
+            <button class="text-gray-500 p-1 hover:bg-gray-200 rounded-full transition">
+                <i data-lucide="smile" class="w-6 h-6"></i>
+            </button>
+            <input type="text" id="user-input" placeholder="Ask me anything about Kurukshetra..." 
+                class="flex-1 py-2 px-4 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-[#008069]/20 text-sm h-10 shadow-sm"
+                onkeypress="handleKeyPress(event)"
+                oninput="handleAutocomplete(event)"
+                autocomplete="off">
+            <button onclick="sendMessage()" class="bg-gradient-to-r from-[#008069] to-[#00a884] p-2.5 rounded-full text-white hover:shadow-md transition-all">
+                <i data-lucide="send" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
+            <!-- Modal Header -->
+            <div class="gradient-header p-4 flex items-center justify-between text-white sticky top-0 z-10">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                    <div>
+                        <h2 class="font-semibold text-lg" id="feedback-title">Feedback Form</h2>
+                        <p class="text-xs opacity-90" id="feedback-subtitle">Help us improve</p>
+                    </div>
+                </div>
+                <button onclick="closeFeedbackModal()" class="hover:bg-white/20 rounded-full p-2 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Feedback Form -->
+            <form id="feedback-form" class="p-4 space-y-4">
+                <!-- Personal Information -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-personal-info">Personal Information</h3>
+                    
+                    <input type="text" id="feedback-name" name="name" required
+                        placeholder="Your Name *"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] focus:border-transparent">
+                    
+                    <input type="email" id="feedback-email" name="email" required
+                        placeholder="Email Address *"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] focus:border-transparent">
+                    
+                    <div class="grid grid-cols-3 gap-2">
+                        <input type="text" id="feedback-country" name="country"
+                            placeholder="Country"
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <input type="text" id="feedback-state" name="state"
+                            placeholder="State"
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <input type="text" id="feedback-city" name="city"
+                            placeholder="City"
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                    </div>
+                </div>
+
+                <!-- Usage Information -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-usage">Usage Information</h3>
+                    
+                    <select id="feedback-frequency" name="usageFrequency" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-frequency-default">How often do you use this chatbot? *</option>
+                        <option value="First time">First time</option>
+                        <option value="Daily">Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                        <option value="Rarely">Rarely</option>
+                    </select>
+                    
+                    <input type="text" id="feedback-purpose" name="purpose"
+                        placeholder="Purpose of using this chatbot"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                </div>
+
+                <!-- Performance Rating -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-performance">Bot Performance</h3>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-700" id="feedback-understood-label">Did the bot understand your questions?</label>
+                        <div class="flex gap-2">
+                            <label class="flex-1"><input type="radio" name="understood" value="Yes" class="mr-1"> <span id="feedback-yes">Yes</span></label>
+                            <label class="flex-1"><input type="radio" name="understood" value="No" class="mr-1"> <span id="feedback-no">No</span></label>
+                            <label class="flex-1"><input type="radio" name="understood" value="Mostly" class="mr-1"> <span id="feedback-mostly">Mostly</span></label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-700" id="feedback-helpful-label">Were the answers helpful?</label>
+                        <div class="flex gap-2">
+                            <label class="flex-1"><input type="radio" name="helpful" value="Very helpful" class="mr-1"> <span id="feedback-very">Very</span></label>
+                            <label class="flex-1"><input type="radio" name="helpful" value="Somewhat" class="mr-1"> <span id="feedback-somewhat">Somewhat</span></label>
+                            <label class="flex-1"><input type="radio" name="helpful" value="Not helpful" class="mr-1"> <span id="feedback-not">Not</span></label>
+                        </div>
+                    </div>
+
+                    <select id="feedback-speed" name="responseSpeed" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-speed-default">Response speed *</option>
+                        <option value="Very fast">Very fast</option>
+                        <option value="Fast">Fast</option>
+                        <option value="Average">Average</option>
+                        <option value="Slow">Slow</option>
+                    </select>
+
+                    <select id="feedback-ease" name="easyToUse" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-ease-default">Easy to use? *</option>
+                        <option value="Very easy">Very easy</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Difficult">Difficult</option>
+                    </select>
+                </div>
+
+                <!-- Problems & Rating -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-issues">Issues & Rating</h3>
+                    
+                    <select id="feedback-problems" name="hadProblems" onchange="toggleProblemDetails()"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="No" id="feedback-problems-default">Did you face any problems?</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <textarea id="feedback-problem-details" name="problemDetails"
+                        placeholder="Please describe the problem..."
+                        rows="2"
+                        class="hidden w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] resize-none"></textarea>
+
+                    <div class="space-y-2">
+                        <label class="text-sm text-gray-700" id="feedback-rating-label">Overall Rating *</label>
+                        <div class="flex gap-2 text-2xl">
+                            <label><input type="radio" name="rating" value="⭐" required class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐⭐⭐</span></label>
+                            <label><input type="radio" name="rating" value="⭐⭐⭐⭐⭐" class="hidden"><span class="cursor-pointer hover:scale-125 transition">⭐⭐⭐⭐⭐</span></label>
+                        </div>
+                    </div>
+
+                    <select id="feedback-again" name="useAgain" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069]">
+                        <option value="" id="feedback-again-default">Would you use this chatbot again? *</option>
+                        <option value="Definitely">Definitely</option>
+                        <option value="Probably">Probably</option>
+                        <option value="Maybe">Maybe</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <!-- Additional Feedback -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-gray-800 text-sm" id="feedback-additional">Additional Feedback</h3>
+                    
+                    <textarea id="feedback-improvements" name="improvements"
+                        placeholder="Suggestions for improvement"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] resize-none"></textarea>
+
+                    <textarea id="feedback-comments" name="comments"
+                        placeholder="Any other comments"
+                        rows="2"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#008069] resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="feedback-submit-btn"
+                    class="w-full bg-gradient-to-r from-[#008069] to-[#00a884] text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span id="feedback-submit-text">Submit Feedback</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
