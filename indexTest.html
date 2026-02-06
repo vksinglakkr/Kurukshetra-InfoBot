@@ -550,7 +550,7 @@
     </div>
     <script>
         // Popular pills data (language-specific)
-        const popularPills = {
+        const popularPillsData = {  // ← Changed name to avoid conflict
             en: [
                 { icon: '🛕', text: 'Brahma Sarovar' },
                 { icon: '📿', text: 'Jyotisar' },
@@ -573,47 +573,98 @@
             ]
         };
 
+        // Detect current language from HTML or default to 'en'
+        function getCurrentLanguage() {
+            // Try multiple methods to detect language
+            const htmlLang = document.documentElement.lang;
+            const headerTitle = document.getElementById('header-title');
+            
+            // Check if page is in Hindi based on header text
+            if (headerTitle && headerTitle.textContent.includes('कुरुक्षेत्र')) {
+                return 'hi';
+            }
+            
+            // Check HTML lang attribute
+            if (htmlLang && htmlLang.startsWith('hi')) {
+                return 'hi';
+            }
+            
+            // Default to English
+            return 'en';
+        }
+
         // Render popular pills based on current language
         function renderPopularPills() {
-            const lang = currentLanguage || 'en';
-            const pills = popularPills[lang];
+            const lang = getCurrentLanguage();
+            const pills = popularPillsData[lang];
             const container = document.getElementById('popular-pills');
             const title = document.getElementById('popular-title');
+            
+            if (!container || !title) {
+                console.log('Popular pills container not found');
+                return;
+            }
             
             // Update title based on language
             title.textContent = lang === 'hi' ? 'लोकप्रिय खोजें:' : 'Popular Searches:';
             
             // Render pills
             container.innerHTML = pills.map(pill => `
-                <button class="search-pill" onclick="quickSearch('${pill.text}')">
+                <button class="search-pill" onclick="quickSearchFromPill('${pill.text.replace(/'/g, "\\'")}')">
                     ${pill.icon} ${pill.text}
                 </button>
             `).join('');
+            
+            console.log('Popular pills rendered:', pills.length, 'pills in', lang);
         }
 
-        // Quick search from pill click
-        function quickSearch(query) {
+        // Quick search from pill click (renamed to avoid conflicts)
+        function quickSearchFromPill(query) {
             const input = document.getElementById('user-input');
+            if (!input) return;
+            
             input.value = query;
             
-            // Hide autocomplete
-            document.getElementById('autocomplete-dropdown').style.display = 'none';
+            // Hide autocomplete if it exists
+            const autocomplete = document.getElementById('autocomplete-dropdown');
+            if (autocomplete) {
+                autocomplete.style.display = 'none';
+            }
             
             // Send message (use your existing function)
-            sendMessage();
+            if (typeof sendMessage === 'function') {
+                sendMessage();
+            } else {
+                console.error('sendMessage function not found');
+            }
         }
 
         // Initialize pills on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderPopularPills);
+        } else {
+            // DOM already loaded
             renderPopularPills();
-        });
+        }
 
-        // Update pills when language changes
-        const originalToggleLanguage = window.toggleLanguage;
-        window.toggleLanguage = function() {
-            if (originalToggleLanguage) originalToggleLanguage();
-            setTimeout(renderPopularPills, 100); // Re-render pills after language change
-        };
+        // Hook into language change if the function exists
+        // This will be called AFTER your script.js loads
+        setTimeout(function() {
+            // Store original function if it exists
+            if (typeof toggleLanguage !== 'undefined') {
+                const originalToggleLanguage = window.toggleLanguage;
+                
+                window.toggleLanguage = function() {
+                    // Call original function
+                    originalToggleLanguage();
+                    
+                    // Re-render pills after language change
+                    setTimeout(renderPopularPills, 100);
+                };
+                
+                console.log('Language toggle hook installed');
+            }
+        }, 1000);
     </script>
     <!-- External JavaScript -->
     <script src="script.js"></script>
