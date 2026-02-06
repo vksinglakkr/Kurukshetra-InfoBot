@@ -217,143 +217,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 });
 
-// ========================================
-// AUTOCOMPLETE DROPDOWN - Type to Filter
-// ========================================
+// ============================================
+// AUTOCOMPLETE FUNCTIONS
+// ============================================
 
-let autocompleteData = []; // Will be populated from your autocomplete-data.json
-
-// Load autocomplete data
 async function loadAutocompleteData() {
     try {
         const response = await fetch('autocomplete-data.json');
-        const data = await response.json();
-        
-        // Get current language
-        const currentLang = document.documentElement.lang || 'en';
-        
-        // Use appropriate language data
-        autocompleteData = data[currentLang] || data.en;
-        
-        console.log('Autocomplete data loaded:', autocompleteData.length, 'suggestions');
+        autocompleteData = await response.json();
+        console.log('Autocomplete data loaded:', autocompleteData);
     } catch (error) {
-        console.error('Error loading autocomplete data:', error);
+        console.error('Failed to load autocomplete data:', error);
+        // Fallback to empty arrays if file doesn't exist
+        autocompleteData = { en: [], hi: [] };
     }
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    loadAutocompleteData();
-    setupAutocomplete();
-});
-// Setup autocomplete event listeners
-function setupAutocomplete() {
-    const searchInput = document.getElementById('search-input');
-    const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
-    
-    // Show autocomplete when typing
-    searchInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        
-        if (query.length === 0) {
-            // Hide if empty
-            autocompleteDropdown.style.display = 'none';
-        } else if (query.length >= 2) {
-            // Show filtered results when 2+ characters
-            const filtered = filterAutocomplete(query);
-            renderAutocomplete(filtered);
-            autocompleteDropdown.style.display = 'block';
-        }
-    });
-    
-    // Hide autocomplete when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && 
-            !autocompleteDropdown.contains(e.target)) {
-            autocompleteDropdown.style.display = 'none';
-        }
-    });
-    
-    // Prevent autocomplete from closing when scrolling
-    autocompleteDropdown.addEventListener('mousedown', function(e) {
-        e.preventDefault();
-    });
-}
-
-
-// Filter autocomplete suggestions
-function filterAutocomplete(query) {
-    const lowerQuery = query.toLowerCase();
-    
-    // Filter by keywords
-    const matches = autocompleteData.filter(item => {
-        // Check if query matches text
-        if (item.text.toLowerCase().includes(lowerQuery)) {
-            return true;
-        }
-        
-        // Check if query matches keywords
-        if (item.keywords) {
-            const keywordArray = Array.isArray(item.keywords) 
-                ? item.keywords 
-                : item.keywords.split(' ');
-            
-            return keywordArray.some(keyword => 
-                keyword.toLowerCase().includes(lowerQuery)
-            );
-        }
-        
-        return false;
-    });
-    
-    // Return top 10 matches
-    return matches.slice(0, 10);
-}
-
-
-// Render autocomplete results
-function renderAutocomplete(suggestions) {
-    const dropdown = document.getElementById('autocomplete-dropdown');
-    
-    if (suggestions.length === 0) {
-        dropdown.innerHTML = `
-            <div class="autocomplete-no-results">
-                No suggestions found. Try different keywords.
-            </div>
-        `;
-        return;
-    }
-    
-    dropdown.innerHTML = suggestions.map(item => `
-        <div class="autocomplete-item" onclick="selectAutocomplete('${escapeHtml(item.text)}')">
-            <span class="autocomplete-item-icon">${item.icon || '🔍'}</span>
-            <span class="autocomplete-item-text">${escapeHtml(item.text)}</span>
-        </div>
-    `).join('');
-}
-
-
-// Select an autocomplete suggestion
-function selectAutocomplete(text) {
-    const searchInput = document.getElementById('search-input');
-    const dropdown = document.getElementById('autocomplete-dropdown');
-    
-    // Set input value
-    searchInput.value = text;
-    
-    // Hide dropdown
-    dropdown.style.display = 'none';
-    
-    // Perform search
-    performSearch(text);
-}
-
-
-// Helper: Escape HTML to prevent XSS
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
 }
 
 function handleAutocomplete(event) {
@@ -663,20 +540,6 @@ function handleKeyPress(e) {
     if (e.key === 'Enter') {
         sendMessage();
     }
-}
-// ========================================
-// POPULAR SEARCH PILLS - Click to Search
-// ========================================
-
-function quickSearch(query) {
-    const searchInput = document.getElementById('search-input');
-    searchInput.value = query;
-    
-    // Hide autocomplete if open
-    document.getElementById('autocomplete-dropdown').style.display = 'none';
-    
-    // Trigger your existing search function
-    performSearch(query);
 }
 
 function handleChipClick(text) {
