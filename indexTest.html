@@ -296,7 +296,14 @@
                 </div>
             </div>
         </div>
-
+        <!-- ✨ NEW: Popular Search Pills (Add this entire section) -->
+        <div class="popular-searches-section" style="margin: 12px; margin-bottom: 8px;">
+            <h4 id="popular-title">Popular Searches:</h4>
+            <div class="search-pills" id="popular-pills">
+                <!-- Pills will be populated by JavaScript -->
+            </div>
+        </div>
+        <!-- End of Popular Pills -->
         <!-- Chat Container -->
         <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-3 wa-bg relative">
             
@@ -357,10 +364,10 @@
             </button>
         </div>
 
-        <!-- Input Area with Autocomplete -->
-        <div class="bg-[#f0f2f5] p-2 flex items-center gap-2 z-20 shadow-lg relative">
-            <!-- Autocomplete Dropdown -->
-            <div id="autocomplete-dropdown" class="autocomplete-dropdown hidden"></div>
+<!-- Input Area with Autocomplete -->
+        <div class="bg-[#f0f2f5] p-2 flex items-center gap-2 z-20 shadow-lg relative search-container">
+            <!-- ✨ Autocomplete Dropdown (moved outside for better positioning) -->
+            <div id="autocomplete-dropdown" class="autocomplete-dropdown" style="display: none;"></div>
             
             <button class="text-gray-500 p-1 hover:bg-gray-200 rounded-full transition">
                 <i data-lucide="smile" class="w-6 h-6"></i>
@@ -541,7 +548,73 @@
             </form>
         </div>
     </div>
+    <script>
+        // Popular pills data (language-specific)
+        const popularPills = {
+            en: [
+                { icon: '🛕', text: 'Brahma Sarovar' },
+                { icon: '📿', text: 'Jyotisar' },
+                { icon: '🏛️', text: 'Tourist places' },
+                { icon: '🚨', text: 'Emergency numbers' },
+                { icon: '👤', text: 'DC office' },
+                { icon: '🕉️', text: 'Sthaneshwar Temple' },
+                { icon: '🕉️', text: '48 Kos Parikrama' },
+                { icon: '🏥', text: 'Hospitals' }
+            ],
+            hi: [
+                { icon: '🛕', text: 'ब्रह्म सरोवर' },
+                { icon: '📿', text: 'ज्योतिसर' },
+                { icon: '🏛️', text: 'पर्यटन स्थल' },
+                { icon: '🚨', text: 'आपातकालीन नंबर' },
+                { icon: '👤', text: 'DC कार्यालय' },
+                { icon: '🕉️', text: 'स्थानेश्वर मंदिर' },
+                { icon: '🕉️', text: '48 कोस परिक्रमा' },
+                { icon: '🏥', text: 'अस्पताल' }
+            ]
+        };
 
+        // Render popular pills based on current language
+        function renderPopularPills() {
+            const lang = currentLanguage || 'en';
+            const pills = popularPills[lang];
+            const container = document.getElementById('popular-pills');
+            const title = document.getElementById('popular-title');
+            
+            // Update title based on language
+            title.textContent = lang === 'hi' ? 'लोकप्रिय खोजें:' : 'Popular Searches:';
+            
+            // Render pills
+            container.innerHTML = pills.map(pill => `
+                <button class="search-pill" onclick="quickSearch('${pill.text}')">
+                    ${pill.icon} ${pill.text}
+                </button>
+            `).join('');
+        }
+
+        // Quick search from pill click
+        function quickSearch(query) {
+            const input = document.getElementById('user-input');
+            input.value = query;
+            
+            // Hide autocomplete
+            document.getElementById('autocomplete-dropdown').style.display = 'none';
+            
+            // Send message (use your existing function)
+            sendMessage();
+        }
+
+        // Initialize pills on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPopularPills();
+        });
+
+        // Update pills when language changes
+        const originalToggleLanguage = window.toggleLanguage;
+        window.toggleLanguage = function() {
+            if (originalToggleLanguage) originalToggleLanguage();
+            setTimeout(renderPopularPills, 100); // Re-render pills after language change
+        };
+    </script>
     <!-- External JavaScript -->
     <script src="script.js"></script>
 </body>
