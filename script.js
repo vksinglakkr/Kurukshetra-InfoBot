@@ -273,7 +273,7 @@ ${window.location.href}
 
 _आध्यात्मिक विरासत का डिजिटल अनुभव!_ 🙏`;
     } else {
-        inviteMessage = `🕉️ *Kurukshetra Mitra - AI Chatbot*
+        inviteMessage = `🕉️ *Kurukshetra-InfoBot - AI Chatbot*
 
 Discover Kurukshetra's heritage digitally!
 
@@ -445,7 +445,7 @@ function shareBotMessage(messageIndex) {
     }
     
     // Create shareable message with branding
-    const shareMessage = `🕉️ *Kurukshetra Mitra*
+    const shareMessage = `🕉️ *Kurukshetra-InfoBot*
 
 ${cleanContent}
 
