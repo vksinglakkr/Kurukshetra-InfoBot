@@ -1,15 +1,395 @@
 {
   "en": [
     {
-      "icon": "👤",
-      "text": "Who is the DC?",
-      "keywords": ["dc", "deputy commissioner", "collector", "district magistrate", "officer"]
+      "icon": "🏛️",
+      "text": "All tourist places in Kurukshetra",
+      "keywords": ["tourist", "places", "all", "list", "tourism", "attractions", "visit", "sightseeing"]
+    },
+    {
+      "icon": "🛕",
+      "text": "All Sarovars (sacred lakes)",
+      "keywords": ["sarovar", "sarovars", "lakes", "all", "list", "sacred", "holy", "water"]
+    },
+    {
+      "icon": "⚔️",
+      "text": "All Mahabharata sites",
+      "keywords": ["mahabharata", "mahabharat", "sites", "all", "epic", "war", "kurukshetra"]
     },
     {
       "icon": "🕉️",
       "text": "All Shiva temples",
       "keywords": ["shiva", "temples", "all", "mahadev", "mandir", "lord"]
     },
+    {
+      "icon": "🛕",
+      "text": "All temples in Kurukshetra",
+      "keywords": ["temples", "all", "mandir", "religious", "worship"]
+    },
+    {
+      "icon": "🎭",
+      "text": "All museums in Kurukshetra",
+      "keywords": ["museums", "all", "museum", "list", "exhibition"]
+    },
+    {
+      "icon": "🙏",
+      "text": "All Gurdwaras in Kurukshetra",
+      "keywords": ["gurdwara", "gurdwaras", "all", "sikh", "gurudwara"]
+    },
+    {
+      "icon": "🕉️",
+      "text": "All 48 Kos Parikrama sites",
+      "keywords": ["48", "kos", "parikrama", "sites", "all", "pilgrimage", "circuit"]
+    },
+    {
+      "icon": "💧",
+      "text": "All Tirthas (sacred water sites)",
+      "keywords": ["tirtha", "tirthas", "all", "sacred", "water", "holy"]
+    },
+    {
+      "icon": "🏺",
+      "text": "Historical monuments list",
+      "keywords": ["historical", "monuments", "heritage", "sites", "ancient"]
+    },
+    
+    // ========================================
+    // GENERAL DISTRICT INFO
+    // ========================================
+    
+    {
+      "icon": "📖",
+      "text": "About Kurukshetra district",
+      "keywords": ["about", "kurukshetra", "district", "information", "general"]
+    },
+    {
+      "icon": "🏛️",
+      "text": "History of Kurukshetra",
+      "keywords": ["history", "historical", "kurukshetra", "battle", "epic"]
+    },
+    {
+      "icon": "📊",
+      "text": "Population of Kurukshetra",
+      "keywords": ["population", "census", "people", "demographics", "statistics"]
+    },
+    {
+      "icon": "📏",
+      "text": "Area of Kurukshetra district",
+      "keywords": ["area", "size", "square", "kilometers"]
+    },
+    {
+      "icon": "🌤️",
+      "text": "Weather in Kurukshetra",
+      "keywords": ["weather", "climate", "temperature", "forecast"]
+    },
+    {
+      "icon": "🚍",
+      "text": "How to reach Kurukshetra?",
+      "keywords": ["reach", "travel", "transport", "distance", "delhi", "chandigarh"]
+    },
+    
+    // ========================================
+    // TOP TOURIST SITES
+    // ========================================
+    
+    {
+      "icon": "🛕",
+      "text": "Brahma Sarovar",
+      "keywords": ["brahma", "sarovar", "temple", "holy", "sacred", "tank", "water", "lake"]
+    },
+    {
+      "icon": "📿",
+      "text": "Jyotisar (Bhagavad Gita birthplace)",
+      "keywords": ["jyotisar", "gita", "krishna", "bhagavad", "arjuna", "birthplace"]
+    },
+    {
+      "icon": "🕉️",
+      "text": "Sthaneshwar Mahadev Temple",
+      "keywords": ["sthaneshwar", "mahadev", "temple", "shiva", "lord", "shrine"]
+    },
+    {
+      "icon": "💧",
+      "text": "Baan Ganga sacred site",
+      "keywords": ["baan", "ganga", "ban", "tirtha", "holy", "water"]
+    },
+    {
+      "icon": "🛕",
+      "text": "Sannihit Sarovar",
+      "keywords": ["sannihit", "sarovar", "sanihit", "lake", "eclipse"]
+    },
+    {
+      "icon": "⚔️",
+      "text": "Karn Ka Tila (Karna's Mound)",
+      "keywords": ["karn", "karna", "tila", "mound", "mahabharata"]
+    },
+    {
+      "icon": "🎭",
+      "text": "Panorama and Science Centre",
+      "keywords": ["panorama", "science", "centre", "museum", "exhibition"]
+    },
+    {
+      "icon": "💧",
+      "text": "Bhishma Kund Narkatari",
+      "keywords": ["bhishma", "kund", "narkatari", "tirtha"]
+    },
+    {
+      "icon": "🏛️",
+      "text": "Sheikh Chilli Tomb",
+      "keywords": ["sheikh", "chilli", "chaheli", "tomb", "monument"]
+    },
+    {
+      "icon": "🎨",
+      "text": "Krishna Museum Kurukshetra",
+      "keywords": ["krishna", "museum", "shri", "kurukshetra"]
+    },
+    {
+      "icon": "🙏",
+      "text": "Bhadrakali Shaktipeeth Temple",
+      "keywords": ["bhadrakali", "shaktipeeth", "devikoop", "temple", "goddess"]
+    },
+    {
+      "icon": "🏺",
+      "text": "Krishna Arjun Rath",
+      "keywords": ["krishna", "arjun", "rath", "chariot"]
+    },
+    
+    // ========================================
+    // CULTURAL & MODERN SITES
+    // ========================================
+    
+    {
+      "icon": "🎓",
+      "text": "Kurukshetra University",
+      "keywords": ["university", "ku", "campus", "college", "education", "kurukshetra university", "kuk"]
+    },
+    {
+      "icon": "🚀",
+      "text": "Kalpana Chawla Planetarium",
+      "keywords": ["kalpana", "chawla", "planetarium", "space", "astronaut"]
+    },
+    {
+      "icon": "🏛️",
+      "text": "1857 War Memorial Museum",
+      "keywords": ["1857", "war", "memorial", "museum", "freedom", "struggle"]
+    },
+    {
+      "icon": "🎭",
+      "text": "Dharohar Haryana Museum",
+      "keywords": ["dharohar", "museum", "haryana", "culture", "heritage"]
+    },
+    {
+      "icon": "🙏",
+      "text": "Gurdwara Raj Ghat Patshahi",
+      "keywords": ["gurdwara", "raj", "ghat", "sikh", "gurudwara"]
+    },
+    {
+      "icon": "🛕",
+      "text": "Birla Mandir Kurukshetra",
+      "keywords": ["birla", "mandir", "temple", "lakshmi", "narayan"]
+    },
+    {
+      "icon": "🙏",
+      "text": "Hanuman Mandir (Dakshinmukhi)",
+      "keywords": ["hanuman", "mandir", "dakshinmukhi", "temple"]
+    },
+    {
+      "icon": "🛕",
+      "text": "Tirupati Balaji Temple",
+      "keywords": ["tirupati", "balaji", "temple", "venkateswara"]
+    },
+    
+    // ========================================
+    // 48 KOS SITES & TIRTHAS
+    // ========================================
+    
+    {
+      "icon": "🕉️",
+      "text": "48 Kos Parikrama route map",
+      "keywords": ["48", "kos", "parikrama", "route", "map", "pilgrimage", "holy", "circuit"]
+    },
+    {
+      "icon": "💧",
+      "text": "Pehowa Saraswati Tirtha",
+      "keywords": ["pehowa", "saraswati", "tirtha", "river"]
+    },
+    {
+      "icon": "💧",
+      "text": "Kamyak Tirtha Kamauda",
+      "keywords": ["kamyak", "tirtha", "kamauda"]
+    },
+    {
+      "icon": "🪷",
+      "text": "Nabhi Kamal sacred lotus site",
+      "keywords": ["nabhi", "kamal", "lotus", "brahma"]
+    },
+    
+    // ========================================
+    // BHAGAVAD GITA SECTION
+    // ========================================
+    
+    {
+      "icon": "📖",
+      "text": "What is Bhagavad Gita?",
+      "keywords": ["gita", "geeta", "bhagavad", "bhagwad", "what", "is", "about", "holy", "book", "scripture"]
+    },
+    {
+      "icon": "📚",
+      "text": "Bhagavad Gita teachings summary",
+      "keywords": ["gita", "teachings", "summary", "lessons"]
+    },
+    {
+      "icon": "🙏",
+      "text": "Karma Yoga in Bhagavad Gita",
+      "keywords": ["karma", "yoga", "action", "duty", "meaning", "path", "gita"]
+    },
+    {
+      "icon": "💝",
+      "text": "Bhakti Yoga in Bhagavad Gita",
+      "keywords": ["bhakti", "yoga", "devotion", "path"]
+    },
+    {
+      "icon": "🧘",
+      "text": "Meditation teachings in Gita",
+      "keywords": ["meditation", "dhyana", "yoga", "gita", "mind"]
+    },
+    {
+      "icon": "⚔️",
+      "text": "Arjuna's dilemma in Gita",
+      "keywords": ["arjuna", "arjun", "dilemma", "vishada", "war", "kurukshetra", "gita"]
+    },
+    {
+      "icon": "📿",
+      "text": "Krishna's teachings to Arjuna",
+      "keywords": ["krishna", "lord", "teaching", "teachings", "arjuna", "gita", "wisdom"]
+    },
+    {
+      "icon": "📖",
+      "text": "Bhagavad Gita chapters summary",
+      "keywords": ["chapter", "chapters", "adhyay", "18", "summary", "gita"]
+    },
+    {
+      "icon": "🎯",
+      "text": "Dharma meaning in Gita",
+      "keywords": ["dharma", "duty", "righteousness", "gita"]
+    },
+    
+    // ========================================
+    // ADMINISTRATIVE
+    // ========================================
+    
+    {
+      "icon": "👤",
+      "text": "DC office Kurukshetra contact",
+      "keywords": ["dc", "deputy", "commissioner", "office", "contact", "phone", "number", "collector", "district", "magistrate"]
+    },
+    {
+      "icon": "🏢",
+      "text": "SDM offices in Kurukshetra",
+      "keywords": ["sdm", "sub", "divisional", "magistrate", "office", "offices", "contact", "address"]
+    },
+    {
+      "icon": "👮",
+      "text": "Police stations in Kurukshetra",
+      "keywords": ["police", "station", "stations", "thana", "law", "enforcement", "emergency"]
+    },
+    {
+      "icon": "🏥",
+      "text": "Hospitals in Kurukshetra",
+      "keywords": ["hospital", "hospitals", "medical", "health", "care", "clinic", "doctor", "healthcare", "emergency"]
+    },
+    {
+      "icon": "🏫",
+      "text": "Schools in Kurukshetra",
+      "keywords": ["school", "schools", "education", "list"]
+    },
+    {
+      "icon": "🏛️",
+      "text": "Government offices Kurukshetra",
+      "keywords": ["government", "offices", "office"]
+    },
+    {
+      "icon": "🚨",
+      "text": "Emergency numbers Kurukshetra",
+      "keywords": ["emergency", "numbers", "helpline", "ambulance", "police", "fire", "108", "112", "101", "102"]
+    },
+    {
+      "icon": "📋",
+      "text": "How to get birth certificate?",
+      "keywords": ["birth", "certificate", "registration", "apply", "document"]
+    },
+    {
+      "icon": "📝",
+      "text": "Latest tenders",
+      "keywords": ["tender", "bid", "procurement", "contract", "latest"]
+    },
+    {
+      "icon": "💼",
+      "text": "Job vacancies",
+      "keywords": ["job", "vacancy", "recruitment", "employment", "career", "opening"]
+    },
+    {
+      "icon": "🌾",
+      "text": "Agriculture department",
+      "keywords": ["agriculture", "farming", "krishi", "crop", "farmer"]
+    },
+    {
+      "icon": "🏪",
+      "text": "Ration card application",
+      "keywords": ["ration", "card", "pds", "food", "apply"]
+    },
+    {
+      "icon": "🚗",
+      "text": "Driving license",
+      "keywords": ["driving", "license", "dl", "vehicle", "rto"]
+    },
+    {
+      "icon": "🏠",
+      "text": "Property tax payment",
+      "keywords": ["property", "tax", "house", "municipal", "payment"]
+    },
+    {
+      "icon": "⚡",
+      "text": "Electricity bill payment",
+      "keywords": ["electricity", "bill", "power", "uhbvn", "dhbvn"]
+    },
+    {
+      "icon": "💧",
+      "text": "Water supply complaint",
+      "keywords": ["water", "supply", "complaint", "jal", "board"]
+    },
+    {
+      "icon": "🏫",
+      "text": "School admission",
+      "keywords": ["school", "admission", "education", "student", "enroll"]
+    },
+    {
+      "icon": "📿",
+      "text": "Gita Jayanti Mahotsav",
+      "keywords": ["gita", "jayanti", "festival", "mahotsav", "event", "celebration"]
+    },
+    {
+      "icon": "🏨",
+      "text": "Hotels in Kurukshetra",
+      "keywords": ["hotel", "accommodation", "stay", "lodge", "guest", "house"]
+    },
+    {
+      "icon": "🍽️",
+      "text": "Restaurants and dhabas",
+      "keywords": ["restaurant", "dhaba", "food", "eating", "dining"]
+    },
+    {
+      "icon": "📞",
+      "text": "Helpline numbers",
+      "keywords": ["helpline", "toll", "free", "contact", "number", "support"]
+    },
+    {
+      "icon": "🚌",
+      "text": "Bus stand location",
+      "keywords": ["bus", "stand", "depot", "isbt", "transport"]
+    },
+    {
+      "icon": "👤",
+      "text": "Who is the DC?",
+      "keywords": ["dc", "deputy commissioner", "collector", "district magistrate", "officer"]
+    }, 
     {
       "icon": "🚨",
       "text": "Emergency numbers",
