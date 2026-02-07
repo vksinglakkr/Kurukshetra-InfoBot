@@ -848,7 +848,52 @@ function toggleProblemDetails() {
         detailsField.classList.add('hidden');
     }
 }
+// ============================================
+// TEST FUNCTION - WhatsApp Share
+// (Remove this function after verification)
+// ============================================
+function testWhatsAppShare() {
+    console.log('🧪 Test button clicked');
+    
+    // Check if adapter is initialized
+    if (!whatsappAdapter) {
+        alert('❌ WhatsApp Adapter not initialized!');
+        console.error('whatsappAdapter is null');
+        return;
+    }
+    
+    // Test message
+    const testMessage = `🕉️ *Kurukshetra Mitra Chatbot*
 
+Testing WhatsApp Share Integration!
+
+✅ If you can see this message in WhatsApp, the integration is working perfectly!
+
+🔗 Chat with me: ${window.location.href}
+
+_Testing from ${new Date().toLocaleString()}_`;
+    
+    console.log('📤 Attempting to share message...');
+    console.log('Message:', testMessage);
+    
+    // Try to share
+    try {
+        whatsappAdapter.share(testMessage);
+        console.log('✅ Share method called successfully');
+        
+        // Show confirmation
+        setTimeout(() => {
+            alert('✅ WhatsApp share triggered!\n\n' + 
+                  (whatsappAdapter.isWhatsAppAvailable() ? 
+                   'Check if WhatsApp opened with the test message.' : 
+                   'WhatsApp Web should open in new tab.'));
+        }, 500);
+        
+    } catch (error) {
+        console.error('❌ Share failed:', error);
+        alert('❌ Share failed! Check console for details.');
+    }
+}
 // Handle feedback form submission
 document.addEventListener('DOMContentLoaded', () => {
     const feedbackForm = document.getElementById('feedback-form');
