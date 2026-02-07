@@ -324,19 +324,89 @@ function escapeRegex(text) {
 
 function renderMessages() {
     const container = document.getElementById('messages-list');
-    container.innerHTML = messages.map(msg => `
-        <div class="flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}">
-            <div class="max-w-[85%] p-2 px-3 rounded-lg shadow-sm text-[14px] leading-relaxed relative message-box 
-                ${msg.role === 'user' ? 'bg-[#d9fdd3] rounded-tr-none triangle-right' : 'bg-white rounded-tl-none triangle-left'}">
-                <div class="text-gray-800 break-words">${formatText(msg.content)}</div>
-                <div class="text-[10px] text-gray-500 text-right mt-1 flex justify-end gap-1">
-                    ${msg.time} ${msg.role === 'user' ? '<span class="text-[#53bdeb]">✓✓</span>' : ''}
+    container.innerHTML = messages.map((msg, index) => {
+        // Format the message content
+        const formattedContent = formatText(msg.content);
+        
+        // Add share button HTML only for bot messages
+        const shareButton = (msg.role === 'bot' && whatsappAdapter) ? `
+            <button class="share-btn" onclick="shareBotMessage(${index})">
+                <i data-lucide="share-2"></i> Share
+            </button>
+        ` : '';
+        
+        return `
+            <div class="flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}">
+                <div class="max-w-[85%] p-2 px-3 rounded-lg shadow-sm text-[14px] leading-relaxed relative message-box 
+                    ${msg.role === 'user' ? 'bg-[#d9fdd3] rounded-tr-none triangle-right' : 'bg-white rounded-tl-none triangle-left'}">
+                    <div class="text-gray-800 break-words">${formattedContent}</div>
+                    <div class="text-[10px] text-gray-500 text-right mt-1 flex justify-end gap-1">
+                        ${msg.time} ${msg.role === 'user' ? '<span class="text-[#53bdeb]">✓✓</span>' : ''}
+                    </div>
+                    ${shareButton}
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
+    
+    // Render Lucide icons (for share icon)
+    lucide.createIcons();
 }
 
+// ============================================
+// SHARE BOT MESSAGE FUNCTION
+// ============================================
+function shareBotMessage(messageIndex) {
+    console.log('📤 Sharing message index:', messageIndex);
+    
+    // Check if WhatsApp adapter is available
+    if (!whatsappAdapter) {
+        alert('WhatsApp sharing not available');
+        console.error('whatsappAdapter is null');
+        return;
+    }
+    
+    // Get the message
+    const msg = messages[messageIndex];
+    if (!msg || msg.role !== 'bot') {
+        console.error('Invalid message or not a bot message');
+        return;
+    }
+    
+    // Clean the message content (remove HTML tags and extra formatting)
+    let cleanContent = msg.content
+        .replace(/<[^>]*>/g, '')              // Remove HTML tags
+        .replace(/\*\*/g, '*')                // Convert bold to single asterisk
+        .replace(/#{1,6}\s/g, '')             // Remove markdown headers
+        .replace(/\n\n+/g, '\n\n')            // Clean multiple line breaks
+        .replace(/🔗\s*https?:\/\/[^\s]+/g, '') // Remove link URLs (keep text)
+        .trim();
+    
+    // Limit length if too long
+    if (cleanContent.length > 500) {
+        cleanContent = cleanContent.substring(0, 497) + '...';
+    }
+    
+    // Create shareable message with branding
+    const shareMessage = `🕉️ *Kurukshetra Mitra*
+
+${cleanContent}
+
+💬 Chat with our bot: ${window.location.href}
+
+_Discover Kurukshetra Heritage_`;
+    
+    console.log('📱 Sharing via WhatsApp:', shareMessage.substring(0, 100) + '...');
+    
+    // Share via WhatsApp
+    try {
+        whatsappAdapter.share(shareMessage);
+        console.log('✅ Share triggered successfully');
+    } catch (error) {
+        console.error('❌ Share failed:', error);
+        alert('Failed to share. Please try again.');
+    }
+}
 function renderChips(skipAnimation = false) {
     const grid = document.getElementById('chips-grid');
     const titleEl = document.getElementById('chips-title');
