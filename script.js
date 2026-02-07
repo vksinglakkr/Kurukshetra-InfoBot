@@ -555,11 +555,16 @@ function handleChipClick(text) {
     sendMessage();
 }
 
+// ============================================
+// FIXED sendMessage() FUNCTION
+// Better error handling and JSON parsing
+// ============================================
+
 async function sendMessage() {
     const inputEl = document.getElementById('user-input');
     const text = inputEl.value.trim();
     if (!text) return;
-
+    
     // Hide autocomplete
     document.getElementById('autocomplete-dropdown').classList.add('hidden');
     
@@ -568,11 +573,18 @@ async function sendMessage() {
     
     // Stop rotation after first message
     stopRotation();
-
+    
     // Detect if this is a Gita query
     const isGita = isGitaQuery(text);
     const webhookUrl = isGita ? GITA_WEBHOOK_URL : N8N_WEBHOOK_URL;
-
+    
+    console.log('=== SEND MESSAGE DEBUG ===');
+    console.log('Message:', text);
+    console.log('Language:', currentLanguage);
+    console.log('Is Gita Query:', isGita);
+    console.log('Webhook URL:', webhookUrl);
+    console.log('========================');
+    
     // Add User Message
     const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     messages.push({ role: 'user', content: text, time: time });
@@ -580,12 +592,12 @@ async function sendMessage() {
     renderMessages();
     scrollToBottom();
     inputEl.value = '';
-
+    
     // Show Loading
     document.getElementById('loading-indicator').classList.remove('hidden');
     document.getElementById('chips-container').classList.add('hidden');
     scrollToBottom();
-
+    
     try {
         // Call appropriate webhook (Gita or District)
         const response = await fetch(webhookUrl, {
@@ -598,17 +610,63 @@ async function sendMessage() {
             })
         });
         
-        const data = await response.json();
-        console.log('API Response:', data);
+        console.log('Response status:', response.status, response.statusText);
         
-        // Extract bot response (handle both formats)
+        // ============================================
+        // FIX 1: CHECK HTTP STATUS FIRST
+        // ============================================
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status} ${response.statusText}`);
+        }
+        
+        // ============================================
+        // FIX 2: SAFE JSON PARSING
+        // ============================================
+        let data;
+        try {
+            const responseText = await response.text();
+            console.log('Raw response length:', responseText.length);
+            console.log('Raw response:', responseText.substring(0, 200)); // First 200 chars
+            
+            if (!responseText || responseText.trim() === '') {
+                throw new Error('Empty response from server');
+            }
+            
+            data = JSON.parse(responseText);
+            console.log('Parsed data:', data);
+            
+        } catch (parseError) {
+            console.error('JSON Parse Error:', parseError);
+            console.error('Failed to parse response');
+            throw new Error('Invalid response format from server');
+        }
+        
+        // ============================================
+        // EXTRACT BOT RESPONSE (handle both formats)
+        // ============================================
         let botContent;
+        
         if (isGita) {
             // Gita webhook returns { answer: "..." } or { response: "..." }
-            botContent = data.answer || data.response || 'No response received';
+            botContent = data.answer || data.response || data.text || null;
+            
+            if (!botContent) {
+                console.error('Gita response missing answer field:', data);
+                throw new Error('Invalid Gita response format');
+            }
+            
         } else {
             // District webhook returns array with { response: "..." }
-            botContent = (Array.isArray(data) ? data[0].response : data.response) || 'No response received';
+            if (Array.isArray(data)) {
+                botContent = data[0]?.response || data[0]?.text || null;
+            } else {
+                botContent = data.response || data.text || data.message || null;
+            }
+            
+            if (!botContent) {
+                console.error('District response missing response field:', data);
+                throw new Error('Invalid district response format');
+            }
         }
         
         // Add indicator and disclaimer if Gita response
@@ -618,22 +676,94 @@ async function sendMessage() {
                 : '_This is an AI-generated response. Please verify with scholars._';
             botContent = `📖 **Gita Wisdom**\n\n${botContent}\n\n${disclaimer}`;
         }
+        
         const botTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         messages.push({ role: 'bot', content: botContent, time: botTime });
         saveChat();
-
+        
+        console.log('✅ Message sent successfully');
+        
     } catch (error) {
-        console.error('Error:', error);
+        console.error('❌ Error in sendMessage:', error);
+        console.error('Error name:', error.name);
+        console.error('Error message:', error.message);
+        
         const errorTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        messages.push({ role: 'bot', content: "⚠️ Unable to connect to server. Please try again later.", time: errorTime });
+        
+        // ============================================
+        // FIX 3: BETTER ERROR MESSAGES
+        // ============================================
+        let errorMessage;
+        
+        if (error.message.includes('Empty response')) {
+            // Server returned nothing
+            errorMessage = currentLanguage === 'hi'
+                ? '⚠️ सर्वर से कोई उत्तर नहीं मिला। कृपया पुनः प्रयास करें।'
+                : '⚠️ No response from server. Please try again.';
+                
+        } else if (error.message.includes('Invalid response format') || error.message.includes('JSON')) {
+            // Server returned malformed JSON
+            errorMessage = currentLanguage === 'hi'
+                ? '⚠️ सर्वर ने अमान्य प्रतिक्रिया भेजी। कृपया बाद में प्रयास करें।'
+                : '⚠️ Server sent invalid response. Please try later.';
+                
+        } else if (error.message.includes('Server error')) {
+            // HTTP error (404, 500, etc.)
+            errorMessage = currentLanguage === 'hi'
+                ? `⚠️ सर्वर त्रुटि। कृपया कुछ समय बाद प्रयास करें।`
+                : `⚠️ Server error. Please try again later.`;
+                
+        } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            // Network error (no internet)
+            errorMessage = currentLanguage === 'hi'
+                ? '⚠️ इंटरनेट कनेक्शन की जांच करें।'
+                : '⚠️ Please check your internet connection.';
+                
+        } else if (error.message.includes('Invalid Gita response') || error.message.includes('Invalid district response')) {
+            // Response structure doesn't match expected format
+            errorMessage = currentLanguage === 'hi'
+                ? '⚠️ अप्रत्याशित प्रतिक्रिया प्रारूप। कृपया व्यवस्थापक से संपर्क करें।'
+                : '⚠️ Unexpected response format. Please contact admin.';
+                
+        } else {
+            // Unknown error
+            errorMessage = currentLanguage === 'hi'
+                ? `⚠️ कुछ गलत हो गया। कृपया पुनः प्रयास करें।\n\nतकनीकी विवरण: ${error.message}`
+                : `⚠️ Something went wrong. Please try again.\n\nTechnical details: ${error.message}`;
+        }
+        
+        messages.push({ 
+            role: 'bot', 
+            content: errorMessage, 
+            time: errorTime 
+        });
         saveChat();
+        
     } finally {
+        // Always execute (success or error)
         document.getElementById('loading-indicator').classList.add('hidden');
         document.getElementById('toggle-chips-btn').classList.remove('hidden');
         lucide.createIcons();
         renderMessages();
         scrollToBottom();
     }
+}
+
+
+// ============================================
+// DEBUGGING HELPER FUNCTION
+// ============================================
+
+// Add this to help debug webhook responses
+function debugWebhookResponse(response, data) {
+    console.log('=== WEBHOOK RESPONSE DEBUG ===');
+    console.log('Status:', response.status);
+    console.log('Headers:', Object.fromEntries(response.headers.entries()));
+    console.log('Data type:', typeof data);
+    console.log('Is array:', Array.isArray(data));
+    console.log('Data keys:', Object.keys(data || {}));
+    console.log('Full data:', JSON.stringify(data, null, 2));
+    console.log('============================');
 }
 
 // ============================================
