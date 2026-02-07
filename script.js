@@ -239,7 +239,64 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 });
+// ============================================
+// SHARE APP INVITATION FUNCTION
+// ============================================
+function shareApp() {
+    console.log('📱 Share App button clicked');
+    
+    if (!whatsappAdapter) {
+        alert('WhatsApp sharing not available');
+        return;
+    }
+    
+    // Get current language
+    const lang = currentLanguage || 'en';
+    
+    // Create invitation message based on language
+    let inviteMessage;
+    
+    if (lang === 'hi') {
+        inviteMessage = `🕉️ *कुरुक्षेत्र मित्र - AI चैटबॉट*
 
+कुरुक्षेत्र की विरासत को डिजिटल रूप से खोजें!
+
+✨ विशेषताएं:
+- 90+ धरोहर स्थल
+- भगवद गीता ज्ञान
+- आपातकालीन संपर्क
+- पर्यटन जानकारी
+- द्विभाषी (हिंदी/अंग्रेजी)
+
+🔗 अभी चैट करें:
+${window.location.href}
+
+_आध्यात्मिक विरासत का डिजिटल अनुभव!_ 🙏`;
+    } else {
+        inviteMessage = `🕉️ *Kurukshetra Mitra - AI Chatbot*
+
+Discover Kurukshetra's heritage digitally!
+
+✨ Features:
+- 90+ Heritage Sites
+- Bhagavad Gita Wisdom
+- Emergency Contacts
+- Tourism Information
+- Bilingual (Hindi/English)
+
+🔗 Chat now:
+${window.location.href}
+
+_Experience spiritual heritage digitally!_ 🙏`;
+    }
+    
+    console.log('Sharing app invitation...');
+    
+    // Share via WhatsApp
+    whatsappAdapter.share(inviteMessage);
+    
+    console.log('✅ App invitation shared');
+}
 // ============================================
 // AUTOCOMPLETE FUNCTIONS
 // ============================================
@@ -918,52 +975,7 @@ function toggleProblemDetails() {
         detailsField.classList.add('hidden');
     }
 }
-// ============================================
-// TEST FUNCTION - WhatsApp Share
-// (Remove this function after verification)
-// ============================================
-function testWhatsAppShare() {
-    console.log('🧪 Test button clicked');
-    
-    // Check if adapter is initialized
-    if (!whatsappAdapter) {
-        alert('❌ WhatsApp Adapter not initialized!');
-        console.error('whatsappAdapter is null');
-        return;
-    }
-    
-    // Test message
-    const testMessage = `🕉️ *Kurukshetra Mitra Chatbot*
 
-Testing WhatsApp Share Integration!
-
-✅ If you can see this message in WhatsApp, the integration is working perfectly!
-
-🔗 Chat with me: ${window.location.href}
-
-_Testing from ${new Date().toLocaleString()}_`;
-    
-    console.log('📤 Attempting to share message...');
-    console.log('Message:', testMessage);
-    
-    // Try to share
-    try {
-        whatsappAdapter.share(testMessage);
-        console.log('✅ Share method called successfully');
-        
-        // Show confirmation
-        setTimeout(() => {
-            alert('✅ WhatsApp share triggered!\n\n' + 
-                  (whatsappAdapter.isWhatsAppAvailable() ? 
-                   'Check if WhatsApp opened with the test message.' : 
-                   'WhatsApp Web should open in new tab.'));
-        }, 500);
-        
-    } catch (error) {
-        console.error('❌ Share failed:', error);
-        alert('❌ Share failed! Check console for details.');
-    }
-}
 // Handle feedback form submission
 document.addEventListener('DOMContentLoaded', () => {
     const feedbackForm = document.getElementById('feedback-form');
