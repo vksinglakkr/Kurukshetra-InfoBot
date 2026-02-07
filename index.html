@@ -115,6 +115,75 @@
             background: #d1d5db;
             border-radius: 3px;
         }
+   /* ============================================
+   WHATSAPP SHARE BUTTON STYLES
+   ============================================ */
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(37, 211, 102, 0.3);
+}
+
+.share-btn:hover {
+    background: #20BA5A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
+.share-btn:active {
+    transform: translateY(0);
+}
+
+.share-btn svg,
+.share-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Share button container */
+.message-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Compact share icon button */
+.action-icon {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0.35rem;
+    border-radius: 50%;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-icon:hover {
+    background: rgba(37, 211, 102, 0.1);
+    color: #25D366;
+}
+
+.action-icon svg {
+    width: 18px;
+    height: 18px;
+}
     </style>
 </head>
 <body class="min-h-screen md:flex md:justify-center md:items-center" style="background: #008069;">
