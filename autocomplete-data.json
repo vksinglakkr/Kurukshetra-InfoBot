@@ -152,7 +152,12 @@
     {
       "icon": "🎓",
       "text": "Kurukshetra University",
-      "keywords": ["university", "ku", "campus", "college", "education", "kurukshetra university", "kuk"]
+      "keywords": ["university", "ku", "campus", "college", "education", "kurukshetra university", "kuk", "kurukshetra", "k.u.k"]
+    },
+    {
+      "icon": "🎓",
+      "text": "Universities in Kurukshetra",
+      "keywords": ["university", "college", "education", "kurukshetra university", "kuk"]
     },
     {
       "icon": "🚀",
@@ -404,11 +409,6 @@
       "icon": "🏥",
       "text": "List of hospitals",
       "keywords": ["hospital", "medical", "health", "clinic", "doctor", "healthcare"]
-    },
-    {
-      "icon": "🎓",
-      "text": "Universities in Kurukshetra",
-      "keywords": ["university", "college", "education", "kurukshetra university", "kuk"]
     },
     {
       "icon": "🚍",
