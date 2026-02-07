@@ -376,11 +376,6 @@
       "keywords": ["dc", "deputy commissioner", "collector", "district magistrate", "officer"]
     }, 
     {
-      "icon": "🚨",
-      "text": "Emergency numbers",
-      "keywords": ["emergency", "ambulance", "police", "fire", "helpline", "108", "112", "101", "102"]
-    },
-    {
       "icon": "🏛️",
       "text": "Tourist places in Kurukshetra",
       "keywords": ["tourist", "tourism", "places", "visit", "attractions", "heritage", "sightseeing"]
@@ -479,11 +474,6 @@
       "icon": "🏫",
       "text": "School admission",
       "keywords": ["school", "admission", "education", "student", "enroll"]
-    },
-    {
-      "icon": "👮",
-      "text": "Police stations",
-      "keywords": ["police", "station", "thana", "law", "enforcement"]
     },
     {
       "icon": "🏛️",
@@ -912,11 +902,7 @@
       "text": "बस स्टैंड का स्थान",
       "keywords": ["बस", "स्टैंड", "डिपो", "परिवहन", "bus"]
     },
-
-
-
-
-    
+   
     {
       "icon": "👤",
       "text": "DC कौन हैं?",
