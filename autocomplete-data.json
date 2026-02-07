@@ -5,11 +5,11 @@
       "text": "All tourist places in Kurukshetra",
       "keywords": ["tourist", "places", "all", "list", "tourism", "attractions", "visit", "sightseeing"]
     },
-    {
+ {
   "icon": "🏛️",
-  "text": "Anubhav Kendra",
-  "keywords": ["anubhav", "kendra", "experience", "center", "centre", "museum", "exhibition", "interactive", "kurukshetra", "anubhav kendra"]
-    },
+  "text": "Anubhav Kendra (Mahabharata Experience Center)",
+  "keywords": ["anubhav", "kendra", "mahabharata", "experience", "center", "centre", "museum", "exhibition", "interactive", "multimedia", "kurukshetra", "mahabharatanubhavkendra", "mahabharat"]
+},
     {
       "icon": "🛕",
       "text": "All Sarovars (sacred lakes)",
@@ -436,11 +436,6 @@
       "keywords": ["gita", "jayanti", "festival", "mahotsav", "event", "celebration"]
     },
     {
-      "icon": "🏢",
-      "text": "SDM office contact",
-      "keywords": ["sdm", "sub divisional magistrate", "office", "contact", "address"]
-    },
-    {
       "icon": "📝",
       "text": "Latest tenders",
       "keywords": ["tender", "bid", "procurement", "contract", "latest"]
@@ -812,16 +807,11 @@
       "text": "DC कार्यालय संपर्क",
       "keywords": ["dc", "उपायुक्त", "कार्यालय", "संपर्क", "फोन", "नंबर"]
     },
-    {
+{
   "icon": "🏛️",
-  "text": "अनुभव केंद्र",
-  "keywords": ["अनुभव", "केंद्र", "anubhav", "kendra", "experience", "center", "संग्रहालय", "प्रदर्शनी", "कुरुक्षेत्र"]
+  "text": "अनुभव केंद्र (महाभारत अनुभव केंद्र)",
+  "keywords": ["अनुभव", "केंद्र", "महाभारत", "anubhav", "kendra", "mahabharata", "experience", "center", "संग्रहालय", "प्रदर्शनी", "इंटरैक्टिव", "कुरुक्षेत्र", "महाभारत अनुभव"]
 },
-    {
-      "icon": "🏢",
-      "text": "SDM कार्यालय",
-      "keywords": ["sdm", "उप", "प्रभागीय", "अधिकारी", "कार्यालय"]
-    },
     {
       "icon": "👮",
       "text": "पुलिस स्टेशन",
