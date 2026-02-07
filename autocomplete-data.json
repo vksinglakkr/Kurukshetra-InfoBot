@@ -6,6 +6,11 @@
       "keywords": ["tourist", "places", "all", "list", "tourism", "attractions", "visit", "sightseeing"]
     },
     {
+  "icon": "🏛️",
+  "text": "Anubhav Kendra",
+  "keywords": ["anubhav", "kendra", "experience", "center", "centre", "museum", "exhibition", "interactive", "kurukshetra", "anubhav kendra"]
+    },
+    {
       "icon": "🛕",
       "text": "All Sarovars (sacred lakes)",
       "keywords": ["sarovar", "sarovars", "lakes", "all", "list", "sacred", "holy", "water"]
@@ -807,6 +812,11 @@
       "text": "DC कार्यालय संपर्क",
       "keywords": ["dc", "उपायुक्त", "कार्यालय", "संपर्क", "फोन", "नंबर"]
     },
+    {
+  "icon": "🏛️",
+  "text": "अनुभव केंद्र",
+  "keywords": ["अनुभव", "केंद्र", "anubhav", "kendra", "experience", "center", "संग्रहालय", "प्रदर्शनी", "कुरुक्षेत्र"]
+},
     {
       "icon": "🏢",
       "text": "SDM कार्यालय",
