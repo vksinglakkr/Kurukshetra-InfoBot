@@ -14,6 +14,29 @@ let rotationInterval;
 let messages = JSON.parse(localStorage.getItem('kwr_chat_history')) || [];
 let autocompleteData = { en: [], hi: [] };
 
+// ============================================
+// WHATSAPP ADAPTER INITIALIZATION
+// ============================================
+let whatsappAdapter = null;
+
+// Initialize when page loads
+window.addEventListener('DOMContentLoaded', function() {
+    try {
+        whatsappAdapter = WhatsAppAdapter.init({
+            baseUrl: window.location.origin,
+            onShare: (data) => {
+                console.log('✅ Content shared via WhatsApp:', data);
+            }
+        });
+        
+        console.log('✅ WhatsApp Adapter initialized successfully');
+        console.log('📱 WhatsApp Available:', whatsappAdapter.isWhatsAppAvailable());
+        console.log('📦 Adapter Version:', whatsappAdapter.version);
+        
+    } catch (error) {
+        console.error('❌ WhatsApp Adapter initialization failed:', error);
+    }
+});
 // TRANSLATIONS
 const translations = {
     en: {
