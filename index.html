@@ -272,9 +272,17 @@
             </div>
         </div>
 
-        <!-- Enhanced Quick Questions Chips -->
+        <!-- Enhanced Quick Questions Chips with Manual Navigation -->
         <div id="chips-container" class="hidden absolute bottom-[75px] left-0 right-0 px-4 py-2 bg-gradient-to-t from-[#efeae2] from-90% to-transparent z-10 transition-all">
-            <div id="chips-title" class="text-center text-xs font-bold text-[#008069]/80 mb-1.5 tracking-wide"></div>
+            <div class="flex items-center justify-between mb-1.5">
+                <button onclick="previousQuestionSet()" class="text-[#008069] hover:bg-white/50 rounded-full p-1 transition-all">
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                </button>
+                <div id="chips-title" class="text-center text-xs font-bold text-[#008069]/80 tracking-wide"></div>
+                <button onclick="nextQuestionSet()" class="text-[#008069] hover:bg-white/50 rounded-full p-1 transition-all">
+                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+            </div>
             <div class="grid grid-cols-2 gap-2.5 mb-1.5" id="chips-grid"></div>
             <div class="flex justify-center gap-1.5" id="indicators"></div>
         </div>
