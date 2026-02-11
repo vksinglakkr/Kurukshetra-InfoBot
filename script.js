@@ -529,7 +529,7 @@ function renderIndicators() {
     }
     
     container.innerHTML = QUESTION_SETS[currentLanguage].map((_, index) => `
-        <div class="w-2 h-2 rounded-full transition-all ${index === currentSetIndex ? 'bg-[#008069] w-6' : 'bg-gray-400'}"></div>
+        <div onclick="jumpToQuestionSet(${index})" class="w-2 h-2 rounded-full transition-all cursor-pointer hover:scale-125 ${index === currentSetIndex ? 'bg-[#008069] w-6' : 'bg-gray-400'}"></div>
     `).join('');
 }
 
@@ -565,6 +565,13 @@ function nextQuestionSet() {
 
 function previousQuestionSet() {
     currentSetIndex = (currentSetIndex - 1 + QUESTION_SETS[currentLanguage].length) % QUESTION_SETS[currentLanguage].length;
+    renderChips();
+    renderIndicators();
+    lucide.createIcons();
+}
+
+function jumpToQuestionSet(index) {
+    currentSetIndex = index;
     renderChips();
     renderIndicators();
     lucide.createIcons();
