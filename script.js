@@ -221,10 +221,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById('toggle-chips-btn').classList.remove('hidden');
         stopRotation();
     } else {
-        // Only show chips and start rotation if no chat history
+        // Only show chips if no chat history (no auto-rotation)
         renderChips();
         renderIndicators();
-        startRotation();
+        // Auto-rotation removed - manual only
+        document.getElementById('toggle-chips-btn').classList.add('hidden');
     }
     
     renderMessages();
@@ -552,17 +553,31 @@ function formatText(text) {
 }
 
 // ============================================
-// ROTATION FUNCTIONS
+// ROTATION FUNCTIONS (MANUAL ONLY)
 // ============================================
 
-function rotateQuestions() {
+function nextQuestionSet() {
     currentSetIndex = (currentSetIndex + 1) % QUESTION_SETS[currentLanguage].length;
     renderChips();
     renderIndicators();
+    lucide.createIcons();
+}
+
+function previousQuestionSet() {
+    currentSetIndex = (currentSetIndex - 1 + QUESTION_SETS[currentLanguage].length) % QUESTION_SETS[currentLanguage].length;
+    renderChips();
+    renderIndicators();
+    lucide.createIcons();
+}
+
+function rotateQuestions() {
+    // Kept for compatibility but not used for auto-rotation
+    nextQuestionSet();
 }
 
 function startRotation() {
-    rotationInterval = setInterval(rotateQuestions, 4000);
+    // Auto-rotation disabled - manual navigation only
+    // Function kept for compatibility
 }
 
 function stopRotation() {
@@ -582,13 +597,11 @@ function toggleChipsVisibility() {
         renderChips(true);
         renderIndicators();
         chipsContainer.classList.remove('hidden');  // Show chips
-        // toggleBtn.classList.add('hidden');        // ❌ DON'T hide button!
         btnText.textContent = currentLanguage === 'hi' ? 'छुपाएं' : 'Hide'; // Change text
-        startRotation();
+        // No auto-rotation - manual only
     } else {
         // CHIPS ARE VISIBLE → Hide them
         chipsContainer.classList.add('hidden');     // Hide chips
-        // toggleBtn.classList.remove('hidden');     // Button stays visible
         btnText.textContent = currentLanguage === 'hi' ? 'सुझाव' : 'Suggestions'; // Reset text
         stopRotation();
     }
@@ -701,6 +714,11 @@ function handleChipClick(text) {
     document.getElementById('user-input').value = text;
     document.getElementById('chips-container').classList.add('hidden');
     document.getElementById('autocomplete-dropdown').classList.add('hidden');
+    // Show the toggle button after selecting a chip
+    document.getElementById('toggle-chips-btn').classList.remove('hidden');
+    // Update button text to "Suggestions"
+    document.getElementById('suggestions-btn-text').textContent = 
+        currentLanguage === 'hi' ? 'सुझाव' : 'Suggestions';
     stopRotation();
     sendMessage();
 }
@@ -720,6 +738,12 @@ async function sendMessage() {
     
     // Hide welcome message after first interaction
     document.getElementById('welcome-message').style.display = 'none';
+    
+    // Hide chips container after sending message
+    document.getElementById('chips-container').classList.add('hidden');
+    
+    // Show toggle button after first message
+    document.getElementById('toggle-chips-btn').classList.remove('hidden');
     
     // Stop rotation after first message
     stopRotation();
