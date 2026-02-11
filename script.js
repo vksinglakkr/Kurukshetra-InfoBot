@@ -923,7 +923,12 @@ async function sendMessage() {
     } finally {
         // Always execute (success or error)
         document.getElementById('loading-indicator').classList.add('hidden');
-        document.getElementById('toggle-chips-btn').classList.remove('hidden');
+        
+        // Only show toggle button if there are messages
+        if (messages.length > 0) {
+            document.getElementById('toggle-chips-btn').classList.remove('hidden');
+        }
+        
         lucide.createIcons();
         renderMessages();
         scrollToBottom();
@@ -957,16 +962,13 @@ function saveChat() {
 
 function clearChat() {
     if(confirm("🗑️ Delete all chat history?")) {
+        // Clear data
         messages = [];
         localStorage.removeItem('kwr_chat_history');
         
-        // Show welcome message
+        // Reset UI state - back to initial load state
         document.getElementById('welcome-message').style.display = 'flex';
-        
-        // Show chips container
         document.getElementById('chips-container').classList.remove('hidden');
-        
-        // Hide toggle button
         document.getElementById('toggle-chips-btn').classList.add('hidden');
         
         // Reset chips to first set
@@ -974,13 +976,13 @@ function clearChat() {
         renderChips(true);
         renderIndicators();
         
-        // Render empty messages
+        // Render empty messages (will clear the chat display)
         renderMessages();
         
         // Close menu
         toggleMenu();
         
-        // Recreate icons
+        // Recreate icons for arrows
         lucide.createIcons();
     }
 }
