@@ -214,18 +214,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Apply language on load
     updateUI();
     
-    // Hide welcome message and chips if chat history exists
+    // Show or hide elements based on chat history
     if (messages.length > 0) {
+        // Has chat history: hide welcome, hide chips, show toggle button
         document.getElementById('welcome-message').style.display = 'none';
         document.getElementById('chips-container').classList.add('hidden');
         document.getElementById('toggle-chips-btn').classList.remove('hidden');
         stopRotation();
     } else {
-        // Only show chips if no chat history (no auto-rotation)
+        // No chat history: show welcome, show chips, show toggle button (as "Hide")
+        document.getElementById('welcome-message').style.display = 'flex';
+        document.getElementById('chips-container').classList.remove('hidden');
+        document.getElementById('toggle-chips-btn').classList.remove('hidden'); // CHANGED: Show button
+        document.getElementById('suggestions-btn-text').textContent = 
+            currentLanguage === 'hi' ? 'छुपाएं' : 'Hide'; // Set text to "Hide"
         renderChips();
         renderIndicators();
-        // Auto-rotation removed - manual only
-        document.getElementById('toggle-chips-btn').classList.add('hidden');
     }
     
     renderMessages();
@@ -409,12 +413,16 @@ function renderMessages() {
     
     // Ensure correct UI state based on messages
     if (messages.length === 0) {
-        // No messages: hide toggle button, show chips
-        document.getElementById('toggle-chips-btn').classList.add('hidden');
+        // No messages: show toggle button as "Hide", show chips
+        document.getElementById('toggle-chips-btn').classList.remove('hidden');
+        document.getElementById('suggestions-btn-text').textContent = 
+            currentLanguage === 'hi' ? 'छुपाएं' : 'Hide';
         document.getElementById('chips-container').classList.remove('hidden');
     } else {
-        // Has messages: show toggle button, chips controlled by toggle state
+        // Has messages: show toggle button as "Suggestions", chips controlled by toggle state
         document.getElementById('toggle-chips-btn').classList.remove('hidden');
+        document.getElementById('suggestions-btn-text').textContent = 
+            currentLanguage === 'hi' ? 'सुझाव' : 'Suggestions';
     }
     
     // Render Lucide icons (for share icon and arrows)
@@ -979,7 +987,11 @@ function clearChat() {
         // Reset UI state - back to initial load state
         document.getElementById('welcome-message').style.display = 'flex';
         document.getElementById('chips-container').classList.remove('hidden');
-        document.getElementById('toggle-chips-btn').classList.add('hidden');
+        document.getElementById('toggle-chips-btn').classList.remove('hidden'); // SHOW button
+        
+        // Set button text to "Hide" since chips are visible
+        document.getElementById('suggestions-btn-text').textContent = 
+            currentLanguage === 'hi' ? 'छुपाएं' : 'Hide';
         
         // Reset chips to first set
         currentSetIndex = 0;
