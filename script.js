@@ -407,7 +407,17 @@ function renderMessages() {
         `;
     }).join('');
     
-    // Render Lucide icons (for share icon)
+    // Ensure correct UI state based on messages
+    if (messages.length === 0) {
+        // No messages: hide toggle button, show chips
+        document.getElementById('toggle-chips-btn').classList.add('hidden');
+        document.getElementById('chips-container').classList.remove('hidden');
+    } else {
+        // Has messages: show toggle button, chips controlled by toggle state
+        document.getElementById('toggle-chips-btn').classList.remove('hidden');
+    }
+    
+    // Render Lucide icons (for share icon and arrows)
     lucide.createIcons();
 }
 
