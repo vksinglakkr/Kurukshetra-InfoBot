@@ -959,9 +959,29 @@ function clearChat() {
     if(confirm("🗑️ Delete all chat history?")) {
         messages = [];
         localStorage.removeItem('kwr_chat_history');
+        
+        // Show welcome message
         document.getElementById('welcome-message').style.display = 'flex';
+        
+        // Show chips container
+        document.getElementById('chips-container').classList.remove('hidden');
+        
+        // Hide toggle button
+        document.getElementById('toggle-chips-btn').classList.add('hidden');
+        
+        // Reset chips to first set
+        currentSetIndex = 0;
+        renderChips(true);
+        renderIndicators();
+        
+        // Render empty messages
         renderMessages();
+        
+        // Close menu
         toggleMenu();
+        
+        // Recreate icons
+        lucide.createIcons();
     }
 }
 
