@@ -704,25 +704,88 @@ function updateUI() {
 function isGitaQuery(text) {
     const lowerText = text.toLowerCase();
     
-    // English Gita keywords
-    const englishKeywords = [
-        'gita', 'geeta', 'bhagavad', 'bhagwad', 'krishna', 'arjuna', 'arjun',
+    // Exclude keywords - these indicate NOT a Gita query
+    const excludeKeywords = [
+        'anubhav', 'kendra', 'museum', 'experience center', 'experience centre',
+        'visit', 'timings', 'ticket', 'entry fee', 'location', 'address',
+        'अनुभव', 'केंद्र', 'संग्रहालय', 'समय', 'टिकट'
+    ];
+    
+    // If query contains exclude keywords, it's NOT a Gita query
+    const hasExclude = excludeKeywords.some(keyword => lowerText.includes(keyword));
+    if (hasExclude) {
+        console.log('❌ Not a Gita query (contains tourism/museum keywords)');
+        return false;
+    }
+    
+    // Core Gita keywords (most specific)
+    const coreGitaKeywords = [
+        'gita', 'geeta', 'bhagavad', 'bhagwad',
+        'गीता', 'भगवद'
+    ];
+    
+    // If has core Gita keywords, it's definitely a Gita query
+    const hasCore = coreGitaKeywords.some(keyword => lowerText.includes(keyword));
+    if (hasCore) {
+        console.log('✅ Gita query detected (core keywords)');
+        return true;
+    }
+    
+    // Spiritual/philosophical keywords (require additional Gita context)
+    const spiritualKeywords = [
         'karma yoga', 'bhakti yoga', 'jnana yoga', 'dhyana yoga',
-        'chapter', 'shlok', 'verse', 'mahabharata', 'mahabharat',
-        'dharma', 'moksha', 'atman', 'brahman', 'yoga'
+        'shlok', 'verse', 'chapter', 'अध्याय', 'श्लोक',
+        'dharma', 'moksha', 'atman', 'brahman',
+        'धर्म', 'मोक्ष', 'आत्मा', 'ब्रह्म',
+        'कर्म योग', 'भक्ति योग', 'ज्ञान योग', 'ध्यान योग'
     ];
     
-    // Hindi Gita keywords
-    const hindiKeywords = [
-        'गीता', 'भगवद', 'भगवान', 'कृष्ण', 'अर्जुन',
-        'कर्म योग', 'भक्ति योग', 'ज्ञान योग', 'ध्यान योग',
-        'अध्याय', 'श्लोक', 'महाभारत',
-        'धर्म', 'मोक्ष', 'आत्मा', 'ब्रह्म', 'योग'
+    // Character names (only Gita query if asking about teachings)
+    const characterKeywords = [
+        'krishna', 'arjuna', 'arjun',
+        'कृष्ण', 'अर्जुन', 'भगवान'
     ];
     
-    const allKeywords = [...englishKeywords, ...hindiKeywords];
+    // Epic keywords (NOT Gita unless combined with core)
+    const epicKeywords = [
+        'mahabharata', 'mahabharat', 'महाभारत'
+    ];
     
-    return allKeywords.some(keyword => lowerText.includes(keyword));
+    // Check spiritual keywords
+    const hasSpiritual = spiritualKeywords.some(keyword => lowerText.includes(keyword));
+    if (hasSpiritual) {
+        console.log('✅ Gita query detected (spiritual keywords)');
+        return true;
+    }
+    
+    // Check character keywords (but exclude if asking about places/history)
+    const hasCharacter = characterKeywords.some(keyword => lowerText.includes(keyword));
+    if (hasCharacter) {
+        // Exclude if asking about temples, places, history
+        const placeKeywords = ['temple', 'mandir', 'place', 'statue', 'मंदिर', 'स्थान', 'मूर्ति'];
+        const hasPlace = placeKeywords.some(keyword => lowerText.includes(keyword));
+        
+        if (!hasPlace) {
+            console.log('✅ Gita query detected (character with teachings context)');
+            return true;
+        }
+    }
+    
+    // Epic keywords alone do NOT make it a Gita query
+    const hasEpic = epicKeywords.some(keyword => lowerText.includes(keyword));
+    if (hasEpic) {
+        console.log('❌ Not a Gita query (Mahabharat without Gita context)');
+        return false;
+    }
+    
+    // Check for standalone "yoga" (too generic, exclude)
+    if (lowerText === 'yoga' || lowerText === 'योग') {
+        console.log('❌ Not a Gita query (generic yoga)');
+        return false;
+    }
+    
+    console.log('❌ Not a Gita query (no matching keywords)');
+    return false;
 }
 
 // ============================================
