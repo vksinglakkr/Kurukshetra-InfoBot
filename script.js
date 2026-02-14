@@ -553,18 +553,33 @@ function renderIndicators() {
 
 function formatText(text) {
     if (!text) return '';
+
+    // 1. Handle New Lines
     let formatted = text.replace(/\n/g, '<br>');
+
+    // 2. Handle Bold (**text**)
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 
-    // 1. Process URLs FIRST
+    // 3. Handle URLs (Process these BEFORE italics)
     const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
     formatted = formatted.replace(urlRegex, (url) => {
-        const cleanUrl = url.replace(/[.,!;]+$/, ''); 
-        return `<a href="${cleanUrl}" target="_blank" class="text-[#027eb5] hover:underline break-all">🔗 ${cleanUrl}</a>`;
+        try {
+            const cleanUrl = url.replace(/[.,!;]+$/, ''); 
+            const decodedUrl = decodeURIComponent(cleanUrl);
+            const displayText = decodedUrl.length > 60 
+                ? decodedUrl.substring(0, 57) + '...' 
+                : decodedUrl;
+                
+            return `<a href="${cleanUrl}" target="_blank" class="text-[#027eb5] hover:underline font-medium break-all">🔗 ${displayText}</a>`;
+        } catch (e) {
+            return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium">🔗 ${url}</a>`;
+        }
     });
 
-    // 2. Process Italics LAST
-    formatted = formatted.replace(/_(.*?)_/g, '<i>$1</i>');
+    // 4. Handle Italics (_text_) - THE CRITICAL FIX
+    // This regex ensures the underscore is only converted if it's at the start 
+    // of a word or preceded by a space, preventing it from catching the URL ID.
+    formatted = formatted.replace(/(^|\s)_(.*?)_(\s|$)/g, '$1<i>$2</i>$3');
 
     return formatted;
 }
@@ -900,27 +915,21 @@ async function sendMessage() {
         // EXTRACT BOT RESPONSE
         let botContent;
         
-        if (isGita) {
-            // Gita webhook returns { answer: "..." } or { response: "..." }
-            botContent = data.answer || data.response || data.text || null;
-            
-            if (!botContent) {
-                console.error('Gita response missing answer field:', data);
-                throw new Error('Invalid Gita response format');
-            }
 
-            // CLEANING THE URL AREA
-            // Remove the trailing "||" that comes from n8n
-            botContent = botContent.trim().replace(/\|\|\s*$/, '');
+if (isGita) {
+    botContent = data.answer || data.response || data.text || null;
+    if (!botContent) throw new Error('Invalid Gita response format');
 
-            // The Zero-Width Space (\u200B) acts as a formatting barrier
-            const disclaimer = currentLanguage === 'hi' 
-                ? '\n\n\u200B_यह AI द्वारा उत्पन्न प्रतिक्रिया है। कृपया विद्वानों से सत्यापन करें।_'
-                : '\n\n\u200B_This is an AI-generated response. Please verify with scholars._';
-            
-            botContent = `📖 **Gita Wisdom**\n\n${botContent}${disclaimer}`;
-            
-        } else {
+    botContent = botContent.trim().replace(/\|\|\s*$/, '');
+
+    // The &zwnj; (Zero-Width Non-Joiner) is an invisible wall 
+    // that stops formatting tags from connecting.
+    const disclaimer = currentLanguage === 'hi' 
+        ? '\n\n&zwnj;_यह AI द्वारा उत्पन्न प्रतिक्रिया है। कृपया विद्वानों से सत्यापन करें।_'
+        : '\n\n&zwnj;_This is an AI-generated response. Please verify with scholars._';
+    
+    botContent = `📖 **Gita Wisdom**\n\n${botContent}${disclaimer}`;
+} else {
             // District webhook returns array or object
             if (Array.isArray(data)) {
                 botContent = data[0]?.response || data[0]?.text || null;
