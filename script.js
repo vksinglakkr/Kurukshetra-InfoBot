@@ -721,7 +721,7 @@ function isGitaQuery(text) {
     // Exclude keywords - these indicate NOT a Gita query
     const excludeKeywords = [
         'anubhav', 'kendra', 'museum', 'experience center', 'experience centre',
-        'visit', 'timings', 'ticket', 'entry fee', 'location', 'address',
+        'visit', 'timings', 'ticket', 'entry fee', 'location', 'jyotisar', 'address',
         'अनुभव', 'केंद्र', 'संग्रहालय', 'समय', 'टिकट'
     ];
     
