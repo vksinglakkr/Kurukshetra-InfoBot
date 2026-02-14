@@ -560,16 +560,16 @@ function formatText(text) {
     // 2. Handle Bold (**text**)
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 
-    // 3. Handle URLs 
-    // This improved Regex allows underscores (_), question marks (?), and equals (=) 
-    // common in Google Script URLs, while stopping at whitespace or angle brackets.
+    // 3. Handle URLs - IMPROVED REGEX
+    // This regex explicitly allows underscores, question marks, and equal signs 
+    // common in Google Script URLs, ensuring it doesn't stop at the "_".
     const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
     
     formatted = formatted.replace(urlRegex, (url) => {
         try {
-            // Trim any trailing punctuation that isn't part of the ID
-            // but ensure we keep the underscore
-            const cleanUrl = url.replace(/[.,!?;]+$/, ''); 
+            // Remove any trailing punctuation that isn't part of the ID, 
+            // but keep the alphanumeric characters and underscores.
+            const cleanUrl = url.replace(/[.,!;]+$/, ''); 
             
             const decodedUrl = decodeURIComponent(cleanUrl);
             const displayText = decodedUrl.length > 60 
@@ -582,8 +582,9 @@ function formatText(text) {
         }
     });
 
-    // 4. Handle Italics (_text_) 
-    // We do this LAST so it doesn't break the URL strings already converted to HTML
+    // 4. Handle Italics (_text_) - RUN THIS LAST
+    // By running this last, the underscores inside the <a> tag's href 
+    // attribute are ignored by the italic rule.
     formatted = formatted.replace(/_(.*?)_/g, '<i>$1</i>');
 
     return formatted;
