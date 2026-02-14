@@ -553,21 +553,40 @@ function renderIndicators() {
 
 function formatText(text) {
     if (!text) return '';
-  let formatted = text.replace(/\n/g, '<br>');
+
+    // 1. Handle New Lines
+    let formatted = text.replace(/\n/g, '<br>');
+
+    // 2. Handle Bold (**text**)
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-    formatted = formatted.replace(/_(.*?)_/g, '<i>$1</i>');
+
+    // 3. Handle URLs 
+    // This improved Regex allows underscores (_), question marks (?), and equals (=) 
+    // common in Google Script URLs, while stopping at whitespace or angle brackets.
     const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
-    return formatted.replace(urlRegex, (url) => {
+    
+    formatted = formatted.replace(urlRegex, (url) => {
         try {
-            const decodedUrl = decodeURIComponent(url);
+            // Trim any trailing punctuation that isn't part of the ID
+            // but ensure we keep the underscore
+            const cleanUrl = url.replace(/[.,!?;]+$/, ''); 
+            
+            const decodedUrl = decodeURIComponent(cleanUrl);
             const displayText = decodedUrl.length > 60 
                 ? decodedUrl.substring(0, 57) + '...' 
                 : decodedUrl;
-            return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium break-all">🔗 ${displayText}</a>`;
+                
+            return `<a href="${cleanUrl}" target="_blank" class="text-[#027eb5] hover:underline font-medium break-all">🔗 ${displayText}</a>`;
         } catch (e) {
             return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium">🔗 ${url}</a>`;
         }
     });
+
+    // 4. Handle Italics (_text_) 
+    // We do this LAST so it doesn't break the URL strings already converted to HTML
+    formatted = formatted.replace(/_(.*?)_/g, '<i>$1</i>');
+
+    return formatted;
 }
 
 // ============================================
