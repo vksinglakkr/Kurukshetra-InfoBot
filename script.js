@@ -553,38 +553,17 @@ function renderIndicators() {
 
 function formatText(text) {
     if (!text) return '';
-
-    // 1. Handle New Lines
     let formatted = text.replace(/\n/g, '<br>');
-
-    // 2. Handle Bold (**text**)
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 
-    // 3. Handle URLs - IMPROVED REGEX
-    // This regex explicitly allows underscores, question marks, and equal signs 
-    // common in Google Script URLs, ensuring it doesn't stop at the "_".
+    // 1. Process URLs FIRST
     const urlRegex = /(https?:\/\/[^\s<>"']+)/g;
-    
     formatted = formatted.replace(urlRegex, (url) => {
-        try {
-            // Remove any trailing punctuation that isn't part of the ID, 
-            // but keep the alphanumeric characters and underscores.
-            const cleanUrl = url.replace(/[.,!;]+$/, ''); 
-            
-            const decodedUrl = decodeURIComponent(cleanUrl);
-            const displayText = decodedUrl.length > 60 
-                ? decodedUrl.substring(0, 57) + '...' 
-                : decodedUrl;
-                
-            return `<a href="${cleanUrl}" target="_blank" class="text-[#027eb5] hover:underline font-medium break-all">🔗 ${displayText}</a>`;
-        } catch (e) {
-            return `<a href="${url}" target="_blank" class="text-[#027eb5] hover:underline font-medium">🔗 ${url}</a>`;
-        }
+        const cleanUrl = url.replace(/[.,!;]+$/, ''); 
+        return `<a href="${cleanUrl}" target="_blank" class="text-[#027eb5] hover:underline break-all">🔗 ${cleanUrl}</a>`;
     });
 
-    // 4. Handle Italics (_text_) - RUN THIS LAST
-    // By running this last, the underscores inside the <a> tag's href 
-    // attribute are ignored by the italic rule.
+    // 2. Process Italics LAST
     formatted = formatted.replace(/_(.*?)_/g, '<i>$1</i>');
 
     return formatted;
@@ -894,21 +873,17 @@ async function sendMessage() {
         
         console.log('Response status:', response.status, response.statusText);
         
-        // ============================================
         // FIX 1: CHECK HTTP STATUS FIRST
-        // ============================================
         if (!response.ok) {
             throw new Error(`Server error: ${response.status} ${response.statusText}`);
         }
         
-        // ============================================
         // FIX 2: SAFE JSON PARSING
-        // ============================================
         let data;
         try {
             const responseText = await response.text();
             console.log('Raw response length:', responseText.length);
-            console.log('Raw response:', responseText.substring(0, 200)); // First 200 chars
+            console.log('Raw response:', responseText.substring(0, 200)); 
             
             if (!responseText || responseText.trim() === '') {
                 throw new Error('Empty response from server');
@@ -919,13 +894,10 @@ async function sendMessage() {
             
         } catch (parseError) {
             console.error('JSON Parse Error:', parseError);
-            console.error('Failed to parse response');
             throw new Error('Invalid response format from server');
         }
         
-        // ============================================
-        // EXTRACT BOT RESPONSE (handle both formats)
-        // ============================================
+        // EXTRACT BOT RESPONSE
         let botContent;
         
         if (isGita) {
@@ -936,9 +908,20 @@ async function sendMessage() {
                 console.error('Gita response missing answer field:', data);
                 throw new Error('Invalid Gita response format');
             }
+
+            // CLEANING THE URL AREA
+            // Remove the trailing "||" that comes from n8n
+            botContent = botContent.trim().replace(/\|\|\s*$/, '');
+
+            // The Zero-Width Space (\u200B) acts as a formatting barrier
+            const disclaimer = currentLanguage === 'hi' 
+                ? '\n\n\u200B_यह AI द्वारा उत्पन्न प्रतिक्रिया है। कृपया विद्वानों से सत्यापन करें।_'
+                : '\n\n\u200B_This is an AI-generated response. Please verify with scholars._';
+            
+            botContent = `📖 **Gita Wisdom**\n\n${botContent}${disclaimer}`;
             
         } else {
-            // District webhook returns array with { response: "..." }
+            // District webhook returns array or object
             if (Array.isArray(data)) {
                 botContent = data[0]?.response || data[0]?.text || null;
             } else {
@@ -951,14 +934,6 @@ async function sendMessage() {
             }
         }
         
-        // Add indicator and disclaimer if Gita response
-        if (isGita) {
-            const disclaimer = currentLanguage === 'hi' 
-                ? '_यह AI द्वारा उत्पन्न प्रतिक्रिया है। कृपया विद्वानों से सत्यापन करें।_'
-                : '_This is an AI-generated response. Please verify with scholars._';
-            botContent = `📖 **Gita Wisdom**\n\n${botContent}\n\n${disclaimer}`;
-        }
-        
         const botTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         messages.push({ role: 'bot', content: botContent, time: botTime });
         saveChat();
@@ -967,75 +942,32 @@ async function sendMessage() {
         
     } catch (error) {
         console.error('❌ Error in sendMessage:', error);
-        console.error('Error name:', error.name);
-        console.error('Error message:', error.message);
-        
         const errorTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         
-        // ============================================
-        // FIX 3: BETTER ERROR MESSAGES
-        // ============================================
         let errorMessage;
-        
         if (error.message.includes('Empty response')) {
-            // Server returned nothing
-            errorMessage = currentLanguage === 'hi'
-                ? '⚠️ सर्वर से कोई उत्तर नहीं मिला। कृपया पुनः प्रयास करें।'
-                : '⚠️ No response from server. Please try again.';
-                
+            errorMessage = currentLanguage === 'hi' ? '⚠️ सर्वर से कोई उत्तर नहीं मिला।' : '⚠️ No response from server.';
         } else if (error.message.includes('Invalid response format') || error.message.includes('JSON')) {
-            // Server returned malformed JSON
-            errorMessage = currentLanguage === 'hi'
-                ? '⚠️ सर्वर ने अमान्य प्रतिक्रिया भेजी। कृपया बाद में प्रयास करें।'
-                : '⚠️ Server sent invalid response. Please try later.';
-                
-        } else if (error.message.includes('Server error')) {
-            // HTTP error (404, 500, etc.)
-            errorMessage = currentLanguage === 'hi'
-                ? `⚠️ सर्वर त्रुटि। कृपया कुछ समय बाद प्रयास करें।`
-                : `⚠️ Server error. Please try again later.`;
-                
-        } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
-            // Network error (no internet)
-            errorMessage = currentLanguage === 'hi'
-                ? '⚠️ इंटरनेट कनेक्शन की जांच करें।'
-                : '⚠️ Please check your internet connection.';
-                
-        } else if (error.message.includes('Invalid Gita response') || error.message.includes('Invalid district response')) {
-            // Response structure doesn't match expected format
-            errorMessage = currentLanguage === 'hi'
-                ? '⚠️ अप्रत्याशित प्रतिक्रिया प्रारूप। कृपया व्यवस्थापक से संपर्क करें।'
-                : '⚠️ Unexpected response format. Please contact admin.';
-                
+            errorMessage = currentLanguage === 'hi' ? '⚠️ सर्वर ने अमान्य प्रतिक्रिया भेजी।' : '⚠️ Server sent invalid response.';
+        } else if (error.name === 'TypeError') {
+            errorMessage = currentLanguage === 'hi' ? '⚠️ इंटरनेट कनेक्शन की जांच करें।' : '⚠️ Check internet connection.';
         } else {
-            // Unknown error
-            errorMessage = currentLanguage === 'hi'
-                ? `⚠️ कुछ गलत हो गया। कृपया पुनः प्रयास करें।\n\nतकनीकी विवरण: ${error.message}`
-                : `⚠️ Something went wrong. Please try again.\n\nTechnical details: ${error.message}`;
+            errorMessage = currentLanguage === 'hi' ? `⚠️ कुछ गलत हो गया।` : `⚠️ Something went wrong.`;
         }
         
-        messages.push({ 
-            role: 'bot', 
-            content: errorMessage, 
-            time: errorTime 
-        });
+        messages.push({ role: 'bot', content: errorMessage, time: errorTime });
         saveChat();
         
     } finally {
-        // Always execute (success or error)
         document.getElementById('loading-indicator').classList.add('hidden');
-        
-        // Only show toggle button if there are messages
         if (messages.length > 0) {
             document.getElementById('toggle-chips-btn').classList.remove('hidden');
         }
-        
         lucide.createIcons();
         renderMessages();
         scrollToBottom();
     }
 }
-
 
 // ============================================
 // DEBUGGING HELPER FUNCTION
