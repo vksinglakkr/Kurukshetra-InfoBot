@@ -1041,7 +1041,41 @@ function toggleMenu() {
         lucide.createIcons();
     }
 }
+// ============================================
+// CLICK OUTSIDE TO CLOSE MENU
+// ============================================
 
+document.addEventListener('DOMContentLoaded', function() {
+    const menu = document.getElementById('menu-dropdown');
+    const menuButton = document.querySelector('button[onclick="toggleMenu()"]');
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!menu.classList.contains('hidden')) {
+            if (!menu.contains(event.target) && !menuButton.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        }
+    });
+    
+    // Close menu when clicking on menu items
+    const menuItems = menu.querySelectorAll('button, a');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menu.classList.add('hidden');
+        });
+    });
+});
+
+// BONUS: Close with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const menu = document.getElementById('menu-dropdown');
+        if (!menu.classList.contains('hidden')) {
+            menu.classList.add('hidden');
+        }
+    }
+});
 function scrollToBottom() {
     const container = document.getElementById('chat-container');
     setTimeout(() => {
