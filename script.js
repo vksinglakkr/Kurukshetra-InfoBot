@@ -4,7 +4,7 @@
 
 // CONFIGURATION
 const N8N_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/chat";
-const FEEDBACK_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/Feed";
+const FEEDBACK_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/InfoBot_Feed";
 const GITA_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/InfoBot_AskGita";
 
 // GLOBAL STATE
