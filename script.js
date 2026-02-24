@@ -397,10 +397,28 @@ function renderMessages() {
             </button>
         ` : '';
         
+        // Add listen button HTML only for bot messages (NEW!)
+        const listenButton = (msg.role === 'bot') ? `
+            <button onclick="speakText(this)" 
+                    class="text-gray-500 hover:text-[#008069] transition-all p-1 rounded-full hover:bg-gray-100" 
+                    title="Listen to response" 
+                    data-text="${msg.content.replace(/"/g, '&quot;').replace(/<[^>]*>/g, '')}">
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+            </button>
+        ` : '';
+        
         return `
             <div class="flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}">
                 <div class="max-w-[85%] p-2 px-3 rounded-lg shadow-sm text-[14px] leading-relaxed relative message-box 
                     ${msg.role === 'user' ? 'bg-[#d9fdd3] rounded-tr-none triangle-right' : 'bg-white rounded-tl-none triangle-left'}">
+                    
+                    ${msg.role === 'bot' ? `
+                        <div class="flex items-center justify-between mb-2 pb-1 border-b border-gray-200">
+                            <span class="text-xs font-semibold text-[#008069]">Response</span>
+                            ${listenButton}
+                        </div>
+                    ` : ''}
+                    
                     <div class="text-gray-800 break-words">${formattedContent}</div>
                     <div class="text-[10px] text-gray-500 text-right mt-1 flex justify-end gap-1">
                         ${msg.time} ${msg.role === 'user' ? '<span class="text-[#53bdeb]">✓✓</span>' : ''}
@@ -409,7 +427,6 @@ function renderMessages() {
                 </div>
             </div>
         `;
-    }).join('');
     
     // Ensure correct UI state based on messages
     if (messages.length === 0) {
