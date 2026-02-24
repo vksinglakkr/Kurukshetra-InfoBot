@@ -1036,9 +1036,25 @@ function clearChat() {
 
 function toggleMenu() {
     const menu = document.getElementById('menu-dropdown');
+    
+    if (!menu) {
+        console.error('Menu not found');
+        return;
+    }
+    
+    console.log('Toggle menu clicked - Current state:', menu.classList.contains('hidden') ? 'hidden' : 'visible');
+    
     menu.classList.toggle('hidden');
+    
+    console.log('New state:', menu.classList.contains('hidden') ? 'hidden' : 'visible');
+    
+    // Refresh Lucide icons if menu is now visible
     if (!menu.classList.contains('hidden')) {
-        lucide.createIcons();
+        setTimeout(() => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }, 50);
     }
 }
 // ============================================
