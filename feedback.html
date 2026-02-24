@@ -18,12 +18,13 @@
             background: linear-gradient(135deg, #008069 0%, #00a884 100%);
         }
         
-        /* Modern Star Rating Styles */
+        /* Modern Star Rating Styles - IMPROVED VISIBILITY */
         .star-rating {
             display: flex;
             gap: 8px;
             justify-content: center;
             font-size: 0;
+            flex-direction: row-reverse;
         }
         
         .star-rating input {
@@ -33,20 +34,29 @@
         .star-rating label {
             cursor: pointer;
             font-size: 2.5rem;
-            color: #d1d5db;
+            color: #d1d5db; /* Gray - unselected */
             transition: all 0.2s ease;
             position: relative;
         }
         
+        /* Hover effect */
         .star-rating label:hover,
-        .star-rating label:hover ~ label,
-        .star-rating input:checked ~ label {
-            color: #fbbf24;
-            transform: scale(1.1);
+        .star-rating label:hover ~ label {
+            color: #fbbf24; /* Gold on hover */
+            transform: scale(1.15);
         }
         
-        .star-rating {
-            flex-direction: row-reverse;
+        /* Selected state - make VERY visible */
+        .star-rating input:checked ~ label {
+            color: #f59e0b !important; /* Darker gold - MORE VISIBLE */
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.9));
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        }
+        
+        /* Click animation */
+        .star-rating label:active {
+            transform: scale(0.95);
         }
         
         /* Success Modal */
