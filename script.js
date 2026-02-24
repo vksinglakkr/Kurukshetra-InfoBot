@@ -655,6 +655,7 @@ function toggleChipsVisibility() {
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'en' ? 'hi' : 'en';
     localStorage.setItem('preferred_language', currentLanguage);
+    updateVoiceLanguage(currentLanguage);
     currentSetIndex = 0;
     updateUI();
     renderChips();
