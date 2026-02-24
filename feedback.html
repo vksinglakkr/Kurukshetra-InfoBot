@@ -18,12 +18,11 @@
             background: linear-gradient(135deg, #008069 0%, #00a884 100%);
         }
         
-        /* Modern Star Rating Styles - IMPROVED VISIBILITY */
+        /* Star Rating - Filled vs Outlined (BEST VISIBILITY) */
         .star-rating {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             justify-content: center;
-            font-size: 0;
             flex-direction: row-reverse;
         }
         
@@ -33,25 +32,33 @@
         
         .star-rating label {
             cursor: pointer;
-            font-size: 2.5rem;
-            color: #d1d5db; /* Gray - unselected */
+            font-size: 3rem;
             transition: all 0.2s ease;
-            position: relative;
+            user-select: none;
+        }
+        
+        /* Unselected stars - OUTLINED (empty) ☆ */
+        .star-rating label::before {
+            content: '☆';
+            color: #9ca3af;
+        }
+        
+        /* Selected stars - FILLED (solid) ★ */
+        .star-rating input:checked ~ label::before {
+            content: '★';
+            color: #fbbf24;
+            filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.6));
         }
         
         /* Hover effect */
-        .star-rating label:hover,
-        .star-rating label:hover ~ label {
-            color: #fbbf24; /* Gold on hover */
-            transform: scale(1.15);
+        .star-rating label:hover::before,
+        .star-rating label:hover ~ label::before {
+            content: '★';
+            color: #fcd34d;
         }
         
-        /* Selected state - make VERY visible */
-        .star-rating input:checked ~ label {
-            color: #f59e0b !important; /* Darker gold - MORE VISIBLE */
+        .star-rating label:hover {
             transform: scale(1.15);
-            filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.9));
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
         }
         
         /* Click animation */
@@ -155,19 +162,19 @@
                     <!-- Modern 5-Star Rating -->
                     <div class="star-rating py-2">
                         <input type="radio" name="rating" value="5" id="star5" required>
-                        <label for="star5">⭐</label>
+                        <label for="star5"></label>
                         
                         <input type="radio" name="rating" value="4" id="star4">
-                        <label for="star4">⭐</label>
+                        <label for="star4"></label>
                         
                         <input type="radio" name="rating" value="3" id="star3">
-                        <label for="star3">⭐</label>
+                        <label for="star3"></label>
                         
                         <input type="radio" name="rating" value="2" id="star2">
-                        <label for="star2">⭐</label>
+                        <label for="star2"></label>
                         
                         <input type="radio" name="rating" value="1" id="star1">
-                        <label for="star1">⭐</label>
+                        <label for="star1"></label>
                     </div>
                     
                     <p class="text-xs text-center text-gray-500">Click on a star to rate (1 = Poor, 5 = Excellent)</p>
