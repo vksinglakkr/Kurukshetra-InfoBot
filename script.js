@@ -768,8 +768,8 @@ function isGitaQuery(text) {
     const spiritualKeywords = [
         'karma yoga', 'bhakti yoga', 'jnana yoga', 'dhyana yoga',
         'shlok', 'verse', 'chapter', 'अध्याय', 'श्लोक',
-        'dharma', 'moksha', 'atman', 'brahman',
-        'धर्म', 'मोक्ष', 'आत्मा', 'ब्रह्म',
+        'dharma', 'moksha', 'atman',
+        'धर्म', 'मोक्ष', 'आत्मा',
         'कर्म योग', 'भक्ति योग', 'ज्ञान योग', 'ध्यान योग'
     ];
     
