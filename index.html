@@ -298,16 +298,16 @@
         <!-- Input Area with Autocomplete -->
         <div class="bg-[#f0f2f5] p-2 flex items-center gap-2 z-20 shadow-lg relative">
             <!-- Autocomplete Dropdown -->
-            <div id="autocomplete-dropdown" class="autocomplete-dropdown hidden"></div>
-            
-            <button class="text-gray-500 p-1 hover:bg-gray-200 rounded-full transition">
-                <i data-lucide="smile" class="w-6 h-6"></i>
-            </button>
+            <div id="autocomplete-dropdown" class="autocomplete-dropdown hidden"></div>          
             <input type="text" id="user-input" placeholder="Ask me anything about Kurukshetra..." 
                 class="flex-1 py-2 px-4 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-[#008069]/20 text-sm h-10 shadow-sm"
                 onkeypress="handleKeyPress(event)"
                 oninput="handleAutocomplete(event)"
                 autocomplete="off">
+                <button id="mic-btn" class="text-gray-500 p-1 hover:bg-gray-200 rounded-full transition relative" title="Voice Input">
+                <i data-lucide="mic" class="w-6 h-6"></i>
+                <div class="voice-indicator" id="voice-indicator"></div>
+            </button>       
             <button onclick="sendMessage()" class="bg-gradient-to-r from-[#008069] to-[#00a884] p-2.5 rounded-full text-white hover:shadow-md transition-all">
                 <i data-lucide="send" class="w-5 h-5"></i>
             </button>
