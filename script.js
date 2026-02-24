@@ -1116,3 +1116,39 @@ function scrollToBottom() {
         container.scrollTop = container.scrollHeight;
     }, 100);
 }
+// TEXT-TO-SPEECH FEATURE
+let currentSpeech = null;
+let isSpeaking = false;
+
+function speakText(button) {
+    const text = button.getAttribute('data-text');
+    if (!text) return;
+    
+    const cleanText = text.replace(/<[^>]*>/g, '').replace(/&quot;/g, '"').trim();
+    
+    if (isSpeaking) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+        button.innerHTML = '<i data-lucide="volume-2" class="w-4 h-4"></i>';
+        lucide.createIcons();
+        return;
+    }
+    
+    currentSpeech = new SpeechSynthesisUtterance(cleanText);
+    currentSpeech.lang = currentLanguage === 'hi' ? 'hi-IN' : 'en-US';
+    currentSpeech.rate = 0.9;
+    
+    button.innerHTML = '<i data-lucide="square" class="w-4 h-4"></i>';
+    button.classList.add('text-red-500');
+    lucide.createIcons();
+    
+    currentSpeech.onstart = () => isSpeaking = true;
+    currentSpeech.onend = () => {
+        isSpeaking = false;
+        button.innerHTML = '<i data-lucide="volume-2" class="w-4 h-4"></i>';
+        button.classList.remove('text-red-500');
+        lucide.createIcons();
+    };
+    
+    window.speechSynthesis.speak(currentSpeech);
+}
