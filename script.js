@@ -689,7 +689,7 @@ function updateUI() {
     document.getElementById('user-input').placeholder = t.inputPlaceholder;
     
     // Update menu items
-    document.getElementById('menu-feedback').textContent = t.menuFeedback;
+    document.getElementById('menu-feedback-text').textContent = t.menuFeedback;
     document.getElementById('menu-clear').textContent = t.clearChat;
     document.getElementById('menu-visit').textContent = t.visitWebsite;
     
