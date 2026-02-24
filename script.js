@@ -427,6 +427,7 @@ function renderMessages() {
                 </div>
             </div>
         `;
+    }).join('');
     
     // Ensure correct UI state based on messages
     if (messages.length === 0) {
