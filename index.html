@@ -406,6 +406,389 @@
     <script src="script_mic.js?v=6.0"></script>
     <script src="script_listen.js?v=6.0"></script>
     <script src="settings-integration.js?v=6.0"></script>
-   
+// ============================================
+// ULTRA-STRONG SETTINGS LOADER
+// This WILL override Tailwind and all existing CSS
+// Paste this RIGHT BEFORE </body> in index.html
+// ============================================
+
+<script>
+console.log('💪 ULTRA-STRONG Settings Loader Started');
+
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 Page loaded, applying settings with MAXIMUM FORCE...');
+    
+    const saved = localStorage.getItem('infobotSettings');
+    
+    if (!saved) {
+        console.log('⚠️ No saved settings found');
+        return;
+    }
+    
+    const settings = JSON.parse(saved);
+    console.log('✅ Settings found:', settings);
+    
+    // ============================================
+    // APPLY ALL SETTINGS WITH MAXIMUM SPECIFICITY
+    // ============================================
+    
+    const ultraStyle = document.createElement('style');
+    ultraStyle.id = 'ultra-settings-override';
+    
+    let css = `
+        /* ============================================
+           ULTRA OVERRIDE STYLES - HIGHEST PRIORITY
+           ============================================ */
+    `;
+    
+    // ============================================
+    // 1. DARK MODE
+    // ============================================
+    if (settings.theme === 'dark') {
+        console.log('🌙 Applying DARK MODE with ultra-strength...');
+        
+        document.body.classList.add('dark-mode');
+        
+        css += `
+            /* Dark Mode - Ultra Override */
+            body.dark-mode,
+            body.dark-mode * {
+                background-color: #0b141a !important;
+                color: #e9edef !important;
+            }
+            
+            body.dark-mode .wa-bg,
+            body.dark-mode div[class*="wa"],
+            body.dark-mode main,
+            body.dark-mode #app-container {
+                background-color: #0b141a !important;
+                background-image: none !important;
+            }
+            
+            /* User Messages - Green */
+            body.dark-mode .message-box.bg-\\[\\#d9fdd3\\],
+            body.dark-mode div[class*="d9fdd3"],
+            body.dark-mode .user-message,
+            body.dark-mode [class*="user"] {
+                background-color: #005c4b !important;
+                color: #e9edef !important;
+            }
+            
+            /* Bot Messages - Dark Gray */
+            body.dark-mode .message-box.bg-white,
+            body.dark-mode .bot-message,
+            body.dark-mode [class*="bot"]:not(button) {
+                background-color: #1f2c34 !important;
+                color: #e9edef !important;
+            }
+            
+            /* Header */
+            body.dark-mode header,
+            body.dark-mode .gradient-header,
+            body.dark-mode [class*="header"] {
+                background: linear-gradient(135deg, #005c4b 0%, #00a884 100%) !important;
+            }
+            
+            /* Inputs */
+            body.dark-mode input,
+            body.dark-mode textarea,
+            body.dark-mode select {
+                background-color: #1f2c34 !important;
+                color: #e9edef !important;
+                border-color: #3b4a54 !important;
+            }
+            
+            /* Buttons keep their colors */
+            body.dark-mode button {
+                color: inherit;
+            }
+        `;
+    }
+    
+    // ============================================
+    // 2. FONT SIZE - ULTRA OVERRIDE
+    // ============================================
+    if (settings.fontSize && settings.fontSize !== 'medium') {
+        console.log('📝 Applying FONT SIZE with ultra-strength:', settings.fontSize);
+        
+        const fontSizes = {
+            small: '12px',
+            medium: '14px',
+            large: '16px',
+            xlarge: '18px'
+        };
+        
+        const fontSize = fontSizes[settings.fontSize];
+        
+        css += `
+            /* Font Size - Ultra Override */
+            .message-box,
+            .message-box *,
+            .message,
+            .message *,
+            [class*="message"] p,
+            [class*="message"] span,
+            [class*="message"] div,
+            #messages-list > div,
+            #messages-list > div *,
+            .chat-message,
+            .chat-message * {
+                font-size: ${fontSize} !important;
+            }
+            
+            /* Also apply to new messages added dynamically */
+            * [data-message],
+            * [data-message] * {
+                font-size: ${fontSize} !important;
+            }
+        `;
+        
+        // Also set CSS variable for JavaScript-added messages
+        document.documentElement.style.setProperty('--message-font-size', fontSize);
+        
+        console.log('✅ Font size applied:', fontSize);
+    }
+    
+    // ============================================
+    // 3. ACCENT COLOR - ULTRA OVERRIDE
+    // ============================================
+    if (settings.accentColor && settings.accentColor !== '#008069') {
+        console.log('🎨 Applying ACCENT COLOR with ultra-strength:', settings.accentColor);
+        
+        const accent = settings.accentColor;
+        const accentLight = lightenColor(accent, 20);
+        const accentDark = darkenColor(accent, 10);
+        
+        css += `
+            /* Accent Color - Ultra Override */
+            
+            /* Headers */
+            .gradient-header,
+            header,
+            [class*="header"]:not(.message) {
+                background: linear-gradient(135deg, ${accent} 0%, ${accentLight} 100%) !important;
+            }
+            
+            /* Buttons with green */
+            .bg-\\[\\#008069\\],
+            .bg-green-600,
+            .bg-green-700,
+            [class*="bg-green"] {
+                background-color: ${accent} !important;
+            }
+            
+            /* Text with green */
+            .text-\\[\\#008069\\],
+            .text-green-600,
+            .text-green-700,
+            [class*="text-green"] {
+                color: ${accent} !important;
+            }
+            
+            /* Borders with green */
+            .border-\\[\\#008069\\],
+            .border-green-600,
+            [class*="border-green"] {
+                border-color: ${accent} !important;
+            }
+            
+            /* Hover states */
+            button:hover[class*="green"],
+            .hover\\:bg-green-700:hover {
+                background-color: ${accentDark} !important;
+            }
+            
+            /* Chip buttons */
+            .chip-button,
+            [class*="chip"] {
+                background-color: ${accent} !important;
+            }
+            
+            /* Links */
+            a[class*="green"] {
+                color: ${accent} !important;
+            }
+        `;
+        
+        // Set CSS variables
+        document.documentElement.style.setProperty('--accent-color', accent);
+        document.documentElement.style.setProperty('--accent-light', accentLight);
+        document.documentElement.style.setProperty('--accent-dark', accentDark);
+        
+        console.log('✅ Accent color applied:', accent);
+    }
+    
+    // ============================================
+    // 4. BACKGROUND - ULTRA OVERRIDE
+    // ============================================
+    if (settings.background && settings.background !== 'whatsapp') {
+        console.log('🖼️ Applying BACKGROUND:', settings.background);
+        
+        if (settings.background === 'solid') {
+            css += `
+                .wa-bg,
+                [class*="wa-bg"],
+                #messages-container,
+                main,
+                .chat-container {
+                    background-image: none !important;
+                    background-color: #ffffff !important;
+                }
+            `;
+        } else if (settings.background === 'gradient') {
+            css += `
+                .wa-bg,
+                [class*="wa-bg"],
+                #messages-container,
+                main,
+                .chat-container {
+                    background-image: linear-gradient(135deg, #e0f2fe 0%, #f3e8ff 100%) !important;
+                    background-color: transparent !important;
+                }
+            `;
+        }
+        
+        console.log('✅ Background applied');
+    }
+    
+    // ============================================
+    // 5. WIDTH - ULTRA OVERRIDE
+    // ============================================
+    if (settings.width && settings.width !== 100) {
+        console.log('📏 Applying WIDTH:', settings.width + '%');
+        
+        css += `
+            #app-container,
+            .max-w-screen-xl,
+            .container,
+            main > div:first-child,
+            body > div:first-child {
+                max-width: ${settings.width}% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+        `;
+        
+        console.log('✅ Width applied');
+    }
+    
+    // ============================================
+    // 6. BUBBLE STYLE
+    // ============================================
+    if (settings.bubbleStyle === 'sharp') {
+        console.log('💬 Applying SHARP BUBBLES');
+        
+        css += `
+            .message-box,
+            [class*="message"] {
+                border-radius: 4px !important;
+            }
+            
+            .triangle-left::before,
+            .triangle-right::before {
+                display: none !important;
+            }
+        `;
+        
+        console.log('✅ Sharp bubbles applied');
+    }
+    
+    // ============================================
+    // 7. ANIMATIONS
+    // ============================================
+    if (settings.animations === false) {
+        console.log('⚡ DISABLING animations');
+        
+        css += `
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0s !important;
+                animation-duration: 0s !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        `;
+        
+        console.log('✅ Animations disabled');
+    }
+    
+    // ============================================
+    // 8. COMPACT MODE
+    // ============================================
+    if (settings.compact) {
+        console.log('📱 Applying COMPACT MODE');
+        
+        css += `
+            .message-box {
+                padding: 0.5rem 0.75rem !important;
+                margin-top: 0.25rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            #messages-list,
+            [class*="message-list"],
+            .messages-container {
+                gap: 0.25rem !important;
+            }
+        `;
+        
+        console.log('✅ Compact mode applied');
+    }
+    
+    // ============================================
+    // 9. TIMESTAMPS
+    // ============================================
+    if (settings.timestamps === false) {
+        console.log('🕐 HIDING timestamps');
+        
+        css += `
+            .message-time,
+            .timestamp,
+            time,
+            [class*="time"]:not(button) {
+                display: none !important;
+            }
+        `;
+        
+        console.log('✅ Timestamps hidden');
+    }
+    
+    // ============================================
+    // INJECT THE ULTRA-STRONG STYLESHEET
+    // ============================================
+    ultraStyle.textContent = css;
+    document.head.appendChild(ultraStyle);
+    
+    console.log('🎉 ULTRA-STRONG settings applied successfully!');
+    console.log('📋 Applied settings:', settings);
+});
+
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+function lightenColor(color, percent) {
+    const num = parseInt(color.replace("#",""), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = Math.min(255, (num >> 16) + amt);
+    const G = Math.min(255, (num >> 8 & 0x00FF) + amt);
+    const B = Math.min(255, (num & 0x0000FF) + amt);
+    return "#" + (0x1000000 + R*0x10000 + G*0x100 + B).toString(16).slice(1);
+}
+
+function darkenColor(color, percent) {
+    const num = parseInt(color.replace("#",""), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = Math.max(0, (num >> 16) - amt);
+    const G = Math.max(0, (num >> 8 & 0x00FF) - amt);
+    const B = Math.max(0, (num & 0x0000FF) - amt);
+    return "#" + (0x1000000 + R*0x10000 + G*0x100 + B).toString(16).slice(1);
+}
+
+console.log('💪 ULTRA-STRONG Settings Loader Ready!');
+</script>
+
+
+    
 </body>
 </html>
