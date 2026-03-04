@@ -841,6 +841,30 @@ if (settings.accentColor && settings.accentColor !== '#008069') {
     document.head.appendChild(ultraStyle);
     
     console.log('🎉 ULTRA-STRONG settings applied successfully!');
+// ============================================
+    // ACCENT COLOR INLINE STYLE OVERRIDE
+    // ============================================
+    setTimeout(() => {
+        if (settings.accentColor && settings.accentColor !== '#008069') {
+            const accent = settings.accentColor;
+            const accentLight = lightenColor(accent, 20);
+            
+            // Override .gradient-header inline style
+            const header = document.querySelector('.gradient-header');
+            if (header) {
+                header.removeAttribute('style');
+                header.style.setProperty('background', `linear-gradient(135deg, ${accent} 0%, ${accentLight} 100%)`, 'important');
+                console.log('✅ Header accent forced:', accent);
+            }
+            
+            // Override send button gradient
+            const sendBtn = document.querySelector('button.bg-gradient-to-r.from-\\[\\#008069\\]');
+            if (sendBtn) {
+                sendBtn.style.setProperty('background', `linear-gradient(to right, ${accent}, ${lightenColor(accent, 10)})`, 'important');
+                console.log('✅ Send button accent forced');
+            }
+        }
+    }, 300);
     console.log('📋 Applied settings:', settings);
 });
 
