@@ -546,72 +546,158 @@ window.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // 3. ACCENT COLOR - ULTRA OVERRIDE
     // ============================================
-    if (settings.accentColor && settings.accentColor !== '#008069') {
-        console.log('🎨 Applying ACCENT COLOR with ultra-strength:', settings.accentColor);
-        
-        const accent = settings.accentColor;
-        const accentLight = lightenColor(accent, 20);
-        const accentDark = darkenColor(accent, 10);
-        
-        css += `
-            /* Accent Color - Ultra Override */
-            
-            /* Headers */
-            .gradient-header,
-            header,
-            [class*="header"]:not(.message) {
-                background: linear-gradient(135deg, ${accent} 0%, ${accentLight} 100%) !important;
-            }
-            
-            /* Buttons with green */
-            .bg-\\[\\#008069\\],
-            .bg-green-600,
-            .bg-green-700,
-            [class*="bg-green"] {
-                background-color: ${accent} !important;
-            }
-            
-            /* Text with green */
-            .text-\\[\\#008069\\],
-            .text-green-600,
-            .text-green-700,
-            [class*="text-green"] {
-                color: ${accent} !important;
-            }
-            
-            /* Borders with green */
-            .border-\\[\\#008069\\],
-            .border-green-600,
-            [class*="border-green"] {
-                border-color: ${accent} !important;
-            }
-            
-            /* Hover states */
-            button:hover[class*="green"],
-            .hover\\:bg-green-700:hover {
-                background-color: ${accentDark} !important;
-            }
-            
-            /* Chip buttons */
-            .chip-button,
-            [class*="chip"] {
-                background-color: ${accent} !important;
-            }
-            
-            /* Links */
-            a[class*="green"] {
-                color: ${accent} !important;
-            }
-        `;
-        
-        // Set CSS variables
-        document.documentElement.style.setProperty('--accent-color', accent);
-        document.documentElement.style.setProperty('--accent-light', accentLight);
-        document.documentElement.style.setProperty('--accent-dark', accentDark);
-        
-        console.log('✅ Accent color applied:', accent);
-    }
+if (settings.accentColor && settings.accentColor !== '#008069') {
+    console.log('🎨 Applying ACCENT COLOR with ULTRA-FORCE:', settings.accentColor);
     
+    const accent = settings.accentColor;
+    const accentLight = lightenColor(accent, 20);
+    const accentDark = darkenColor(accent, 10);
+    
+    css += `
+        /* ============================================
+           ACCENT COLOR - NUCLEAR OPTION
+           ============================================ */
+        
+        /* HEADER - Every possible selector */
+        header,
+        .gradient-header,
+        div[class*="gradient-header"],
+        div[class*="header"]:first-child,
+        body > div:first-child > div:first-child,
+        [class*="bg-gradient"],
+        nav,
+        .navbar {
+            background: linear-gradient(135deg, ${accent} 0%, ${accentLight} 100%) !important;
+        }
+        
+        /* Tailwind gradient utilities that might be used */
+        .bg-gradient-to-r,
+        .bg-gradient-to-br,
+        .bg-gradient-to-bl {
+            background: linear-gradient(135deg, ${accent} 0%, ${accentLight} 100%) !important;
+        }
+        
+        /* GREEN BACKGROUNDS - All variations */
+        .bg-\\[\\#008069\\],
+        .bg-\\[\\#00a884\\],
+        .bg-green-50,
+        .bg-green-100,
+        .bg-green-200,
+        .bg-green-300,
+        .bg-green-400,
+        .bg-green-500,
+        .bg-green-600,
+        .bg-green-700,
+        .bg-green-800,
+        .bg-green-900,
+        [class*="bg-green"],
+        button[class*="bg-green"],
+        a[class*="bg-green"] {
+            background-color: ${accent} !important;
+        }
+        
+        /* HOVER STATES */
+        .hover\\:bg-green-700:hover,
+        .hover\\:bg-green-600:hover,
+        .hover\\:bg-\\[\\#00a884\\]:hover,
+        button:hover[class*="bg-green"] {
+            background-color: ${accentDark} !important;
+        }
+        
+        /* TEXT COLORS - All green text */
+        .text-\\[\\#008069\\],
+        .text-\\[\\#00a884\\],
+        .text-green-500,
+        .text-green-600,
+        .text-green-700,
+        .text-green-800,
+        [class*="text-green"],
+        a[class*="text-green"] {
+            color: ${accent} !important;
+        }
+        
+        /* BORDERS */
+        .border-\\[\\#008069\\],
+        .border-green-500,
+        .border-green-600,
+        .border-green-700,
+        [class*="border-green"] {
+            border-color: ${accent} !important;
+        }
+        
+        /* BUTTONS - Specific targeting */
+        button.bg-\\[\\#008069\\],
+        button[class*="green"],
+        .chip-button,
+        .btn-primary,
+        [role="button"][class*="green"] {
+            background-color: ${accent} !important;
+        }
+        
+        /* FOCUS STATES */
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: ${accent} !important;
+            ring-color: ${accent} !important;
+        }
+        
+        /* RING UTILITIES (Tailwind focus rings) */
+        .ring-green-500,
+        .ring-green-600,
+        .focus\\:ring-green-500:focus,
+        .focus\\:ring-green-600:focus {
+            --tw-ring-color: ${accent} !important;
+        }
+        
+        /* USER MESSAGE BUBBLES (if they use green) */
+        .bg-\\[\\#d9fdd3\\]:not(.dark-mode *) {
+            background-color: ${lightenColor(accent, 30)} !important;
+        }
+        
+        /* LINKS */
+        a:not([class*="text-"]) {
+            color: ${accent} !important;
+        }
+    `;
+    
+    // ALSO: Directly modify the header element in JavaScript
+    setTimeout(() => {
+        // Find header by multiple methods
+        const headers = [
+            document.querySelector('header'),
+            document.querySelector('.gradient-header'),
+            document.querySelector('[class*="gradient-header"]'),
+            document.querySelector('body > div:first-child > div:first-child'),
+            document.querySelector('[class*="header"]')
+        ];
+        
+        for (let header of headers) {
+            if (header && header.tagName !== 'META') {
+                header.style.background = `linear-gradient(135deg, ${accent} 0%, ${accentLight} 100%)`;
+                header.style.setProperty('background', `linear-gradient(135deg, ${accent} 0%, ${accentLight} 100%)`, 'important');
+                console.log('✅ Header element directly styled:', header.className);
+                break;
+            }
+        }
+        
+        // Find and style all green buttons
+        const greenButtons = document.querySelectorAll('button[class*="green"], button.bg-\\[\\#008069\\], .chip-button');
+        greenButtons.forEach(btn => {
+            btn.style.setProperty('background-color', accent, 'important');
+        });
+        console.log(`✅ Styled ${greenButtons.length} green buttons`);
+        
+    }, 100); // Small delay to ensure DOM is ready
+    
+    // Set CSS variables for good measure
+    document.documentElement.style.setProperty('--accent-color', accent);
+    document.documentElement.style.setProperty('--accent-light', accentLight);
+    document.documentElement.style.setProperty('--accent-dark', accentDark);
+    document.documentElement.style.setProperty('--tw-ring-color', accent);
+    
+    console.log('✅ Accent color FORCE-APPLIED:', accent);
+}
     // ============================================
     // 4. BACKGROUND - ULTRA OVERRIDE
     // ============================================
