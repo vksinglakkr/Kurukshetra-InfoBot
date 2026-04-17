@@ -1,1 +1,250 @@
-a
+{
+  "kurukshetra": {
+    "meta": {
+      "districtKey": "kurukshetra",
+      "districtName": "Kurukshetra",
+      "districtNameHindi": "कुरुक्षेत्र",
+      "state": "Haryana",
+      "population": "9,64,655", 
+      "area": "1,530 sq km",
+      "appDomain": "https://kkr-citymitra.app"
+    },
+    
+    "urls": {
+        "districtGovt": "https://kurukshetra.gov.in",
+        "tourismPortal": "https://kkrtour.com",
+        "48kosPortal": "https://48koskurukshetra.com",
+        "stateHaryanaTourism": "https://haryanatourism.gov.in",
+        "anubhavKendra": "https://mahabharatanubhavkendra.com",
+        "university": "https://kuk.ac.in",
+        "nit": "https://nitkkr.ac.in",
+        "districtCourt": "https://kurukshetra.dcourts.gov.in",
+        "policeWebsite": "https://kurukshetra.haryanapolice.gov.in",
+        "zomato": "https://www.zomato.com/kurukshetra",
+        "swiggy": "https://www.swiggy.com/city/kurukshetra",
+        "sulekha": "https://www.sulekha.com",
+        "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-kurukshetra",
+        "googleMapsDistrict": "https://www.google.com/maps/place/Kurukshetra+District"
+      },
+
+    "govtPages": {
+        "attractions": "https://kurukshetra.gov.in/kurukshetraattractions/",
+        "knowAbout": "https://kurukshetra.gov.in/know-about-kurukshetra/",
+        "aboutDistrict": "https://kurukshetra.gov.in/about-district/",
+        "whereToStay": "https://kurukshetra.gov.in/where-to-stay-in-kurukshetra/",
+        "whoswho": "https://kurukshetra.gov.in/whoswho/",
+        "directory": "https://kurukshetra.gov.in/directory/",
+        "adminSetup": "https://kurukshetra.gov.in/administrative-setup-kurukshetra/",
+        "politicalSetup": "https://kurukshetra.gov.in/political-setup-kurukshetra/",
+        "education": "https://kurukshetra.gov.in/education/",
+        "48kosMain": "https://kurukshetra.gov.in/48kos-kurukshetra/",
+        "48kosKurukshetra": "https://kurukshetra.gov.in/48kos-religious-places-in-kurukshetra/",
+        "48kosKarnal": "https://kurukshetra.gov.in/48kos-religious-places-in-karnal/",
+        "48kosKaithal": "https://kurukshetra.gov.in/48kos-religious-places-in-kaithal/",
+        "48kosPanipat": "https://kurukshetra.gov.in/48kos-religious-places-in-panipat/",
+        "48kosJind": "https://kurukshetra.gov.in/48kos-religious-places-in-jind/",
+        "censusData": "https://kurukshetra.gov.in/know-about-kurukshetra/"
+      },
+
+    "serpapi": {
+        "tourismSite1": "site:kkrtour.com",
+        "tourismSite2": "site:kurukshetra.gov.in -inurl:class- -inurl:recruitment -inurl:tender -inurl:download -inurl:gallery",
+        "tourismSite3": "(site:48koskurukshetra.com OR site:kurukshetra.gov.in) -inurl:class- -inurl:recruitment -inurl:tender",
+        "generalSite": "site:kurukshetra.gov.in OR site:kkrtour.com",
+        "contextSuffix": "Kurukshetra Haryana"
+      },
+
+    "googleSheets": {
+        "spreadsheetId": "1Po82vtiRaf-Cocx37UekRiFd-IbfX7r6j-dvj6aQmWA",
+        "infobotCacheSheet": "InfoBot_Cache",
+        "askGitaCacheSheet": "AskGita_Cache",
+        "infobotLogSheet": "InfoBot_Log",
+        "askGitaLogSheet": "AskGita_Log",
+        "feedbackSheet": "Feedback"
+      },
+
+    "feedback": {
+        "googleAppsScriptUrl": "https://script.google.com/macros/s/AKfycbxCvs-tk8PecmOgORx8WIgszAO0VfqobnCCj75RM0kOiwxZep5UHJFl0Eub28uvHL2WWA/exec"
+      },
+
+    "webhooks": {
+        "infobotPath": "kkr-chat",
+        "askGitaPath": "kkr-AskGita",
+        "feedbackPath": "kkr-Feed"
+      },
+
+    "aiPrompts": {
+        "infobotSystemRole": "You are an official district information assistant for Kurukshetra, Haryana (India).",
+        "askGitaSystemRole": "You are AskGita, an AI scholar for International Gita Mahotsav 2025. Answer ONLY about: 1) Bhagavad Gita (chapters 1-18), 2) Kurukshetra's 48 Kos sites, 3) Today's IGM program. NEVER give legal/medical advice.",
+        "districtContext": "Kurukshetra district, Haryana, India. Famous for Bhagavad Gita, Mahabharata battlefield, 48 Kos pilgrimage circuit, Brahma Sarovar, Jyotisar, International Gita Mahotsav."
+      },
+
+    "tourismSites": {
+        "primaryPortal": "kkrtour.com",
+        "secondaryPortal": "kurukshetra.gov.in",
+        "tertiary48Kos": "48koskurukshetra.com",
+        "broadQueryPrimary": "https://kkrtour.com/viewall.html",
+        "broadQuerySecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
+        "generalListPrimary": "https://kkrtour.com",
+        "generalListSecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
+        "kkrTourListTemplate": "https://kkrtour.com/List.php?id={siteId}",
+        "48kosTemplate": "https://48koskurukshetra.com/{kosSite}/"
+      },
+
+    "perspectiveFallbackUrls": {
+        "buddhist":  { "primary": "https://kurukshetra.gov.in/about-district/",  "secondary": "https://kurukshetra.gov.in/kurukshetraattractions/" },
+        "sikh":      { "primary": "https://kurukshetra.gov.in/about-district/",  "secondary": "https://kurukshetra.gov.in/kurukshetraattractions/" },
+        "jain":      { "primary": "https://kurukshetra.gov.in/about-district/",  "secondary": "https://kurukshetra.gov.in/kurukshetraattractions/" },
+        "historical":{ "primary": "https://kurukshetra.gov.in/about-district/",  "secondary": "https://kurukshetra.gov.in/know-about-kurukshetra/" },
+        "hindu":     { "primary": "https://kkrtour.com/viewall.html",             "secondary": "https://kurukshetra.gov.in/about-district/" },
+        "parikrama": { "primary": "https://48koskurukshetra.com/",                "secondary": "https://kurukshetra.gov.in/about-district/" },
+        "general":   { "primary": "https://kkrtour.com/viewall.html",             "secondary": "https://kurukshetra.gov.in/kurukshetraattractions/" }
+      },
+
+    "hardcodedPageLinks": {
+        "person_fallback":       "https://kurukshetra.gov.in/political-setup-kurukshetra/",
+        "village_admin":         "https://kurukshetra.gov.in/directory/",
+        "admin_structure":       "https://kurukshetra.gov.in/administrative-setup-kurukshetra/",
+        "demographic":           "https://kurukshetra.gov.in/know-about-kurukshetra/",
+        "accommodation":         "https://kurukshetra.gov.in/where-to-stay-in-kurukshetra/",
+        "tourism_general":       "https://kurukshetra.gov.in/kurukshetraattractions/",
+        "police":                "https://kurukshetra.haryanapolice.gov.in/",
+        "court":                 "https://kurukshetra.dcourts.gov.in/"
+      },
+
+
+    "adminStructure": {
+      "tehsils": ["Thanesar", "Pehowa", "Shahabad", "Ladwa"],
+      "subTehsils": ["Babain", "Ismailabad"],
+      "blocks": 7,
+      "villages": 460
+    },
+
+    "keywords": {
+      "localities": ["umri", "kamauda", "thanesar", "pipli", "bir", "amin", "pehowa", "jhansa", "rattangarh", "ladwa", "shahabad"],
+      "tourismSpecifics": ["brahma", "sarovar", "jyotisar", "sthaneshwar", "baan ganga", "sannihit", "sheikh chilli", "kalpana chawla", "panorama"],
+      "queryModifiers": ["kurukshetra mein", "kurukshetra ke", "visit kurukshetra", "places in kurukshetra"]
+    },
+
+    "knownSites": {
+      "brahma sarovar": { "type": "tourism", "id": 2 },
+      "jyotisar": { "type": "tourism", "id": 1 },
+      "nabhi kamal": { "type": "heritage", "url": "https://48koskurukshetra.com/nabhiqimal-tirtha-thanesar/" }
+    }
+  },
+
+  "karnal": {
+    "meta": {
+      "districtKey": "karnal",
+      "districtName": "Karnal",
+      "districtNameHindi": "करनाल",
+      "state": "Haryana",
+      "population": "1,505,324",
+      "area": "2,520 sq km",
+      "appDomain": "https://karnal-citymitra.app"
+    },
+    
+      "urls": {
+        "districtGovt": "https://karnal.gov.in",
+        "tourismPortal": "https://haryanatourism.gov.in",
+        "stateHaryanaTourism": "https://haryanatourism.gov.in",
+        "university": "https://ndri.res.in",
+        "districtCourt": "https://karnal.dcourts.gov.in",
+        "policeWebsite": "https://karnal.haryanapolice.gov.in",
+        "zomato": "https://www.zomato.com/karnal",
+        "swiggy": "https://www.swiggy.com/city/karnal",
+        "sulekha": "https://www.sulekha.com",
+        "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-karnal",
+        "googleMapsDistrict": "https://www.google.com/maps/place/Karnal+District"
+      },
+
+      "govtPages": {
+        "attractions": "https://karnal.gov.in/tourist-places/",
+        "knowAbout": "https://karnal.gov.in/about-karnal/",
+        "aboutDistrict": "https://karnal.gov.in/about-karnal/",
+        "whereToStay": "https://karnal.gov.in/where-to-stay/",
+        "whoswho": "https://karnal.gov.in/whoswho/",
+        "directory": "https://karnal.gov.in/directory/",
+        "adminSetup": "https://karnal.gov.in/administrative-setup/",
+        "politicalSetup": "https://karnal.gov.in/political-setup/",
+        "censusData": "https://karnal.gov.in/about-karnal/"
+      },
+
+      "serpapi": {
+        "tourismSite1": "site:haryanatourism.gov.in karnal",
+        "tourismSite2": "site:karnal.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
+        "tourismSite3": "site:karnal.gov.in OR site:haryanatourism.gov.in",
+        "generalSite": "site:karnal.gov.in",
+        "contextSuffix": "Karnal Haryana"
+      },
+
+      "googleSheets": {
+        "spreadsheetId": "REPLACE_WITH_KARNAL_SHEET_ID",
+        "infobotCacheSheet": "InfoBot_Cache",
+        "askGitaCacheSheet": "AskGita_Cache",
+        "infobotLogSheet": "InfoBot_Log",
+        "askGitaLogSheet": "AskGita_Log",
+        "feedbackSheet": "Feedback"
+      },
+
+      "feedback": {
+        "googleAppsScriptUrl": "REPLACE_WITH_KARNAL_APPS_SCRIPT_URL"
+      },
+
+      "webhooks": {
+        "infobotPath": "karnal-chat",
+        "askGitaPath": "karnal-AskGita",
+        "feedbackPath": "karnal-Feed"
+      },
+
+      "aiPrompts": {
+        "infobotSystemRole": "You are an official district information assistant for Karnal, Haryana (India).",
+        "askGitaSystemRole": "You are an AI guide for Karnal district. Answer questions about Karnal's history, tourism, government services, and culture. NEVER give legal/medical advice.",
+        "districtContext": "Karnal district, Haryana, India. Known as the City of Karna, rice bowl of India, Kalpana Chawla birthplace, National Dairy Research Institute (NDRI)."
+      },
+
+      "tourismSites": {
+        "primaryPortal": "haryanatourism.gov.in",
+        "secondaryPortal": "karnal.gov.in",
+        "broadQueryPrimary": "https://haryanatourism.gov.in/destination/karnal/",
+        "broadQuerySecondary": "https://karnal.gov.in/tourist-places/",
+        "generalListPrimary": "https://haryanatourism.gov.in/destination/karnal/",
+        "generalListSecondary": "https://karnal.gov.in/tourist-places/"
+      },
+
+      "perspectiveFallbackUrls": {
+        "historical":{ "primary": "https://karnal.gov.in/about-karnal/",  "secondary": "https://karnal.gov.in/tourist-places/" },
+        "general":   { "primary": "https://haryanatourism.gov.in/destination/karnal/", "secondary": "https://karnal.gov.in/tourist-places/" }
+      },
+
+      "hardcodedPageLinks": {
+        "person_fallback":  "https://karnal.gov.in/political-setup/",
+        "village_admin":    "https://karnal.gov.in/directory/",
+        "admin_structure":  "https://karnal.gov.in/administrative-setup/",
+        "demographic":      "https://karnal.gov.in/about-karnal/",
+        "accommodation":    "https://karnal.gov.in/where-to-stay/",
+        "tourism_general":  "https://karnal.gov.in/tourist-places/",
+        "police":           "https://karnal.haryanapolice.gov.in/",
+        "court":            "https://karnal.dcourts.gov.in/"
+      },
+
+
+    "adminStructure": {
+      "tehsils": ["Karnal", "Indri", "Nilokheri", "Gharaunda", "Assandh"],
+      "subTehsils": ["Nigdhu", "Ballah", "Kunjpura"],
+      "blocks": 8,
+      "villages": 435
+    },
+
+    "keywords": {
+      "localities": ["indri", "nilokheri", "gharaunda", "assandh", "taraori", "kunjpura", "karnal city"],
+      "tourismSpecifics": ["karna lake", "cantonment church", "kalander shah tomb", "babarpur"],
+      "queryModifiers": ["karnal mein", "karnal ke", "visit karnal", "places in karnal"]
+    },
+
+    "knownSites": {
+      "karna lake": { "type": "tourism", "url": "https://karnaltourism.com/karna-lake" },
+      "cantonment church": { "type": "tourism", "url": "https://karnaltourism.com/church" }
+    }
+  }
+}
