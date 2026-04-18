@@ -894,14 +894,15 @@ async function sendMessage() {
     scrollToBottom();
     
     try {
-        // Call appropriate webhook (Gita or District)
+     // Call appropriate webhook (Gita or District)
         const response = await fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 question: text,  // Gita webhook uses 'question'
                 message: text,   // District webhook uses 'message'
-                language: currentLanguage
+                language: currentLanguage,
+                district: window.DISTRICT_KEY || 'kurukshetra'  // ← THIS IS THE MAGIC LINE
             })
         });
         
