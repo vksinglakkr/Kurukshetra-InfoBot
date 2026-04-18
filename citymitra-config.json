@@ -246,5 +246,49 @@
       "karna lake": { "type": "tourism", "url": "https://karnaltourism.com/karna-lake" },
       "cantonment church": { "type": "tourism", "url": "https://karnaltourism.com/church" }
     }
+  },
+"ambala": {
+    "profile": {
+      "name": "Ambala",
+      "nameHindi": "अम्बाला",
+      "state": "Haryana",
+      "population": "1,128,350",
+      "area": "1,574 sq km"
+    },
+    "urls": {
+      "gov_base": "ambala.gov.in",
+      "gov_tourism": "ambala.gov.in/tourist-places/",
+      "gov_stay": "ambala.gov.in/accommodation/",
+      "gov_whoswho": "ambala.gov.in/whoswho/",
+      "gov_admin": "ambala.gov.in/administrative-setup/",
+      "gov_demographics": "ambala.gov.in/demography/",
+      "tourism_primary": "",
+      "tourism_heritage": "",
+      "police": "ambala.haryanapolice.gov.in",
+      "court": "ambala.dcourts.gov.in",
+      "university": ""
+    },
+    "thirdPartySlugs": {
+      "zomato": "ambala",
+      "swiggy": "city/ambala",
+      "justdial": "Ambala",
+      "mapsSuffix": "+Ambala"
+    },
+    "adminStructure": {
+      "tehsils": ["Ambala", "Ambala Cantt", "Barara", "Naraingarh"],
+      "subTehsils": ["Saha", "Mullana", "Shahzadpur"],
+      "blocks": 6,
+      "villages": 420
+    },
+    "keywords": {
+      "localities": ["ambala cantt", "ambala city", "barara", "naraingarh", "saha", "mullana", "shahzadpur", "baldev nagar", "model town"],
+      "tourismSpecifics": ["bhawani amba temple", "holy redeemer church", "badshahi bagh gurudwara", "sis ganj gurudwara", "rani ka talab", "jain mandir"],
+      "queryModifiers": ["ambala mein", "ambala ke", "visit ambala", "places in ambala"]
+    },
+    "knownSites": {
+      "bhawani amba temple": { "type": "tourism", "url": "https://ambala.gov.in/tourist-place/bhawani-amba-temple/" },
+      "badshahi bagh gurudwara": { "type": "tourism", "url": "https://ambala.gov.in/tourist-place/badshahi-bagh-gurudwara/" },
+      "sis ganj gurudwara": { "type": "tourism", "url": "https://ambala.gov.in/tourist-place/sis-ganj-gurudwara/" }
+    }
   }
 }
