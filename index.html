@@ -404,6 +404,20 @@
     </div>
 
     <!-- External JavaScript -->
+   <script>
+        const hostname = window.location.hostname.toLowerCase();
+        let currentDistrict = 'kurukshetra'; // Default fallback
+        
+        if (hostname.includes('karnal')) {
+            currentDistrict = 'karnal';
+        } else if (hostname.includes('ambala')) {
+            currentDistrict = 'ambala';
+        }
+        
+        window.DISTRICT_KEY = currentDistrict;
+        console.log("📍 Active District set to:", window.DISTRICT_KEY);
+    </script>
+
     <script src="script.js?v=6.0"></script>
     <script src="script_mic.js?v=6.0"></script>
     <script src="script_listen.js?v=6.0"></script>
