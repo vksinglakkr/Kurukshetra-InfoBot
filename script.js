@@ -4,8 +4,8 @@
 
 // CONFIGURATION
 const N8N_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/chat_InfoBot";
-const FEEDBACK_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/InfoBot_Feed";
-const GITA_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/InfoBot_AskGita";
+const FEEDBACK_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/InfoBot_FeedKkr";
+const GITA_WEBHOOK_URL = "https://n8n-workflow-test.duckdns.org/webhook/InfoBot_AskGitaKkr";
 
 // GLOBAL STATE
 let currentLanguage = localStorage.getItem('preferred_language') || 'en';
