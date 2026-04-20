@@ -635,7 +635,7 @@
       "appDomain": "https://panchkula-citymitra.app"
     },
     "urls": {
-      "districtGovt": "https://panchkula.gov.in",
+      "districtGovt": "https://panchkula.nic.in",
       "tourismPortal": "https://haryanatourism.gov.in",
       "stateHaryanaTourism": "https://haryanatourism.gov.in",
       "university": "",
@@ -648,21 +648,21 @@
       "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Panchkula"
     },
     "govtPages": {
-      "attractions": "https://panchkula.gov.in/tourist-places/",
-      "knowAbout": "https://panchkula.gov.in/demography/",
-      "aboutDistrict": "https://panchkula.gov.in/about-district/",
-      "whereToStay": "https://panchkula.gov.in/accommodation/",
-      "whoswho": "https://panchkula.gov.in/whoswho/",
-      "directory": "https://panchkula.gov.in/directory/",
-      "adminSetup": "https://panchkula.gov.in/administrative-setup/",
-      "politicalSetup": "https://panchkula.gov.in/political-setup/",
-      "censusData": "https://panchkula.gov.in/demography/"
+      "attractions": "https://panchkula.nic.in/tourist-places/",
+      "knowAbout": "https://panchkula.nic.in/demography/",
+      "aboutDistrict": "https://panchkula.nic.in/about-district/",
+      "whereToStay": "https://panchkula.nic.in/accommodation/",
+      "whoswho": "https://panchkula.nic.in/whoswho/",
+      "directory": "https://panchkula.nic.in/directory/",
+      "adminSetup": "https://panchkula.nic.in/administrative-setup/",
+      "politicalSetup": "https://panchkula.nic.in/political-setup/",
+      "censusData": "https://panchkula.nic.in/demography/"
     },
     "serpapi": {
       "tourismSite1": "site:haryanatourism.gov.in panchkula",
-      "tourismSite2": "site:panchkula.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
-      "tourismSite3": "site:panchkula.gov.in OR site:haryanatourism.gov.in",
-      "generalSite": "site:panchkula.gov.in",
+      "tourismSite2": "site:panchkula.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:panchkula.nic.in OR site:haryanatourism.gov.in",
+      "generalSite": "site:panchkula.nic.in",
       "contextSuffix": "Panchkula Haryana"
     },
     "googleSheets": {
@@ -688,23 +688,23 @@
     },
     "tourismSites": {
       "primaryPortal": "haryanatourism.gov.in",
-      "secondaryPortal": "panchkula.gov.in",
+      "secondaryPortal": "panchkula.nic.in",
       "broadQueryPrimary": "https://haryanatourism.gov.in/destination/panchkula/",
-      "broadQuerySecondary": "https://panchkula.gov.in/tourist-places/",
+      "broadQuerySecondary": "https://panchkula.nic.in/tourist-places/",
       "generalListPrimary": "https://haryanatourism.gov.in/destination/panchkula/",
-      "generalListSecondary": "https://panchkula.gov.in/tourist-places/"
+      "generalListSecondary": "https://panchkula.nic.in/tourist-places/"
     },
     "perspectiveFallbackUrls": {
-      "historical": { "primary": "https://panchkula.gov.in/about-district/", "secondary": "https://panchkula.gov.in/tourist-places/" },
-      "general": { "primary": "https://haryanatourism.gov.in/destination/panchkula/", "secondary": "https://panchkula.gov.in/tourist-places/" }
+      "historical": { "primary": "https://panchkula.nic.in/about-district/", "secondary": "https://panchkula.nic.in/tourist-places/" },
+      "general": { "primary": "https://haryanatourism.gov.in/destination/panchkula/", "secondary": "https://panchkula.nic.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://panchkula.gov.in/political-setup/",
-      "village_admin": "https://panchkula.gov.in/directory/",
-      "admin_structure": "https://panchkula.gov.in/administrative-setup/",
-      "demographic": "https://panchkula.gov.in/demography/",
-      "accommodation": "https://panchkula.gov.in/accommodation/",
-      "tourism_general": "https://panchkula.gov.in/tourist-places/",
+      "person_fallback": "https://panchkula.nic.in/political-setup/",
+      "village_admin": "https://panchkula.nic.in/directory/",
+      "admin_structure": "https://panchkula.nic.in/administrative-setup/",
+      "demographic": "https://panchkula.nic.in/demography/",
+      "accommodation": "https://panchkula.nic.in/accommodation/",
+      "tourism_general": "https://panchkula.nic.in/tourist-places/",
       "police": "https://panchkula.haryanapolice.gov.in/",
       "court": "https://panchkula.dcourts.gov.in/"
     },
@@ -720,7 +720,7 @@
       "queryModifiers": ["panchkula mein", "panchkula ke", "visit panchkula", "places in panchkula"]
     },
     "knownSites": {
-      "mansa devi temple": { "type": "tourism", "url": "https://panchkula.gov.in/tourist-place/mansa-devi-temple/" },
+      "mansa devi temple": { "type": "tourism", "url": "https://panchkula.nic.in/tourist-place/mansa-devi-temple/" },
       "pinjore gardens": { "type": "tourism", "url": "https://haryanatourism.gov.in/destination/pinjore/" }
     }
   }
