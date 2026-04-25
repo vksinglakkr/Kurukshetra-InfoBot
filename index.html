@@ -297,7 +297,17 @@
                 <button onclick="toggleMenu()"><i data-lucide="more-vertical" class="w-5 h-5"></i></button>
                 
                 <div id="menu-dropdown" class="hidden absolute right-0 top-10 bg-white text-gray-800 shadow-xl rounded-lg py-2 w-48 z-30">
-                     <button onclick="clearChat()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
+               <div class="px-4 py-3 hover:bg-gray-100 flex items-center justify-between border-b border-gray-100">
+                        <div class="flex items-center gap-2 text-sm">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-[#008069]"></i>
+                            <span>Nearby Alerts</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="location-toggle" class="sr-only peer" onchange="toggleLocationAlerts()">
+                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#008069]"></div>
+                        </label>
+                    </div>
+                    <button onclick="clearChat()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2">
                         <i data-lucide="trash-2" class="w-4 h-4"></i> <span id="menu-clear">Clear chat</span>
                     </button>
                     <button onclick="window.location.href='settings.html'" 
