@@ -1165,7 +1165,7 @@ const touristSites = [
         name: "Brahma Sarovar",
         lat: 29.9601,
         lng: 76.8315,
-        radius_km: 2.0, // Alert if within 2km
+        radius_km: 12.0, // Alert if within 2km
         message: "You are very close to the holy Brahma Sarovar! Would you like to know more about its history?",
         link: "https://kurukshetra.gov.in/kurukshetraattractions/brahma-sarovar/"
     },
@@ -1174,7 +1174,7 @@ const touristSites = [
         name: "Jyotisar Birthplace of Bhagavad Gita",
         lat: 29.9542,
         lng: 76.7570,
-        radius_km: 1.5,
+        radius_km: 11.5,
         message: "You are near Jyotisar, the sacred site where Lord Krishna delivered the Bhagavad Gita.",
         link: "https://kurukshetra.gov.in/kurukshetraattractions/jyotisar/"
     },
@@ -1183,7 +1183,7 @@ const touristSites = [
         name: "Birla Mandir",
         lat: 29.9575,
         lng: 76.8213,
-        radius_km: 1.0,
+        radius_km: 11.0,
         message: "The beautiful Birla Mandir is just a short walk away. Click here for details.",
         link: "https://kurukshetra.gov.in/kurukshetraattractions/birla-mandir/"
     }
