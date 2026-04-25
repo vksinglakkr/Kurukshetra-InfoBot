@@ -1158,53 +1158,43 @@ function speakText(button) {
 // CITYMITRA PROXIMITY ALERTS (GEO-FENCING)
 // ==========================================
 
-// 1. Kurukshetra Tourist Sites Data (JSON)
-const touristSites = [
-    {
-        id: "brahma_sarovar",
-        name: "Brahma Sarovar",
-        lat: 29.9601,
-        lng: 76.8315,
-        radius_km: 12.0, // Alert if within 2km
-        message: "You are very close to the holy Brahma Sarovar! Would you like to know more about its history?",
-        link: "https://kurukshetra.gov.in/kurukshetraattractions/brahma-sarovar/"
-    },
-    {
-        id: "jyotisar",
-        name: "Jyotisar Birthplace of Bhagavad Gita",
-        lat: 29.9542,
-        lng: 76.7570,
-        radius_km: 11.5,
-        message: "You are near Jyotisar, the sacred site where Lord Krishna delivered the Bhagavad Gita.",
-        link: "https://kurukshetra.gov.in/kurukshetraattractions/jyotisar/"
-    },
-    {
-        id: "birla_mandir",
-        name: "Birla Mandir",
-        lat: 29.9575,
-        lng: 76.8213,
-        radius_km: 11.0,
-        message: "The beautiful Birla Mandir is just a short walk away. Click here for details.",
-        link: "https://kurukshetra.gov.in/kurukshetraattractions/birla-mandir/"
-    }
-    // You can easily add more sites here!
-];
-
-// State variables to track what we've done
+// 1. Initialize an empty array for our data
+let touristSites = [];
 const notifiedSites = new Set();
 let locationWatchId = null;
 
-// 2. Toggle Function (Connected to your new HTML switch)
+// 2. Fetch the JSON file when the page loads
+async function loadTouristSites() {
+    try {
+        const response = await fetch('sites.json');
+        if (!response.ok) throw new Error("Network response was not ok");
+        
+        touristSites = await response.json();
+        console.log(`✅ Successfully loaded ${touristSites.length} sites from sites.json!`);
+    } catch (error) {
+        console.error("❌ Error loading sites.json:", error);
+    }
+}
+
+// Call the load function immediately so the data is ready
+loadTouristSites();
+
+// 3. Toggle Function (Connected to your HTML switch)
 function toggleLocationAlerts() {
     const isEnabled = document.getElementById('location-toggle').checked;
     
     if (isEnabled) {
+        // Safety check: ensure data loaded before tracking starts
+        if (touristSites.length === 0) {
+            addProximitySystemMessage("⚠️ Still loading site data, please try again in a moment.");
+            document.getElementById('location-toggle').checked = false;
+            return;
+        }
         startLocationTracking();
     } else {
         stopLocationTracking();
     }
 }
-
 // 3. Start tracking the user's location (WITH DEBUGGING)
 function startLocationTracking() {
     if ("geolocation" in navigator) {
