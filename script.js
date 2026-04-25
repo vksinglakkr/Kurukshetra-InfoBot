@@ -1205,33 +1205,32 @@ function toggleLocationAlerts() {
     }
 }
 
-// 3. Start tracking the user's location
+// 3. Start tracking the user's location (WITH DEBUGGING)
 function startLocationTracking() {
     if ("geolocation" in navigator) {
-        // Send a quick bot message confirming it's on
-        addProximitySystemMessage("📍 Nearby alerts enabled! I'll notify you when you are close to important sites.");
+        addProximitySystemMessage("📍 Nearby alerts enabled! Searching for satellites...");
+        console.log("GPS: Requesting location...");
         
         locationWatchId = navigator.geolocation.watchPosition(
             (position) => {
                 const userLat = position.coords.latitude;
                 const userLng = position.coords.longitude;
+                console.log(`GPS: Location found! User is at Lat: ${userLat}, Lng: ${userLng}`);
+                console.log(`GPS: Accuracy is within ${position.coords.accuracy} meters`);
                 checkProximity(userLat, userLng);
             },
             (error) => {
-                console.warn("Location tracking error:", error.message);
-                if (error.code === error.PERMISSION_DENIED) {
-                    addProximitySystemMessage("⚠️ Please allow location permissions in your browser to use Nearby Alerts.");
-                    document.getElementById('location-toggle').checked = false; // Turn the toggle back off
-                }
+                console.error("GPS ERROR:", error.message);
+                addProximitySystemMessage(`⚠️ Location error: ${error.message}`);
+                document.getElementById('location-toggle').checked = false;
             },
-            { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 }
+            { enableHighAccuracy: true, maximumAge: 0, timeout: 27000 }
         );
     } else {
         addProximitySystemMessage("⚠️ Geolocation is not supported by your browser.");
         document.getElementById('location-toggle').checked = false;
     }
 }
-
 // 4. Stop tracking
 function stopLocationTracking() {
     if (locationWatchId !== null) {
@@ -1241,15 +1240,22 @@ function stopLocationTracking() {
     }
 }
 
-// 5. The core logic: Calculate distance and trigger alerts
+// 5. The core logic (WITH DEBUGGING)
 function checkProximity(userLat, userLng) {
+    console.log("--- Checking Proximity against database ---");
+    
     touristSites.forEach(site => {
         const distance = calculateDistance(userLat, userLng, site.lat, site.lng);
+        console.log(`Checking ${site.name}: Distance is ${distance.toFixed(2)} KM (Alert radius is ${site.radius_km} KM)`);
         
-        // If within radius AND we haven't alerted them yet during this session
-        if (distance <= site.radius_km && !notifiedSites.has(site.id)) {
-            notifiedSites.add(site.id);
-            showProximityAlertBubble(site.name, site.message, site.link);
+        if (distance <= site.radius_km) {
+            if (!notifiedSites.has(site.id)) {
+                console.log(`✅ TRIGGERING ALERT FOR: ${site.name}`);
+                notifiedSites.add(site.id);
+                showProximityAlertBubble(site.name, site.message, site.link);
+            } else {
+                console.log(`⏭️ Skipping ${site.name} - Already notified in this session.`);
+            }
         }
     });
 }
