@@ -1153,3 +1153,167 @@ function speakText(button) {
     
     window.speechSynthesis.speak(currentSpeech);
 }
+
+// ==========================================
+// CITYMITRA PROXIMITY ALERTS (GEO-FENCING)
+// ==========================================
+
+// 1. Kurukshetra Tourist Sites Data (JSON)
+const touristSites = [
+    {
+        id: "brahma_sarovar",
+        name: "Brahma Sarovar",
+        lat: 29.9601,
+        lng: 76.8315,
+        radius_km: 2.0, // Alert if within 2km
+        message: "You are very close to the holy Brahma Sarovar! Would you like to know more about its history?",
+        link: "https://kurukshetra.gov.in/kurukshetraattractions/brahma-sarovar/"
+    },
+    {
+        id: "jyotisar",
+        name: "Jyotisar Birthplace of Bhagavad Gita",
+        lat: 29.9542,
+        lng: 76.7570,
+        radius_km: 1.5,
+        message: "You are near Jyotisar, the sacred site where Lord Krishna delivered the Bhagavad Gita.",
+        link: "https://kurukshetra.gov.in/kurukshetraattractions/jyotisar/"
+    },
+    {
+        id: "birla_mandir",
+        name: "Birla Mandir",
+        lat: 29.9575,
+        lng: 76.8213,
+        radius_km: 1.0,
+        message: "The beautiful Birla Mandir is just a short walk away. Click here for details.",
+        link: "https://kurukshetra.gov.in/kurukshetraattractions/birla-mandir/"
+    }
+    // You can easily add more sites here!
+];
+
+// State variables to track what we've done
+const notifiedSites = new Set();
+let locationWatchId = null;
+
+// 2. Toggle Function (Connected to your new HTML switch)
+function toggleLocationAlerts() {
+    const isEnabled = document.getElementById('location-toggle').checked;
+    
+    if (isEnabled) {
+        startLocationTracking();
+    } else {
+        stopLocationTracking();
+    }
+}
+
+// 3. Start tracking the user's location
+function startLocationTracking() {
+    if ("geolocation" in navigator) {
+        // Send a quick bot message confirming it's on
+        addProximitySystemMessage("📍 Nearby alerts enabled! I'll notify you when you are close to important sites.");
+        
+        locationWatchId = navigator.geolocation.watchPosition(
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+                checkProximity(userLat, userLng);
+            },
+            (error) => {
+                console.warn("Location tracking error:", error.message);
+                if (error.code === error.PERMISSION_DENIED) {
+                    addProximitySystemMessage("⚠️ Please allow location permissions in your browser to use Nearby Alerts.");
+                    document.getElementById('location-toggle').checked = false; // Turn the toggle back off
+                }
+            },
+            { enableHighAccuracy: true, maximumAge: 30000, timeout: 27000 }
+        );
+    } else {
+        addProximitySystemMessage("⚠️ Geolocation is not supported by your browser.");
+        document.getElementById('location-toggle').checked = false;
+    }
+}
+
+// 4. Stop tracking
+function stopLocationTracking() {
+    if (locationWatchId !== null) {
+        navigator.geolocation.clearWatch(locationWatchId);
+        locationWatchId = null;
+        addProximitySystemMessage("🔕 Nearby alerts disabled.");
+    }
+}
+
+// 5. The core logic: Calculate distance and trigger alerts
+function checkProximity(userLat, userLng) {
+    touristSites.forEach(site => {
+        const distance = calculateDistance(userLat, userLng, site.lat, site.lng);
+        
+        // If within radius AND we haven't alerted them yet during this session
+        if (distance <= site.radius_km && !notifiedSites.has(site.id)) {
+            notifiedSites.add(site.id);
+            showProximityAlertBubble(site.name, site.message, site.link);
+        }
+    });
+}
+
+// 6. Math: Haversine Formula (Calculates km distance between two coordinates)
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth radius in km
+    const dLat = (lat2 - lat1) * (Math.PI/180);
+    const dLon = (lon2 - lon1) * (Math.PI/180);
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * (Math.PI/180)) * Math.cos(lat2 * (Math.PI/180)) * Math.sin(dLon/2) * Math.sin(dLon/2); 
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    return R * c;
+}
+
+// 7. Inject the styled location alert into the chat
+function showProximityAlertBubble(siteName, message, link) {
+    const messagesList = document.getElementById('messages-list');
+    
+    // Designed to match your WhatsApp-style Tailwind classes perfectly
+    const alertHtml = `
+        <div class="flex justify-start">
+            <div class="max-w-[85%] p-3 rounded-lg rounded-tl-none shadow-sm bg-white message-box triangle-left border border-[#008069]/30">
+                <div class="flex items-center gap-2 mb-2 pb-2 border-b border-gray-100">
+                    <div class="bg-green-100 p-1.5 rounded-full text-[#008069]">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    </div>
+                    <strong class="text-sm text-[#008069]">Nearby Alert: ${siteName}</strong>
+                </div>
+                <div class="text-gray-800 text-[14px] leading-relaxed mb-3">
+                    ${message}
+                </div>
+                <a href="${link}" target="_blank" class="inline-flex items-center gap-1 bg-[#008069]/10 text-[#008069] px-3 py-1.5 rounded-md text-xs font-semibold hover:bg-[#008069]/20 transition-colors">
+                    View Details <i data-lucide="external-link" class="w-3 h-3"></i>
+                </a>
+            </div>
+        </div>
+    `;
+    
+    messagesList.insertAdjacentHTML('beforeend', alertHtml);
+    
+    // Re-render the Lucide icons for the newly added HTML
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+    
+    // Scroll chat to the bottom
+    const chatContainer = document.getElementById('chat-container');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// 8. Utility function for basic system messages (on/off alerts)
+function addProximitySystemMessage(text) {
+    const messagesList = document.getElementById('messages-list');
+    const msgHtml = `
+        <div class="flex justify-start">
+            <div class="max-w-[85%] p-3 rounded-lg rounded-tl-none shadow-sm bg-white message-box triangle-left">
+                <div class="text-gray-600 text-[13px] leading-relaxed italic">
+                    ${text}
+                </div>
+            </div>
+        </div>
+    `;
+    messagesList.insertAdjacentHTML('beforeend', msgHtml);
+    const chatContainer = document.getElementById('chat-container');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
