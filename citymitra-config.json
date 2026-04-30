@@ -723,5 +723,576 @@
       "mansa devi temple": { "type": "tourism", "url": "https://panchkula.nic.in/tourist-place/mansa-devi-temple/" },
       "pinjore gardens": { "type": "tourism", "url": "https://haryanatourism.gov.in/destination/pinjore/" }
     }
+  },
+  "ranchi": {
+    "meta": {
+      "districtKey": "ranchi",
+      "districtName": "Ranchi",
+      "districtNameHindi": "राँची",
+      "state": "Jharkhand",
+      "population": "2,914,253",
+      "area": "5,097 sq km",
+      "appDomain": "https://ranchi-citymitra.app"
+    },
+    "urls": {
+      "districtGovt": "https://ranchi.nic.in",
+      "tourismPortal": "https://tourism.jharkhand.gov.in/",
+      "stateTourism": "https://www.jharkhandtourism.gov.in",
+      "university": "https://www.ranchiuniversity.ac.in",
+      "districtCourt": "https://ranchi.dcourts.gov.in",
+      "policeWebsite": "https://ranchipolice.jharkhand.gov.in",
+      "zomato": "https://www.zomato.com/ranchi",
+      "swiggy": "https://www.swiggy.com/city/ranchi",
+      "sulekha": "https://www.sulekha.com",
+      "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-ranchi",
+      "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Ranchi"
+    },
+    "govtPages": {
+      "attractions": "https://ranchi.nic.in/tourist-places/",
+      "knowAbout": "https://ranchi.nic.in/demography/",
+      "aboutDistrict": "https://ranchi.nic.in/about-district/",
+      "whereToStay": "https://ranchi.nic.in/accommodation/",
+      "whoswho": "https://ranchi.nic.in/whoswho/",
+      "directory": "https://ranchi.nic.in/directory/",
+      "adminSetup": "https://ranchi.nic.in/administrative-setup/",
+      "politicalSetup": "https://ranchi.nic.in/political-setup/",
+      "censusData": "https://ranchi.nic.in/demography/"
+    },
+    "serpapi": {
+      "tourismSite1": "site:jharkhandtourism.gov.in ranchi",
+      "tourismSite2": "site:ranchi.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:ranchi.nic.in OR site:jharkhandtourism.gov.in",
+      "generalSite": "site:ranchi.nic.in",
+      "contextSuffix": "Ranchi Jharkhand"
+    },
+    "googleSheets": {
+      "spreadsheetId": "REPLACE_WITH_RANCHI_SHEET_ID",
+      "infobotCacheSheet": "InfoBot_Cache",
+      "askGitaCacheSheet": "AskGita_Cache",
+      "infobotLogSheet": "InfoBot_Log",
+      "askGitaLogSheet": "AskGita_Log",
+      "feedbackSheet": "Feedback"
+    },
+    "feedback": {
+      "googleAppsScriptUrl": "REPLACE_WITH_RANCHI_APPS_SCRIPT_URL"
+    },
+    "webhooks": {
+      "infobotPath": "ranchi-chat",
+      "askGitaPath": "ranchi-AskGita",
+      "feedbackPath": "ranchi-Feed"
+    },
+    "aiPrompts": {
+      "infobotSystemRole": "You are an official district information assistant for Ranchi, Jharkhand (India).",
+      "askGitaSystemRole": "You are an AI guide for Ranchi district. Answer questions about Ranchi's history, tourism, and services. NEVER give legal/medical advice.",
+      "districtContext": "Ranchi is the capital of Jharkhand, known as the 'City of Waterfalls'. Famous for Hundru Falls, Jonha Falls, and the Jagannath Temple."
+    },
+    "tourismSites": {
+      "primaryPortal": "jharkhandtourism.gov.in",
+      "secondaryPortal": "ranchi.nic.in",
+      "broadQueryPrimary": "https://tourism.jharkhand.gov.in/destination/ranchi",
+      "broadQuerySecondary": "https://ranchi.nic.in/tourist-places/",
+      "generalListPrimary": "https://tourism.jharkhand.gov.in/",
+      "generalListSecondary": "https://ranchi.nic.in/tourist-places/"
+    },
+    "perspectiveFallbackUrls": {
+      "historical": { "primary": "https://ranchi.nic.in/about-district/", "secondary": "https://ranchi.nic.in/tourist-places/" },
+      "general": { "primary": "https://tourism.jharkhand.gov.in/", "secondary": "https://ranchi.nic.in/tourist-places/" }
+    },
+    "hardcodedPageLinks": {
+      "person_fallback": "https://ranchi.nic.in/whoswho/",
+      "village_admin": "https://ranchi.nic.in/directory/",
+      "admin_structure": "https://ranchi.nic.in/administrative-setup/",
+      "demographic": "https://ranchi.nic.in/demography/",
+      "accommodation": "https://ranchi.nic.in/accommodation/",
+      "tourism_general": "https://ranchi.nic.in/tourist-places/",
+      "police": "https://ranchipolice.jharkhand.gov.in/",
+      "court": "https://ranchi.dcourts.gov.in/"
+    },
+    "adminStructure": {
+      "tehsils": ["Ranchi", "Bundu", "Kanke", "Omanjhi", "Angara"],
+      "subTehsils": [],
+      "blocks": 18,
+      "villages": 1311
+    },
+    "keywords": {
+      "localities": ["kanke", "doranda", "hatia", "bariatu", "namkum", "ratu"],
+      "tourismSpecifics": ["hundru falls", "jonha falls", "dasham falls", "tagore hill", "pahari mandir"],
+      "queryModifiers": ["ranchi mein", "ranchi ke", "visit ranchi"]
+    }
+  },
+  "indore": {
+    "meta": {
+      "districtKey": "indore",
+      "districtName": "Indore",
+      "districtNameHindi": "इन्दौर",
+      "state": "Madhya Pradesh",
+      "population": "3,276,697",
+      "area": "3,898 sq km",
+      "appDomain": "https://indore-citymitra.app"
+    },
+    "urls": {
+      "districtGovt": "https://indore.nic.in",
+      "tourismPortal": "https://www.mptourism.com",
+      "stateTourism": "https://www.mptourism.com",
+      "university": "https://www.dauniv.ac.in",
+      "districtCourt": "https://indore.dcourts.gov.in",
+      "policeWebsite": "https://indorepolice.gov.in",
+      "zomato": "https://www.zomato.com/indore",
+      "swiggy": "https://www.swiggy.com/city/indore",
+      "sulekha": "https://www.sulekha.com",
+      "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-indore",
+      "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Indore"
+    },
+    "govtPages": {
+      "attractions": "https://indore.nic.in/tourist-places/",
+      "knowAbout": "https://indore.nic.in/demography/",
+      "aboutDistrict": "https://indore.nic.in/about-district/",
+      "whereToStay": "https://indore.nic.in/accommodation/",
+      "whoswho": "https://indore.nic.in/whoswho/",
+      "directory": "https://indore.nic.in/directory/",
+      "adminSetup": "https://indore.nic.in/administrative-setup/",
+      "politicalSetup": "https://indore.nic.in/political-setup/",
+      "censusData": "https://indore.nic.in/demography/"
+    },
+    "serpapi": {
+      "tourismSite1": "site:mptourism.com indore",
+      "tourismSite2": "site:indore.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:indore.nic.in OR site:mptourism.com",
+      "generalSite": "site:indore.nic.in",
+      "contextSuffix": "Indore Madhya Pradesh"
+    },
+    "googleSheets": {
+      "spreadsheetId": "REPLACE_WITH_INDORE_SHEET_ID",
+      "infobotCacheSheet": "InfoBot_Cache",
+      "askGitaCacheSheet": "AskGita_Cache",
+      "infobotLogSheet": "InfoBot_Log",
+      "askGitaLogSheet": "AskGita_Log",
+      "feedbackSheet": "Feedback"
+    },
+    "feedback": {
+      "googleAppsScriptUrl": "REPLACE_WITH_INDORE_APPS_SCRIPT_URL"
+    },
+    "webhooks": {
+      "infobotPath": "indore-chat",
+      "askGitaPath": "indore-AskGita",
+      "feedbackPath": "indore-Feed"
+    },
+    "aiPrompts": {
+      "infobotSystemRole": "You are an official district information assistant for Indore, Madhya Pradesh (India).",
+      "askGitaSystemRole": "You are an AI guide for Indore. Answer questions about cleanliness, food culture, and history. NEVER give legal/medical advice.",
+      "districtContext": "Indore is the cleanest city in India. Famous for Rajwada Palace, Sarafa Bazaar street food, and the Holkar legacy."
+    },
+    "tourismSites": {
+      "primaryPortal": "mptourism.com",
+      "secondaryPortal": "indore.nic.in",
+      "broadQueryPrimary": "https://www.mptourism.com/destination-indore.php",
+      "broadQuerySecondary": "https://indore.nic.in/tourist-places/",
+      "generalListPrimary": "https://www.mptourism.com",
+      "generalListSecondary": "https://indore.nic.in/tourist-places/"
+    },
+    "perspectiveFallbackUrls": {
+      "historical": { "primary": "https://indore.nic.in/about-district/", "secondary": "https://indore.nic.in/tourist-places/" },
+      "general": { "primary": "https://www.mptourism.com/", "secondary": "https://indore.nic.in/tourist-places/" }
+    },
+    "hardcodedPageLinks": {
+      "person_fallback": "https://indore.nic.in/whoswho/",
+      "village_admin": "https://indore.nic.in/directory/",
+      "admin_structure": "https://indore.nic.in/administrative-setup/",
+      "demographic": "https://indore.nic.in/demography/",
+      "accommodation": "https://indore.nic.in/accommodation/",
+      "tourism_general": "https://indore.nic.in/tourist-places/",
+      "police": "https://indorepolice.gov.in/",
+      "court": "https://indore.dcourts.gov.in/"
+    },
+    "adminStructure": {
+      "tehsils": ["Indore", "Mhow", "Depalpur", "Sanwer"],
+      "blocks": 4,
+      "villages": 612
+    },
+    "keywords": {
+      "localities": ["vijay nagar", "rajendra nagar", "mhow", "palasia", "annapurna"],
+      "tourismSpecifics": ["rajwada palace", "lal bagh palace", "khajrana ganesh", "sarafa bazaar"],
+      "queryModifiers": ["indore mein", "indore ke", "visit indore"]
+    }
+  },
+  "ddn": {
+    "meta": {
+      "districtKey": "dehradun",
+      "districtName": "Dehradun",
+      "districtNameHindi": "देहरादून",
+      "state": "Uttarakhand",
+      "population": "1,696,694",
+      "area": "3,088 sq km",
+      "appDomain": "https://dehradun-citymitra.app"
+    },
+    "urls": {
+      "districtGovt": "https://dehradun.gov.in",
+      "tourismPortal": "https://uttarakhandtourism.gov.in",
+      "stateTourism": "https://uttarakhandtourism.gov.in",
+      "university": "https://www.doonuniversity.ac.in",
+      "districtCourt": "https://dehradun.dcourts.gov.in",
+      "policeWebsite": "https://dehradunpolice.uk.gov.in",
+      "zomato": "https://www.zomato.com/dehradun",
+      "swiggy": "https://www.swiggy.com/city/dehradun",
+      "sulekha": "https://www.sulekha.com",
+      "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-dehradun",
+      "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Dehradun"
+    },
+    "govtPages": {
+      "attractions": "https://dehradun.gov.in/tourist-places/",
+      "knowAbout": "https://dehradun.gov.in/demography/",
+      "aboutDistrict": "https://dehradun.gov.in/about-district/",
+      "whereToStay": "https://dehradun.gov.in/accommodation/",
+      "whoswho": "https://dehradun.gov.in/whoswho/",
+      "directory": "https://dehradun.gov.in/directory/",
+      "adminSetup": "https://dehradun.gov.in/administrative-setup/",
+      "politicalSetup": "https://dehradun.gov.in/political-setup/",
+      "censusData": "https://dehradun.gov.in/demography/"
+    },
+    "serpapi": {
+      "tourismSite1": "site:uttarakhandtourism.gov.in dehradun",
+      "tourismSite2": "site:dehradun.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:dehradun.gov.in OR site:uttarakhandtourism.gov.in",
+      "generalSite": "site:dehradun.gov.in",
+      "contextSuffix": "Dehradun Uttarakhand"
+    },
+    "googleSheets": {
+      "spreadsheetId": "REPLACE_WITH_DEHRADUN_SHEET_ID",
+      "infobotCacheSheet": "InfoBot_Cache",
+      "askGitaCacheSheet": "AskGita_Cache",
+      "infobotLogSheet": "InfoBot_Log",
+      "askGitaLogSheet": "AskGita_Log",
+      "feedbackSheet": "Feedback"
+    },
+    "feedback": {
+      "googleAppsScriptUrl": "REPLACE_WITH_DEHRADUN_APPS_SCRIPT_URL"
+    },
+    "webhooks": {
+      "infobotPath": "dehradun-chat",
+      "askGitaPath": "dehradun-AskGita",
+      "feedbackPath": "dehradun-Feed"
+    },
+    "aiPrompts": {
+      "infobotSystemRole": "You are an official district information assistant for Dehradun, Uttarakhand (India).",
+      "askGitaSystemRole": "You are an AI guide for Dehradun. Answer questions about the Doon Valley and tourism. NEVER give legal/medical advice.",
+      "districtContext": "Dehradun is the gateway to Mussoorie and Rishikesh. Famous for FRI, Robber's Cave, and its basmati rice."
+    },
+    "tourismSites": {
+      "primaryPortal": "uttarakhandtourism.gov.in",
+      "secondaryPortal": "dehradun.gov.in",
+      "broadQueryPrimary": "https://uttarakhandtourism.gov.in/destination/dehradun",
+      "broadQuerySecondary": "https://dehradun.gov.in/tourist-places/",
+      "generalListPrimary": "https://uttarakhandtourism.gov.in",
+      "generalListSecondary": "https://dehradun.gov.in/tourist-places/"
+    },
+    "perspectiveFallbackUrls": {
+      "historical": { "primary": "https://dehradun.gov.in/about-district/", "secondary": "https://dehradun.gov.in/tourist-places/" },
+      "general": { "primary": "https://uttarakhandtourism.gov.in/", "secondary": "https://dehradun.gov.in/tourist-places/" }
+    },
+    "hardcodedPageLinks": {
+      "person_fallback": "https://dehradun.gov.in/whoswho/",
+      "village_admin": "https://dehradun.gov.in/directory/",
+      "admin_structure": "https://dehradun.gov.in/administrative-setup/",
+      "demographic": "https://dehradun.gov.in/demography/",
+      "accommodation": "https://dehradun.gov.in/accommodation/",
+      "tourism_general": "https://dehradun.gov.in/tourist-places/",
+      "police": "https://dehradunpolice.uk.gov.in/",
+      "court": "https://dehradun.dcourts.gov.in/"
+    },
+    "adminStructure": {
+      "tehsils": ["Dehradun", "Chakrata", "Vikasnagar", "Rishikesh", "Doiwala", "Mussoorie"],
+      "blocks": 6,
+      "villages": 764
+    },
+    "keywords": {
+      "localities": ["rajpur road", "clemen town", "ballupur", "selakui", "patel nagar"],
+      "tourismSpecifics": ["robber's cave", "sahastradhara", "tapkeshwar", "fri", "muddling monastery"],
+      "queryModifiers": ["dehradun mein", "dehradun ke", "visit dehradun"]
+    }
+  },
+  "jaipur": {
+    "meta": {
+      "districtKey": "jaipur",
+      "districtName": "Jaipur",
+      "districtNameHindi": "जयपुर",
+      "state": "Rajasthan",
+      "population": "6,626,178",
+      "area": "11,143 sq km",
+      "appDomain": "https://jaipur-citymitra.app"
+    },
+    "urls": {
+      "districtGovt": "https://jaipur.rajasthan.gov.in",
+      "tourismPortal": "https://www.tourism.rajasthan.gov.in",
+      "stateTourism": "https://www.tourism.rajasthan.gov.in",
+      "university": "https://www.uniraj.ac.in",
+      "districtCourt": "https://jaipur.dcourts.gov.in",
+      "policeWebsite": "https://jaipurpolice.rajasthan.gov.in",
+      "zomato": "https://www.zomato.com/jaipur",
+      "swiggy": "https://www.swiggy.com/city/jaipur",
+      "sulekha": "https://www.sulekha.com",
+      "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-jaipur",
+      "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Jaipur"
+    },
+    "govtPages": {
+      "attractions": "https://jaipur.rajasthan.gov.in/tourist-places/",
+      "knowAbout": "https://jaipur.rajasthan.gov.in/demography/",
+      "aboutDistrict": "https://jaipur.rajasthan.gov.in/about-district/",
+      "whereToStay": "https://jaipur.rajasthan.gov.in/accommodation/",
+      "whoswho": "https://jaipur.rajasthan.gov.in/whoswho/",
+      "directory": "https://jaipur.rajasthan.gov.in/directory/",
+      "adminSetup": "https://jaipur.rajasthan.gov.in/administrative-setup/",
+      "politicalSetup": "https://jaipur.rajasthan.gov.in/political-setup/",
+      "censusData": "https://jaipur.rajasthan.gov.in/demography/"
+    },
+    "serpapi": {
+      "tourismSite1": "site:tourism.rajasthan.gov.in jaipur",
+      "tourismSite2": "site:jaipur.rajasthan.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:jaipur.rajasthan.gov.in OR site:tourism.rajasthan.gov.in",
+      "generalSite": "site:jaipur.rajasthan.gov.in",
+      "contextSuffix": "Jaipur Rajasthan"
+    },
+    "googleSheets": {
+      "spreadsheetId": "REPLACE_WITH_JAIPUR_SHEET_ID",
+      "infobotCacheSheet": "InfoBot_Cache",
+      "askGitaCacheSheet": "AskGita_Cache",
+      "infobotLogSheet": "InfoBot_Log",
+      "askGitaLogSheet": "AskGita_Log",
+      "feedbackSheet": "Feedback"
+    },
+    "feedback": {
+      "googleAppsScriptUrl": "REPLACE_WITH_JAIPUR_APPS_SCRIPT_URL"
+    },
+    "webhooks": {
+      "infobotPath": "jaipur-chat",
+      "askGitaPath": "jaipur-AskGita",
+      "feedbackPath": "jaipur-Feed"
+    },
+    "aiPrompts": {
+      "infobotSystemRole": "You are an official district information assistant for Jaipur, Rajasthan (India).",
+      "askGitaSystemRole": "You are an AI guide for Jaipur. Answer questions about the Pink City and Rajputana history. NEVER give legal/medical advice.",
+      "districtContext": "Jaipur is the capital of Rajasthan, part of the Golden Triangle. Famous for Hawa Mahal, Amer Fort, and its UNESCO heritage city center."
+    },
+    "tourismSites": {
+      "primaryPortal": "tourism.rajasthan.gov.in",
+      "secondaryPortal": "jaipur.rajasthan.gov.in",
+      "broadQueryPrimary": "https://www.tourism.rajasthan.gov.in/jaipur.html",
+      "broadQuerySecondary": "https://jaipur.rajasthan.gov.in/tourist-places/",
+      "generalListPrimary": "https://www.tourism.rajasthan.gov.in",
+      "generalListSecondary": "https://jaipur.rajasthan.gov.in/tourist-places/"
+    },
+    "perspectiveFallbackUrls": {
+      "historical": { "primary": "https://jaipur.rajasthan.gov.in/about-district/", "secondary": "https://jaipur.rajasthan.gov.in/tourist-places/" },
+      "general": { "primary": "https://www.tourism.rajasthan.gov.in/", "secondary": "https://jaipur.rajasthan.gov.in/tourist-places/" }
+    },
+    "hardcodedPageLinks": {
+      "person_fallback": "https://jaipur.rajasthan.gov.in/whoswho/",
+      "village_admin": "https://jaipur.rajasthan.gov.in/directory/",
+      "admin_structure": "https://jaipur.rajasthan.gov.in/administrative-setup/",
+      "demographic": "https://jaipur.rajasthan.gov.in/demography/",
+      "accommodation": "https://jaipur.rajasthan.gov.in/accommodation/",
+      "tourism_general": "https://jaipur.rajasthan.gov.in/tourist-places/",
+      "police": "https://jaipurpolice.rajasthan.gov.in/",
+      "court": "https://jaipur.dcourts.gov.in/"
+    },
+    "adminStructure": {
+      "tehsils": ["Jaipur", "Sanganer", "Amer", "Chomu", "Phulera", "Kotputli"],
+      "blocks": 15,
+      "villages": 2369
+    },
+    "keywords": {
+      "localities": ["malviya nagar", "mansarovar", "vaishali nagar", "bani park", "johar bazaar"],
+      "tourismSpecifics": ["hawa mahal", "city palace", "amer fort", "nahargarh", "jal mahal"],
+      "queryModifiers": ["jaipur mein", "jaipur ke", "visit jaipur"]
+    }
+  },
+  "asr": {
+    "meta": {
+      "districtKey": "amritsar",
+      "districtName": "Amritsar",
+      "districtNameHindi": "अमृतसर",
+      "state": "Punjab",
+      "population": "2,490,656",
+      "area": "2,647 sq km",
+      "appDomain": "https://amritsar-citymitra.app"
+    },
+    "urls": {
+      "districtGovt": "https://amritsar.gov.in",
+      "tourismPortal": "https://punjabtourism.punjab.gov.in",
+      "stateTourism": "https://punjabtourism.punjab.gov.in",
+      "university": "https://online.gndu.ac.in",
+      "districtCourt": "https://amritsar.dcourts.gov.in",
+      "policeWebsite": "https://amritsarpolice.gov.in",
+      "zomato": "https://www.zomato.com/amritsar",
+      "swiggy": "https://www.swiggy.com/city/amritsar",
+      "sulekha": "https://www.sulekha.com",
+      "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-amritsar",
+      "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Amritsar"
+    },
+    "govtPages": {
+      "attractions": "https://amritsar.gov.in/tourist-places/",
+      "knowAbout": "https://amritsar.gov.in/demography/",
+      "aboutDistrict": "https://amritsar.gov.in/about-district/",
+      "whereToStay": "https://amritsar.gov.in/accommodation/",
+      "whoswho": "https://amritsar.gov.in/whoswho/",
+      "directory": "https://amritsar.gov.in/directory/",
+      "adminSetup": "https://amritsar.gov.in/administrative-setup/",
+      "politicalSetup": "https://amritsar.gov.in/political-setup/",
+      "censusData": "https://amritsar.gov.in/demography/"
+    },
+    "serpapi": {
+      "tourismSite1": "site:punjabtourism.punjab.gov.in amritsar",
+      "tourismSite2": "site:amritsar.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:amritsar.gov.in OR site:punjabtourism.punjab.gov.in",
+      "generalSite": "site:amritsar.gov.in",
+      "contextSuffix": "Amritsar Punjab"
+    },
+    "googleSheets": {
+      "spreadsheetId": "REPLACE_WITH_AMRITSAR_SHEET_ID",
+      "infobotCacheSheet": "InfoBot_Cache",
+      "askGitaCacheSheet": "AskGita_Cache",
+      "infobotLogSheet": "InfoBot_Log",
+      "askGitaLogSheet": "AskGita_Log",
+      "feedbackSheet": "Feedback"
+    },
+    "feedback": {
+      "googleAppsScriptUrl": "REPLACE_WITH_AMRITSAR_APPS_SCRIPT_URL"
+    },
+    "webhooks": {
+      "infobotPath": "amritsar-chat",
+      "askGitaPath": "amritsar-AskGita",
+      "feedbackPath": "amritsar-Feed"
+    },
+    "aiPrompts": {
+      "infobotSystemRole": "You are an official district information assistant for Amritsar, Punjab (India).",
+      "askGitaSystemRole": "You are an AI guide for Amritsar. Answer questions about the Golden Temple and Wagah Border. NEVER give legal/medical advice.",
+      "districtContext": "Amritsar is the spiritual center of Sikhism. Famous for the Harmandir Sahib, Wagah Border, and Jallianwala Bagh."
+    },
+    "tourismSites": {
+      "primaryPortal": "punjabtourism.punjab.gov.in",
+      "secondaryPortal": "amritsar.gov.in",
+      "broadQueryPrimary": "https://punjabtourism.punjab.gov.in/destination/amritsar",
+      "broadQuerySecondary": "https://amritsar.gov.in/tourist-places/",
+      "generalListPrimary": "https://punjabtourism.punjab.gov.in",
+      "generalListSecondary": "https://amritsar.gov.in/tourist-places/"
+    },
+    "perspectiveFallbackUrls": {
+      "historical": { "primary": "https://amritsar.gov.in/about-district/", "secondary": "https://amritsar.gov.in/tourist-places/" },
+      "general": { "primary": "https://punjabtourism.punjab.gov.in/", "secondary": "https://amritsar.gov.in/tourist-places/" }
+    },
+    "hardcodedPageLinks": {
+      "person_fallback": "https://amritsar.gov.in/whoswho/",
+      "village_admin": "https://amritsar.gov.in/directory/",
+      "admin_structure": "https://amritsar.gov.in/administrative-setup/",
+      "demographic": "https://amritsar.gov.in/demography/",
+      "accommodation": "https://amritsar.gov.in/accommodation/",
+      "tourism_general": "https://amritsar.gov.in/tourist-places/",
+      "police": "https://amritsarpolice.gov.in/",
+      "court": "https://amritsar.dcourts.gov.in/"
+    },
+    "adminStructure": {
+      "tehsils": ["Amritsar", "Ajnala", "Baba Bakala", "Majitha"],
+      "blocks": 9,
+      "villages": 846
+    },
+    "keywords": {
+      "localities": ["ranjit avenue", "civil lines", "putlighar", "lawrence road"],
+      "tourismSpecifics": ["golden temple", "jallianwala bagh", "wagah border", "partition museum"],
+      "queryModifiers": ["amritsar mein", "amritsar ke", "visit amritsar"]
+    }
+  },
+  "vns": {
+    "meta": {
+      "districtKey": "varanasi",
+      "districtName": "Varanasi",
+      "districtNameHindi": "वाराणसी",
+      "state": "Uttar Pradesh",
+      "population": "3,676,841",
+      "area": "1,535 sq km",
+      "appDomain": "https://varanasi-citymitra.app"
+    },
+    "urls": {
+      "districtGovt": "https://varanasi.nic.in",
+      "tourismPortal": "https://www.uptourism.gov.in",
+      "stateTourism": "https://www.uptourism.gov.in",
+      "university": "https://www.bhu.ac.in",
+      "districtCourt": "https://varanasi.dcourts.gov.in",
+      "policeWebsite": "https://varanasipolice.gov.in",
+      "zomato": "https://www.zomato.com/varanasi",
+      "swiggy": "https://www.swiggy.com/city/varanasi",
+      "sulekha": "https://www.sulekha.com",
+      "sulekha_pg": "https://www.sulekha.com/paying-guest-accomodation-varanasi",
+      "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Varanasi"
+    },
+    "govtPages": {
+      "attractions": "https://varanasi.nic.in/tourist-places/",
+      "knowAbout": "https://varanasi.nic.in/demography/",
+      "aboutDistrict": "https://varanasi.nic.in/about-district/",
+      "whereToStay": "https://varanasi.nic.in/accommodation/",
+      "whoswho": "https://varanasi.nic.in/whoswho/",
+      "directory": "https://varanasi.nic.in/directory/",
+      "adminSetup": "https://varanasi.nic.in/administrative-setup/",
+      "politicalSetup": "https://varanasi.nic.in/political-setup/",
+      "censusData": "https://varanasi.nic.in/demography/"
+    },
+    "serpapi": {
+      "tourismSite1": "site:uptourism.gov.in varanasi",
+      "tourismSite2": "site:varanasi.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:varanasi.nic.in OR site:uptourism.gov.in",
+      "generalSite": "site:varanasi.nic.in",
+      "contextSuffix": "Varanasi Uttar Pradesh"
+    },
+    "googleSheets": {
+      "spreadsheetId": "REPLACE_WITH_VARANASI_SHEET_ID",
+      "infobotCacheSheet": "InfoBot_Cache",
+      "askGitaCacheSheet": "AskGita_Cache",
+      "infobotLogSheet": "InfoBot_Log",
+      "askGitaLogSheet": "AskGita_Log",
+      "feedbackSheet": "Feedback"
+    },
+    "feedback": {
+      "googleAppsScriptUrl": "REPLACE_WITH_VARANASI_APPS_SCRIPT_URL"
+    },
+    "webhooks": {
+      "infobotPath": "varanasi-chat",
+      "askGitaPath": "varanasi-AskGita",
+      "feedbackPath": "varanasi-Feed"
+    },
+    "aiPrompts": {
+      "infobotSystemRole": "You are an official district information assistant for Varanasi, Uttar Pradesh (India).",
+      "askGitaSystemRole": "You are an AI guide for Varanasi. Answer questions about Kashi, Ganga Aarti, and Sarnath. NEVER give legal/medical advice.",
+      "districtContext": "Varanasi is one of the oldest living cities. Famous for Kashi Vishwanath Temple, Ganga Ghats, and the Banarasi Saree industry."
+    },
+    "tourismSites": {
+      "primaryPortal": "uptourism.gov.in",
+      "secondaryPortal": "varanasi.nic.in",
+      "broadQueryPrimary": "https://www.uptourism.gov.in/destination/varanasi",
+      "broadQuerySecondary": "https://varanasi.nic.in/tourist-places/",
+      "generalListPrimary": "https://www.uptourism.gov.in",
+      "generalListSecondary": "https://varanasi.nic.in/tourist-places/"
+    },
+    "perspectiveFallbackUrls": {
+      "historical": { "primary": "https://varanasi.nic.in/about-district/", "secondary": "https://varanasi.nic.in/tourist-places/" },
+      "general": { "primary": "https://www.uptourism.gov.in/", "secondary": "https://varanasi.nic.in/tourist-places/" }
+    },
+    "hardcodedPageLinks": {
+      "person_fallback": "https://varanasi.nic.in/whoswho/",
+      "village_admin": "https://varanasi.nic.in/directory/",
+      "admin_structure": "https://varanasi.nic.in/administrative-setup/",
+      "demographic": "https://varanasi.nic.in/demography/",
+      "accommodation": "https://varanasi.nic.in/accommodation/",
+      "tourism_general": "https://varanasi.nic.in/tourist-places/",
+      "police": "https://varanasipolice.gov.in/",
+      "court": "https://varanasi.dcourts.gov.in/"
+    },
+    "adminStructure": {
+      "tehsils": ["Varanasi", "Pindra", "Rajatalao"],
+      "blocks": 8,
+      "villages": 1327
+    },
+    "keywords": {
+      "localities": ["lanka", "godowlia", "sigra", "cantt", "sarnath"],
+      "tourismSpecifics": ["kashi vishwanath", "dashashwamedh ghat", "assi ghat", "sarnath"],
+      "queryModifiers": ["varanasi mein", "varanasi ke", "visit varanasi"]
+    }
   }
 }
