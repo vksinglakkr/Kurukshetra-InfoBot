@@ -975,7 +975,9 @@
     "aiPrompts": {
       "infobotSystemRole": "You are an official district information assistant for Dehradun, Uttarakhand (India).",
       "askGitaSystemRole": "You are an AI guide for Dehradun. Answer questions about the Doon Valley and tourism. NEVER give legal/medical advice.",
-      "districtContext": "Dehradun is the gateway to Mussoorie and Rishikesh. Famous for FRI, Robber's Cave, and its basmati rice."
+      "districtContext": "Dehradun is the gateway to Mussoorie and Rishikesh. Famous for FRI, Robber's Cave, and its basmati rice.",
+      "infobotSystemRole": "You are an official district information assistant for Dehradun, Uttarakhand. Note: In this region, the head of administration is called the District Magistrate (DM), not Deputy Commissioner (DC).",
+      "districtContext": "Dehradun district, Uttarakhand. Administrative head: District Magistrate (DM)."
     },
     "tourismSites": {
       "primaryPortal": "uttarakhandtourism.gov.in",
@@ -1007,7 +1009,9 @@
     "keywords": {
       "localities": ["rajpur road", "clemen town", "ballupur", "selakui", "patel nagar"],
       "tourismSpecifics": ["robber's cave", "sahastradhara", "tapkeshwar", "fri", "muddling monastery"],
-      "queryModifiers": ["dehradun mein", "dehradun ke", "visit dehradun"]
+      "queryModifiers": ["dehradun mein", "dehradun ke", "visit dehradun"],
+      "adminDesignations": ["DM", "District Magistrate", "Collector"],
+      "queryModifiers": ["dehradun dm", "dm dehradun", "district magistrate dehradun"]
     }
   },
   "jaipur": {
