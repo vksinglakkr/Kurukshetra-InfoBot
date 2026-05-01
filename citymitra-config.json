@@ -927,7 +927,7 @@
     },
     "urls": {
       "districtGovt": "https://dehradun.gov.in",
-      "tourismPortal": "https://uttarakhandtourism.gov.in",
+      "tourismPortal": "https://uttarakhandtourism.gov.in/public/destination/dehradun",
       "stateTourism": "https://uttarakhandtourism.gov.in",
       "university": "https://www.doonuniversity.ac.in",
       "districtCourt": "https://dehradun.dcourts.gov.in",
@@ -982,7 +982,7 @@
     "tourismSites": {
       "primaryPortal": "uttarakhandtourism.gov.in",
       "secondaryPortal": "dehradun.gov.in",
-      "broadQueryPrimary": "https://uttarakhandtourism.gov.in/destination/dehradun",
+      "broadQueryPrimary": "https://uttarakhandtourism.gov.in/public/destination/dehradun",
       "broadQuerySecondary": "https://dehradun.gov.in/tourist-places/",
       "generalListPrimary": "https://uttarakhandtourism.gov.in",
       "generalListSecondary": "https://dehradun.gov.in/tourist-places/"
