@@ -943,7 +943,7 @@
       "knowAbout": "https://dehradun.gov.in/demography/",
       "aboutDistrict": "https://dehradun.gov.in/about-district/",
       "whereToStay": "https://dehradun.gov.in/accommodation/",
-      "whoswho": "https://dehradun.gov.in/whoswho/",
+      "whoswho": "https://dehradun.nic.in/about-district/whos-who/",
       "directory": "https://dehradun.gov.in/directory/",
       "adminSetup": "https://dehradun.gov.in/administrative-setup/",
       "politicalSetup": "https://dehradun.gov.in/political-setup/",
@@ -992,14 +992,15 @@
       "general": { "primary": "https://uttarakhandtourism.gov.in/", "secondary": "https://dehradun.gov.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://dehradun.gov.in/whoswho/",
+      "person_fallback": "https://dehradun.nic.in/about-district/whos-who/",
       "village_admin": "https://dehradun.gov.in/directory/",
       "admin_structure": "https://dehradun.gov.in/administrative-setup/",
       "demographic": "https://dehradun.gov.in/demography/",
       "accommodation": "https://dehradun.gov.in/accommodation/",
       "tourism_general": "https://dehradun.gov.in/tourist-places/",
       "police": "https://dehradunpolice.uk.gov.in/",
-      "court": "https://dehradun.dcourts.gov.in/"
+      "court": "https://dehradun.dcourts.gov.in/",
+      "dm_link": "https://dehradun.gov.in/dm-profile/"
     },
     "adminStructure": {
       "tehsils": ["Dehradun", "Chakrata", "Vikasnagar", "Rishikesh", "Doiwala", "Mussoorie"],
