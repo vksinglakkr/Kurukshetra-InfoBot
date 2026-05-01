@@ -952,7 +952,7 @@
     "serpapi": {
       "tourismSite1": "site:uttarakhandtourism.gov.in dehradun",
       "tourismSite2": "site:dehradun.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
-      "tourismSite3": "site:dehradun.gov.in OR site:uttarakhandtourism.gov.in",
+      "tourismSite3": "site:dehradun.gov.in OR site:https://uttarakhandtourism.gov.in/public/destination/dehradun",
       "generalSite": "site:dehradun.gov.in",
       "contextSuffix": "Dehradun Uttarakhand"
     },
@@ -980,7 +980,7 @@
       "districtContext": "Dehradun district, Uttarakhand. Administrative head: District Magistrate (DM)."
     },
     "tourismSites": {
-      "primaryPortal": "uttarakhandtourism.gov.in",
+      "primaryPortal": "https://uttarakhandtourism.gov.in/public/destination/dehradun",
       "secondaryPortal": "dehradun.gov.in",
       "broadQueryPrimary": "https://uttarakhandtourism.gov.in/public/destination/dehradun",
       "broadQuerySecondary": "https://dehradun.gov.in/tourist-places/",
@@ -989,7 +989,7 @@
     },
     "perspectiveFallbackUrls": {
       "historical": { "primary": "https://dehradun.gov.in/about-district/", "secondary": "https://dehradun.gov.in/tourist-places/" },
-      "general": { "primary": "https://uttarakhandtourism.gov.in/", "secondary": "https://dehradun.gov.in/tourist-places/" }
+      "general": { "primary": "https://uttarakhandtourism.gov.in/public/destination/dehradun", "secondary": "https://dehradun.gov.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
       "person_fallback": "https://dehradun.nic.in/about-district/whos-who/",
