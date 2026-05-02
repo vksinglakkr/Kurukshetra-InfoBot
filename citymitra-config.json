@@ -396,7 +396,7 @@
       "general": { "primary": "https://haryanatourism.gov.in/destination/sirsa/", "secondary": "https://sirsa.gov.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://sirsa.gov.in/political-setup/",
+      "person_fallback": "https://sirsa.gov.in/whos-who/",
       "village_admin": "https://sirsa.gov.in/directory/",
       "admin_structure": "https://sirsa.gov.in/about-district/administrative-setup/",
       "demographic": "https://sirsa.gov.in/about-district/demography/",
