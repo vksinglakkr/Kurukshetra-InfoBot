@@ -652,7 +652,7 @@
       "knowAbout": "https://panchkula.nic.in/demography/",
       "aboutDistrict": "https://panchkula.nic.in/about-district/",
       "whereToStay": "https://panchkula.nic.in/accommodation/",
-      "whoswho": "https://panchkula.nic.in/whoswho/",
+      "whoswho": "https://panchkula.nic.in/whos-who/",
       "directory": "https://panchkula.nic.in/directory/",
       "adminSetup": "https://panchkula.nic.in/administrative-setup/",
       "politicalSetup": "https://panchkula.nic.in/political-setup/",
@@ -699,7 +699,7 @@
       "general": { "primary": "https://haryanatourism.gov.in/destination/panchkula/", "secondary": "https://panchkula.nic.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://panchkula.nic.in/political-setup/",
+      "person_fallback": "https://panchkula.nic.in/whos-who/",
       "village_admin": "https://panchkula.nic.in/directory/",
       "admin_structure": "https://panchkula.nic.in/administrative-setup/",
       "demographic": "https://panchkula.nic.in/demography/",
