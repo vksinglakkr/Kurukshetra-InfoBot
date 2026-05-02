@@ -3,100 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CityMitra - District Portal</title>
+    <title>CityMitra - Multi-District Portal</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f4f7f6;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f8f9fa;
+            --text: #333;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: var(--bg);
             margin: 0;
+            padding: 2rem;
+            color: var(--text);
         }
-        .container {
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            margin: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+        .card .hindi {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .card .state {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        .stats {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 0.5rem;
+        }
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+        .btn {
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-main {
+            background-color: var(--accent);
+            color: white;
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn:hover { opacity: 0.85; }
+
+        /* Modal Styles for Resource Page */
+        #resourceModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
             background: white;
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 450px;
+            width: 90%; max-width: 600px;
+            max-height: 80vh; overflow-y: auto;
         }
-        h1 { color: var(--primary-color); margin-bottom: 0.5rem; }
-        p { color: #666; margin-bottom: 1.5rem; }
-        select {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        select:focus { border-color: var(--accent-color); }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover { background-color: #2980b9; }
-        .footer { margin-top: 1.5rem; font-size: 12px; color: #999; }
+        .link-list { list-style: none; padding: 0; }
+        .link-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .link-list a { color: var(--accent); text-decoration: none; word-break: break-all; font-size: 0.9rem;}
+        .close-btn { float: right; cursor: pointer; font-weight: bold; color: red; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>CityMitra Portal</h1>
-    <p>Select a district to launch the InfoBot</p>
-    
-    <select id="districtSelect">
-        <option value="" disabled selected>-- Select District --</option>
-        <option value="https://kkr-citymitra.app">Kurukshetra (कुरुक्षेत्र), Haryana</option>
-        <option value="https://karnal-citymitra.app">Karnal (करनाल), Haryana</option>
-        <option value="https://ambala-citymitra.app">Ambala (अम्बाला), Haryana</option>
-        <option value="https://sirsa-citymitra.app">Sirsa (सिरसा), Haryana</option>
-        <option value="https://palwal-citymitra.app">Palwal (पलवल), Haryana</option>
-        <option value="https://faridabad-citymitra.app">Faridabad (फरीदाबाद), Haryana</option>
-        <option value="https://panchkula-citymitra.app">Panchkula (पंचकुला), Haryana</option>
-        <option value="https://ranchi-citymitra.app">Ranchi (राँची), Jharkhand</option>
-        <option value="https://indore-citymitra.app">Indore (इन्दौर), Madhya Pradesh</option>
-        <option value="https://dehradun-citymitra.app">Dehradun (देहरादून), Uttarakhand</option>
-        <option value="https://jaipur-citymitra.app">Jaipur (जयपुर), Rajasthan</option>
-        <option value="https://amritsar-citymitra.app">Amritsar (अमृतसर), Punjab</option>
-        <option value="https://varanasi-citymitra.app">Varanasi (वाराणसी), Uttar Pradesh</option>
-    </select>
+<div class="header">
+    <h1>CityMitra Unified District Hub</h1>
+    <p>Select a city to launch the assistant or explore data sources</p>
+</div>
 
-    <button onclick="openDistrict()">Open CityMitra</button>
+<div class="grid" id="districtGrid"></div>
 
-    <div class="footer">
-        Official District Information Assistant Hub
+<!-- Resource Viewer Modal -->
+<div id="resourceModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">CLOSE ✖</span>
+        <h2 id="modalTitle">District Sources</h2>
+        <ul id="modalLinks" class="link-list"></ul>
     </div>
 </div>
 
 <script>
-    function openDistrict() {
-        const select = document.getElementById('districtSelect');
-        const url = select.value;
-        if (url) {
-            window.open(url, '_blank');
-        } else {
-            alert("Please select a district first.");
-        }
+    // Config data extracted from citymitra-config.json
+    const districts = {
+        "kkr": { name: "Kurukshetra", hindi: "कुरुक्षेत्र", state: "Haryana", pop: "9,64,655", domain: "https://kkr-citymitra.app", 
+                 links: ["https://kurukshetra.gov.in", "https://kkrtour.com", "https://48koskurukshetra.com"] },
+        "karnal": { name: "Karnal", hindi: "करनाल", state: "Haryana", pop: "1,505,324", domain: "https://karnal-citymitra.app", 
+                    links: ["https://karnal.gov.in", "https://haryanatourism.gov.in/destination/karnal/"] },
+        "ambala": { name: "Ambala", hindi: "अम्बाला", state: "Haryana", pop: "1,128,350", domain: "https://ambala-citymitra.app", 
+                    links: ["https://ambala.gov.in"] },
+        "sirsa": { name: "Sirsa", hindi: "सिरसा", state: "Haryana", pop: "1,295,189", domain: "https://sirsa-citymitra.app", 
+                   links: ["https://sirsa.gov.in"] },
+        "ranchi": { name: "Ranchi", hindi: "राँची", state: "Jharkhand", pop: "2,914,253", domain: "https://ranchi-citymitra.app", 
+                    links: ["https://ranchi.nic.in", "https://tourism.jharkhand.gov.in"] },
+        "asr": { name: "Amritsar", hindi: "अमृतसर", state: "Punjab", pop: "2,490,656", domain: "https://amritsar-citymitra.app", 
+                 links: ["https://amritsar.gov.in", "https://punjabtourism.punjab.gov.in"] },
+        "vns": { name: "Varanasi", hindi: "वाराणसी", state: "Uttar Pradesh", pop: "3,676,841", domain: "https://varanasi-citymitra.app", 
+                 links: ["https://varanasi.nic.in", "https://www.uptourism.gov.in"] },
+        "ddn": { name: "Dehradun", hindi: "देहरादून", state: "Uttarakhand", pop: "1,696,694", domain: "https://dehradun-citymitra.app", 
+                 links: ["https://dehradun.gov.in", "https://uttarakhandtourism.gov.in"] },
+        "jaipur": { name: "Jaipur", hindi: "जयपुर", state: "Rajasthan", pop: "6,626,178", domain: "https://jaipur-citymitra.app", 
+                    links: ["https://jaipur.rajasthan.gov.in", "https://www.tourism.rajasthan.gov.in"] },
+        "indore": { name: "Indore", hindi: "इन्दौर", state: "Madhya Pradesh", pop: "3,276,697", domain: "https://indore-citymitra.app", 
+                    links: ["https://indore.nic.in", "https://www.mptourism.com"] }
+    };
+
+    function renderCards() {
+        const grid = document.getElementById('districtGrid');
+        Object.entries(districts).forEach(([key, d]) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h2>${d.name}</h2>
+                <div class="hindi">${d.hindi}</div>
+                <div class="state">${d.state}</div>
+                <div class="stats">Population: ${d.pop}</div>
+                <div class="btn-group">
+                    <a href="${d.domain}" target="_blank" class="btn btn-main">Open Bot</a>
+                    <button onclick="showResources('${key}')" class="btn btn-outline">Sources</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
     }
+
+    function showResources(key) {
+        const district = districts[key];
+        document.getElementById('modalTitle').innerText = `${district.name} Data Sources`;
+        const list = document.getElementById('modalLinks');
+        list.innerHTML = '';
+        district.links.forEach(link => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+            list.appendChild(li);
+        });
+        document.getElementById('resourceModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('resourceModal').style.display = 'none';
+    }
+
+    renderCards();
 </script>
 
 </body>
