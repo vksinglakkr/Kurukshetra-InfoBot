@@ -752,7 +752,7 @@
       "knowAbout": "https://ranchi.nic.in/demography/",
       "aboutDistrict": "https://ranchi.nic.in/about-district/",
       "whereToStay": "https://ranchi.nic.in/accommodation/",
-      "whoswho": "https://ranchi.nic.in/whoswho/",
+      "whoswho": "https://ranchi.nic.in/whos-who/",
       "directory": "https://ranchi.nic.in/directory/",
       "adminSetup": "https://ranchi.nic.in/administrative-setup/",
       "politicalSetup": "https://ranchi.nic.in/political-setup/",
@@ -799,7 +799,7 @@
       "general": { "primary": "https://tourism.jharkhand.gov.in/", "secondary": "https://ranchi.nic.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://ranchi.nic.in/whoswho/",
+      "person_fallback": "https://ranchi.nic.in/whos-who/",
       "village_admin": "https://ranchi.nic.in/directory/",
       "admin_structure": "https://ranchi.nic.in/administrative-setup/",
       "demographic": "https://ranchi.nic.in/demography/",
