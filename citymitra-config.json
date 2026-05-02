@@ -534,7 +534,7 @@
       "appDomain": "https://faridabad-citymitra.app"
     },
     "urls": {
-      "districtGovt": "https://faridabad.gov.in",
+      "districtGovt": "https://faridabad.nic.in",
       "tourismPortal": "https://haryanatourism.gov.in",
       "stateHaryanaTourism": "https://haryanatourism.gov.in",
       "university": "https://jcboseust.ac.in",
@@ -547,21 +547,21 @@
       "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Faridabad"
     },
     "govtPages": {
-      "attractions": "https://faridabad.gov.in/tourist-places/",
-      "knowAbout": "https://faridabad.gov.in/demography/",
-      "aboutDistrict": "https://faridabad.gov.in/about-district/",
-      "whereToStay": "https://faridabad.gov.in/accommodation/",
-      "whoswho": "https://faridabad.gov.in/whoswho/",
-      "directory": "https://faridabad.gov.in/directory/",
-      "adminSetup": "https://faridabad.gov.in/administrative-setup/",
-      "politicalSetup": "https://faridabad.gov.in/political-setup/",
-      "censusData": "https://faridabad.gov.in/demography/"
+      "attractions": "https://faridabad.nic.in/tourist-places/",
+      "knowAbout": "https://faridabad.nic.in/demography/",
+      "aboutDistrict": "https://faridabad.nic.in/about-district/",
+      "whereToStay": "https://faridabad.nic.in/accommodation/",
+      "whoswho": "https://faridabad.nic.in/whos-who/",
+      "directory": "https://faridabad.nic.in/directory/",
+      "adminSetup": "https://faridabad.nic.in/administrative-setup/",
+      "politicalSetup": "https://faridabad.nic.in/political-setup/",
+      "censusData": "https://faridabad.nic.in/demography/"
     },
     "serpapi": {
       "tourismSite1": "site:haryanatourism.gov.in faridabad",
-      "tourismSite2": "site:faridabad.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
-      "tourismSite3": "site:faridabad.gov.in OR site:haryanatourism.gov.in",
-      "generalSite": "site:faridabad.gov.in",
+      "tourismSite2": "site:faridabad.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:faridabad.nic.in OR site:haryanatourism.gov.in",
+      "generalSite": "site:faridabad.nic.in",
       "contextSuffix": "Faridabad Haryana"
     },
     "googleSheets": {
@@ -587,23 +587,23 @@
     },
     "tourismSites": {
       "primaryPortal": "haryanatourism.gov.in",
-      "secondaryPortal": "faridabad.gov.in",
+      "secondaryPortal": "faridabad.nic.in",
       "broadQueryPrimary": "https://haryanatourism.gov.in/destination/faridabad/",
-      "broadQuerySecondary": "https://faridabad.gov.in/tourist-places/",
+      "broadQuerySecondary": "https://faridabad.nic.in/tourist-places/",
       "generalListPrimary": "https://haryanatourism.gov.in/destination/faridabad/",
-      "generalListSecondary": "https://faridabad.gov.in/tourist-places/"
+      "generalListSecondary": "https://faridabad.nic.in/tourist-places/"
     },
     "perspectiveFallbackUrls": {
-      "historical": { "primary": "https://faridabad.gov.in/about-district/", "secondary": "https://faridabad.gov.in/tourist-places/" },
-      "general": { "primary": "https://haryanatourism.gov.in/destination/faridabad/", "secondary": "https://faridabad.gov.in/tourist-places/" }
+      "historical": { "primary": "https://faridabad.nic.in/about-district/", "secondary": "https://faridabad.nic.in/tourist-places/" },
+      "general": { "primary": "https://haryanatourism.gov.in/destination/faridabad/", "secondary": "https://faridabad.nic.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://faridabad.gov.in/political-setup/",
-      "village_admin": "https://faridabad.gov.in/directory/",
-      "admin_structure": "https://faridabad.gov.in/administrative-setup/",
-      "demographic": "https://faridabad.gov.in/demography/",
-      "accommodation": "https://faridabad.gov.in/accommodation/",
-      "tourism_general": "https://faridabad.gov.in/tourist-places/",
+      "person_fallback": "https://faridabad.nic.in/whos-who/",
+      "village_admin": "https://faridabad.nic.in/directory/",
+      "admin_structure": "https://faridabad.nic.in/administrative-setup/",
+      "demographic": "https://faridabad.nic.in/demography/",
+      "accommodation": "https://faridabad.nic.in/accommodation/",
+      "tourism_general": "https://faridabad.nic.in/tourist-places/",
       "police": "https://faridabad.haryanapolice.gov.in/",
       "court": "https://faridabad.dcourts.gov.in/"
     },
