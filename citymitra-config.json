@@ -1138,7 +1138,7 @@
       "knowAbout": "https://amritsar.gov.in/demography/",
       "aboutDistrict": "https://amritsar.gov.in/about-district/",
       "whereToStay": "https://amritsar.gov.in/accommodation/",
-      "whoswho": "https://amritsar.gov.in/whoswho/",
+      "whoswho": "https://amritsar.gov.in/whos-who/",
       "directory": "https://amritsar.gov.in/directory/",
       "adminSetup": "https://amritsar.gov.in/administrative-setup/",
       "politicalSetup": "https://amritsar.gov.in/political-setup/",
@@ -1185,7 +1185,7 @@
       "general": { "primary": "https://punjabtourism.punjab.gov.in/", "secondary": "https://amritsar.gov.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://amritsar.gov.in/whoswho/",
+      "person_fallback": "https://amritsar.gov.in/whos-who/",
       "village_admin": "https://amritsar.gov.in/directory/",
       "admin_structure": "https://amritsar.gov.in/administrative-setup/",
       "demographic": "https://amritsar.gov.in/demography/",
