@@ -3,225 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CityMitra - Elaborated Source Hub</title>
+    <title>CityMitra - Full District Hub</title>
     <style>
         :root {
             --primary: #2c3e50;
             --accent: #3498db;
-            --bg: #f0f2f5;
-            --text: #333;
+            --bg: #f4f7f9;
             --card-bg: #ffffff;
         }
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background-color: var(--bg);
             margin: 0;
-            padding: 20px;
-            color: var(--text);
+            padding: 30px;
+            color: #333;
         }
         .header { text-align: center; margin-bottom: 40px; }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            max-width: 1300px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 6px solid var(--accent);
             display: flex;
             flex-direction: column;
-            border-top: 5px solid var(--accent);
+            transition: transform 0.2s;
         }
-        .card h2 { margin: 0; color: var(--primary); font-size: 1.5rem; }
-        .card .location { color: #666; margin-bottom: 15px; font-weight: 500; }
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: auto;
-            padding-top: 15px;
-        }
+        .card:hover { transform: translateY(-5px); }
+        .card h2 { margin: 0; color: var(--primary); font-size: 1.6rem; }
+        .card .hindi { font-size: 1.2rem; color: #555; margin: 5px 0; }
+        .card .meta { color: #777; font-size: 0.95rem; margin-bottom: 20px; }
+        
+        .btn-group { display: flex; gap: 12px; margin-top: auto; }
         .btn {
             flex: 1;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 12px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: bold;
             text-align: center;
             cursor: pointer;
             border: none;
-            transition: 0.2s;
         }
         .btn-main { background: var(--accent); color: white; }
-        .btn-outline { background: #eee; color: var(--primary); }
-        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-sources { background: #eaedf0; color: var(--primary); }
 
-        /* Modal / Sidebar for Elaborated Sources */
-        #sourceOverlay {
+        /* Elaborated Source Overlay */
+        #overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.7);
             z-index: 1000;
             justify-content: center; align-items: center;
         }
-        .source-panel {
+        .panel {
             background: white;
-            width: 90%;
-            max-width: 800px;
+            width: 90%; max-width: 850px;
             max-height: 85vh;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 30px;
             overflow-y: auto;
-            position: relative;
         }
-        .category-title {
+        .category {
             background: #f8f9fa;
-            padding: 8px 12px;
-            border-left: 4px solid var(--accent);
+            padding: 10px 15px;
             margin: 20px 0 10px 0;
             font-weight: bold;
-            color: var(--primary);
+            border-left: 5px solid var(--accent);
+            font-size: 0.9rem;
             text-transform: uppercase;
-            font-size: 0.85rem;
         }
-        .link-item {
+        .source-link {
             display: block;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 0;
             color: var(--accent);
             text-decoration: none;
-            font-size: 0.95rem;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
             word-break: break-all;
         }
-        .link-item:hover { text-decoration: underline; }
-        .close-icon {
-            position: absolute;
-            top: 20px; right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #999;
-        }
+        .close-btn { float: right; cursor: pointer; color: #999; font-size: 24px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>CityMitra Global Portal</h1>
-    <p>Unified access to District Bots and their underlying Government Data Sources</p>
+    <h1>CityMitra Unified Hub</h1>
+    <p>13 Districts Configured & Verified</p>
 </div>
 
-<div class="grid" id="container"></div>
+<div class="grid" id="districtGrid"></div>
 
-<!-- Elaborated Source Viewer -->
-<div id="sourceOverlay" onclick="closeSources(event)">
-    <div class="source-panel" onclick="event.stopPropagation()">
-        <span class="close-icon" onclick="document.getElementById('sourceOverlay').style.display='none'">×</span>
-        <h2 id="panelTitle">District Sources</h2>
-        <div id="sourceContent"></div>
+<div id="overlay" onclick="this.style.display='none'">
+    <div class="panel" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="document.getElementById('overlay').style.display='none'">×</span>
+        <h2 id="panelTitle">Data Sources</h2>
+        <div id="panelContent"></div>
     </div>
 </div>
 
 <script>
-    // Full Config data reference from citymitra-config (4)_2.json
-    const configData = {
-        "kkr": {
-            meta: { name: "Kurukshetra", hindi: "कुरुक्षेत्र", state: "Haryana", pop: "9,64,655" },
-            domain: "https://kkr-citymitra.app",
-            sources: {
-                "Official Portal": ["https://kurukshetra.gov.in"],
-                "Tourism & Heritage": ["https://kkrtour.com", "https://48koskurukshetra.com", "https://haryanatourism.gov.in", "https://mahabharatanubhavkendra.com"],
-                "Administration & Directory": ["https://kurukshetra.gov.in/whoswho/", "https://kurukshetra.gov.in/directory/", "https://kurukshetra.gov.in/administrative-setup-kurukshetra/"],
-                "Education & Law": ["https://kuk.ac.in", "https://nitkkr.ac.in", "https://kurukshetra.dcourts.gov.in", "https://kurukshetra.haryanapolice.gov.in"]
-            }
-        },
-        "asr": {
-            meta: { name: "Amritsar", hindi: "अमृतसर", state: "Punjab", pop: "2,490,656" },
-            domain: "https://amritsar-citymitra.app",
-            sources: {
-                "Official Portal": ["https://amritsar.gov.in"],
-                "Tourism": ["https://punjabtourism.punjab.gov.in", "https://amritsar.gov.in/tourist-places/"],
-                "Administration": ["https://amritsar.gov.in/whoswho/", "https://amritsar.gov.in/directory/", "https://amritsar.gov.in/political-setup/"],
-                "Public Services": ["https://amritsarpolice.gov.in", "https://amritsar.dcourts.gov.in", "https://online.gndu.ac.in"]
-            }
-        },
-        "vns": {
-            meta: { name: "Varanasi", hindi: "वाराणसी", state: "Uttar Pradesh", pop: "3,676,841" },
-            domain: "https://varanasi-citymitra.app",
-            sources: {
-                "Official Portal": ["https://varanasi.nic.in"],
-                "Tourism": ["https://www.uptourism.gov.in", "https://varanasi.nic.in/tourist-places/"],
-                "Administration": ["https://varanasi.nic.in/whoswho/", "https://varanasi.nic.in/directory/", "https://varanasi.nic.in/administrative-setup/"],
-                "Utilities": ["https://varanasipolice.gov.in", "https://varanasi.dcourts.gov.in", "https://www.bhu.ac.in"]
-            }
-        },
-        "ddn": {
-            meta: { name: "Dehradun", hindi: "देहरादून", state: "Uttarakhand", pop: "1,696,694" },
-            domain: "https://dehradun-citymitra.app",
-            sources: {
-                "Official Portal": ["https://dehradun.gov.in"],
-                "Tourism": ["https://uttarakhandtourism.gov.in", "https://dehradun.gov.in/tourist-places/"],
-                "Administration": ["https://dehradun.nic.in/about-district/whos-who/", "https://dehradun.gov.in/directory/", "https://dehradun.gov.in/administrative-setup/"],
-                "Links": ["https://dehradunpolice.uk.gov.in", "https://dehradun.dcourts.gov.in"]
-            }
+// Unified Config from citymitra-config (4)_2.json
+const districts = {
+    "kkr": { name: "Kurukshetra", hindi: "कुरुक्षेत्र", state: "Haryana", pop: "9,64,655", domain: "https://kkr-citymitra.app",
+        sources: {
+            "Admin": ["https://kurukshetra.gov.in", "https://kurukshetra.gov.in/whoswho/", "https://kurukshetra.gov.in/directory/"],
+            "Tourism": ["https://kkrtour.com", "https://48koskurukshetra.com", "https://haryanatourism.gov.in"],
+            "Services": ["https://kuk.ac.in", "https://kurukshetra.dcourts.gov.in", "https://kurukshetra.haryanapolice.gov.in"]
         }
-        // Additional districts follow the same pattern...
-    };
-
-    function init() {
-        const container = document.getElementById('container');
-        Object.entries(configData).forEach(([key, district]) => {
-            const el = document.createElement('div');
-            el.className = 'card';
-            el.innerHTML = `
-                <h2>${district.meta.name}</h2>
-                <div style="font-size: 1.1rem; color: #555;">${district.meta.hindi}</div>
-                <div class="location">${district.meta.state} | Pop: ${district.meta.pop}</div>
-                <div class="btn-group">
-                    <a href="${district.domain}" target="_blank" class="btn btn-main">Open Bot</a>
-                    <button onclick="viewSources('${key}')" class="btn btn-outline">All Sources</button>
-                </div>
-            `;
-            container.appendChild(el);
-        });
-    }
-
-    function viewSources(key) {
-        const district = configData[key];
-        document.getElementById('panelTitle').innerText = `Data Sources: ${district.meta.name}`;
-        const content = document.getElementById('sourceContent');
-        content.innerHTML = '';
-
-        Object.entries(district.sources).forEach(([cat, links]) => {
-            const catHeader = document.createElement('div');
-            catHeader.className = 'category-title';
-            catHeader.innerText = cat;
-            content.appendChild(catHeader);
-
-            links.forEach(url => {
-                const a = document.createElement('a');
-                a.className = 'link-item';
-                a.href = url;
-                a.target = '_blank';
-                a.innerText = url;
-                content.appendChild(a);
-            });
-        });
-
-        document.getElementById('sourceOverlay').style.display = 'flex';
-    }
-
-    function closeSources(e) {
-        if(e.target.id === 'sourceOverlay') {
-            document.getElementById('sourceOverlay').style.display = 'none';
+    },
+    "karnal": { name: "Karnal", hindi: "करनाल", state: "Haryana", pop: "1,505,324", domain: "https://karnal-citymitra.app",
+        sources: {
+            "Admin": ["https://karnal.gov.in", "https://karnal.gov.in/whoswho/", "https://karnal.gov.in/directory/"],
+            "Tourism": ["https://haryanatourism.gov.in/destination/karnal/", "https://karnal.gov.in/tourist-places/"],
+            "Services": ["https://ndri.res.in", "https://karnal.dcourts.gov.in", "https://karnal.haryanapolice.gov.in"]
+        }
+    },
+    "ambala": { name: "Ambala", hindi: "अम्बाला", state: "Haryana", pop: "1,128,350", domain: "https://ambala-citymitra.app",
+        sources: {
+            "Admin": ["https://ambala.gov.in", "https://ambala.gov.in/whoswho/"],
+            "Tourism": ["https://ambala.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/ambala/"],
+            "Services": ["https://ambala.dcourts.gov.in", "https://ambala.haryanapolice.gov.in"]
+        }
+    },
+    "srs": { name: "Sirsa", hindi: "सिरसा", state: "Haryana", pop: "1,295,189", domain: "https://sirsa-citymitra.app",
+        sources: {
+            "Admin": ["https://sirsa.gov.in", "https://sirsa.gov.in/about-district/whos-who/"],
+            "Tourism": ["https://sirsa.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/sirsa/"],
+            "Services": ["https://cdlu.ac.in", "https://sirsa.dcourts.gov.in", "https://sirsa.haryanapolice.gov.in"]
+        }
+    },
+    "asr": { name: "Amritsar", hindi: "अमृतसर", state: "Punjab", pop: "2,490,656", domain: "https://amritsar-citymitra.app",
+        sources: {
+            "Admin": ["https://amritsar.gov.in", "https://amritsar.gov.in/whoswho/"],
+            "Tourism": ["https://punjabtourism.punjab.gov.in", "https://amritsar.gov.in/tourist-places/"],
+            "Services": ["https://online.gndu.ac.in", "https://amritsar.dcourts.gov.in", "https://amritsarpolice.gov.in"]
+        }
+    },
+    "vns": { name: "Varanasi", hindi: "वाराणसी", state: "Uttar Pradesh", pop: "3,676,841", domain: "https://varanasi-citymitra.app",
+        sources: {
+            "Admin": ["https://varanasi.nic.in", "https://varanasi.nic.in/whoswho/"],
+            "Tourism": ["https://www.uptourism.gov.in", "https://varanasi.nic.in/tourist-places/"],
+            "Services": ["https://www.bhu.ac.in", "https://varanasipolice.gov.in"]
+        }
+    },
+    "ddn": { name: "Dehradun", hindi: "देहरादून", state: "Uttarakhand", pop: "1,696,694", domain: "https://dehradun-citymitra.app",
+        sources: {
+            "Admin": ["https://dehradun.gov.in", "https://dehradun.nic.in/about-district/whos-who/"],
+            "Tourism": ["https://uttarakhandtourism.gov.in", "https://dehradun.gov.in/tourist-places/"],
+            "Services": ["https://www.doonuniversity.ac.in", "https://dehradunpolice.uk.gov.in"]
+        }
+    },
+    "indore": { name: "Indore", hindi: "इन्दौर", state: "Madhya Pradesh", pop: "3,276,697", domain: "https://indore-citymitra.app",
+        sources: {
+            "Admin": ["https://indore.nic.in", "https://indore.nic.in/whoswho/"],
+            "Tourism": ["https://www.mptourism.com", "https://indore.nic.in/tourist-places/"],
+            "Services": ["https://www.dauniv.ac.in", "https://indorepolice.gov.in"]
+        }
+    },
+    "jaipur": { name: "Jaipur", hindi: "जयपुर", state: "Rajasthan", pop: "6,626,178", domain: "https://jaipur-citymitra.app",
+        sources: {
+            "Admin": ["https://jaipur.rajasthan.gov.in", "https://jaipur.rajasthan.gov.in/whoswho/"],
+            "Tourism": ["https://www.tourism.rajasthan.gov.in", "https://jaipur.rajasthan.gov.in/tourist-places/"],
+            "Services": ["https://www.uniraj.ac.in", "https://jaipurpolice.rajasthan.gov.in"]
+        }
+    },
+    "ranchi": { name: "Ranchi", hindi: "राँची", state: "Jharkhand", pop: "2,914,253", domain: "https://ranchi-citymitra.app",
+        sources: {
+            "Admin": ["https://ranchi.nic.in", "https://ranchi.nic.in/whoswho/"],
+            "Tourism": ["https://tourism.jharkhand.gov.in", "https://ranchi.nic.in/tourist-places/"],
+            "Services": ["https://www.ranchiuniversity.ac.in", "https://ranchipolice.jharkhand.gov.in"]
+        }
+    },
+    "palwal": { name: "Palwal", hindi: "पलवल", state: "Haryana", pop: "1,042,708", domain: "https://palwal-citymitra.app",
+        sources: {
+            "Admin": ["https://palwal.gov.in", "https://palwal.gov.in/whoswho/"],
+            "Tourism": ["https://palwal.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/palwal/"]
+        }
+    },
+    "fbd": { name: "Faridabad", hindi: "फरीदाबाद", state: "Haryana", pop: "1,809,733", domain: "https://faridabad-citymitra.app",
+        sources: {
+            "Admin": ["https://faridabad.gov.in", "https://faridabad.gov.in/whoswho/"],
+            "Tourism": ["https://faridabad.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/faridabad/"]
+        }
+    },
+    "pkl": { name: "Panchkula", hindi: "पंचकुला", state: "Haryana", pop: "5,61,293", domain: "https://panchkula-citymitra.app",
+        sources: {
+            "Admin": ["https://panchkula.nic.in", "https://panchkula.nic.in/whoswho/"],
+            "Tourism": ["https://panchkula.nic.in/tourist-places/", "https://haryanatourism.gov.in/destination/panchkula/"]
         }
     }
+};
 
-    init();
+function render() {
+    const grid = document.getElementById('districtGrid');
+    Object.entries(districts).forEach(([key, d]) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <h2>${d.name}</h2>
+            <div class="hindi">${d.hindi}</div>
+            <div class="meta">${d.state} | Pop: ${d.pop}</div>
+            <div class="btn-group">
+                <a href="${d.domain}" target="_blank" class="btn btn-main">Open Bot</a>
+                <button onclick="openSources('${key}')" class="btn btn-sources">All Sources</button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function openSources(key) {
+    const d = districts[key];
+    document.getElementById('panelTitle').innerText = `${d.name} Elaborated Data Sources`;
+    const content = document.getElementById('panelContent');
+    content.innerHTML = '';
+
+    Object.entries(d.sources).forEach(([cat, links]) => {
+        const h = document.createElement('div');
+        h.className = 'category';
+        h.innerText = cat;
+        content.appendChild(h);
+        links.forEach(url => {
+            const a = document.createElement('a');
+            a.className = 'source-link';
+            a.href = url;
+            a.target = '_blank';
+            a.innerText = url;
+            content.appendChild(a);
+        });
+    });
+    document.getElementById('overlay').style.display = 'flex';
+}
+
+render();
 </script>
+
 </body>
 </html>
