@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CityMitra - Verified District Hub</title>
+    <title>CityMitra - Unified District Hub</title>
     <style>
         :root {
             --primary: #2c3e50;
@@ -51,6 +51,7 @@
             text-align: center;
             cursor: pointer;
             border: none;
+            font-size: 0.95rem;
         }
         .btn-main { background: var(--accent); color: white; }
         .btn-sources { background: #eaedf0; color: var(--primary); }
@@ -97,7 +98,7 @@
 
 <div class="header">
     <h1>CityMitra Unified Hub</h1>
-    <p>13 Districts Corrected & Verified</p>
+    <p>13 Districts Synchronized with Latest Config</p>
 </div>
 
 <div class="grid" id="districtGrid"></div>
@@ -111,94 +112,97 @@
 </div>
 
 <script>
-// Logic: Link = https://[key].citymitra.app/city.html
+// Data synchronized directly from your provided citymitra-config.json
 const districts = {
     "kkr": { name: "Kurukshetra", hindi: "कुरुक्षेत्र", state: "Haryana", pop: "9,64,655", 
         sources: {
             "Admin": ["https://kurukshetra.gov.in", "https://kurukshetra.gov.in/whoswho/", "https://kurukshetra.gov.in/directory/"],
             "Tourism": ["https://kkrtour.com", "https://48koskurukshetra.com", "https://haryanatourism.gov.in"],
-            "Services": ["https://kuk.ac.in", "https://kurukshetra.dcourts.gov.in", "https://kurukshetra.haryanapolice.gov.in"]
+            "Services": ["https://kuk.ac.in", "https://nitkkr.ac.in", "https://kurukshetra.dcourts.gov.in", "https://kurukshetra.haryanapolice.gov.in"]
         }
     },
     "karnal": { name: "Karnal", hindi: "करनाल", state: "Haryana", pop: "1,505,324",
         sources: {
-            "Admin": ["https://karnal.gov.in", "https://karnal.gov.in/whoswho/", "https://karnal.gov.in/directory/"],
-            "Tourism": ["https://haryanatourism.gov.in/destination/karnal/", "https://karnal.gov.in/tourist-places/"],
+            "Admin": ["https://karnal.gov.in", "https://karnal.gov.in/about-district/whos-who/", "https://karnal.gov.in/directory/"],
+            "Tourism": ["https://haryanatourism.gov.in", "https://karnal.gov.in/tourist-places/"],
             "Services": ["https://ndri.res.in", "https://karnal.dcourts.gov.in", "https://karnal.haryanapolice.gov.in"]
         }
     },
     "ambala": { name: "Ambala", hindi: "अम्बाला", state: "Haryana", pop: "1,128,350",
         sources: {
-            "Admin": ["https://ambala.gov.in", "https://ambala.gov.in/whoswho/"],
-            "Tourism": ["https://ambala.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/ambala/"],
+            "Admin": ["https://ambala.gov.in", "https://ambala.gov.in/whoswho/", "https://ambala.gov.in/directory/"],
+            "Tourism": ["https://haryanatourism.gov.in", "https://ambala.gov.in/tourist-places/"],
             "Services": ["https://ambala.dcourts.gov.in", "https://ambala.haryanapolice.gov.in"]
         }
     },
     "srs": { name: "Sirsa", hindi: "सिरसा", state: "Haryana", pop: "1,295,189",
         sources: {
-            "Admin": ["https://sirsa.gov.in", "https://sirsa.gov.in/about-district/whos-who/"],
-            "Tourism": ["https://sirsa.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/sirsa/"],
+            "Admin": ["https://sirsa.gov.in", "https://sirsa.gov.in/whos-who/", "https://sirsa.gov.in/directory/"],
+            "Tourism": ["https://haryanatourism.gov.in", "https://sirsa.gov.in/tourist-places/"],
             "Services": ["https://cdlu.ac.in", "https://sirsa.dcourts.gov.in", "https://sirsa.haryanapolice.gov.in"]
+        }
+    },
+    "palwal": { name: "Palwal", hindi: "पलवल", state: "Haryana", pop: "1,042,708",
+        sources: {
+            "Admin": ["https://palwal.gov.in", "https://palwal.gov.in/whoswho/", "https://palwal.gov.in/directory/"],
+            "Tourism": ["https://haryanatourism.gov.in", "https://palwal.gov.in/tourist-places/"],
+            "Services": ["https://svsu.ac.in", "https://palwal.dcourts.gov.in", "https://palwal.haryanapolice.gov.in"]
+        }
+    },
+    "fbd": { name: "Faridabad", hindi: "फरीदाबाद", state: "Haryana", pop: "1,809,733",
+        sources: {
+            "Admin": ["https://faridabad.nic.in", "https://faridabad.nic.in/whos-who/", "https://faridabad.nic.in/directory/"],
+            "Tourism": ["https://haryanatourism.gov.in", "https://faridabad.nic.in/tourist-places/"],
+            "Services": ["https://jcboseust.ac.in", "https://faridabad.dcourts.gov.in", "https://faridabad.haryanapolice.gov.in"]
+        }
+    },
+    "pkl": { name: "Panchkula", hindi: "पंचकुला", state: "Haryana", pop: "561,293",
+        sources: {
+            "Admin": ["https://panchkula.nic.in", "https://panchkula.nic.in/whos-who/", "https://panchkula.nic.in/directory/"],
+            "Tourism": ["https://haryanatourism.gov.in", "https://panchkula.nic.in/tourist-places/"],
+            "Services": ["https://panchkula.dcourts.gov.in", "https://panchkula.haryanapolice.gov.in"]
+        }
+    },
+    "ranchi": { name: "Ranchi", hindi: "राँची", state: "Jharkhand", pop: "2,914,253",
+        sources: {
+            "Admin": ["https://ranchi.nic.in", "https://ranchi.nic.in/whos-who/", "https://ranchi.nic.in/directory/"],
+            "Tourism": ["https://tourism.jharkhand.gov.in/", "https://ranchi.nic.in/tourist-places/"],
+            "Services": ["https://www.ranchiuniversity.ac.in", "https://ranchi.dcourts.gov.in", "https://ranchipolice.jharkhand.gov.in"]
+        }
+    },
+    "indore": { name: "Indore", hindi: "इन्दौर", state: "Madhya Pradesh", pop: "3,276,697",
+        sources: {
+            "Admin": ["https://indore.nic.in", "https://indore.nic.in/whoswho/", "https://indore.nic.in/directory/"],
+            "Tourism": ["https://www.mptourism.com", "https://indore.nic.in/tourist-places/"],
+            "Services": ["https://www.dauniv.ac.in", "https://indore.dcourts.gov.in", "https://indorepolice.gov.in"]
+        }
+    },
+    "ddn": { name: "Dehradun", hindi: "देहरादून", state: "Uttarakhand", pop: "1,696,694",
+        sources: {
+            "Admin": ["https://dehradun.gov.in", "https://dehradun.nic.in/about-district/whos-who/", "https://dehradun.gov.in/directory/"],
+            "Tourism": ["https://uttarakhandtourism.gov.in/public/destination/dehradun", "https://dehradun.gov.in/tourist-places/"],
+            "Services": ["https://www.doonuniversity.ac.in", "https://dehradun.dcourts.gov.in", "https://dehradunpolice.uk.gov.in"]
+        }
+    },
+    "jaipur": { name: "Jaipur", hindi: "जयपुर", state: "Rajasthan", pop: "6,626,178",
+        sources: {
+            "Admin": ["https://jaipur.rajasthan.gov.in", "https://jaipur.rajasthan.gov.in/whoswho/", "https://jaipur.rajasthan.gov.in/directory/"],
+            "Tourism": ["https://www.tourism.rajasthan.gov.in", "https://jaipur.rajasthan.gov.in/tourist-places/"],
+            "Services": ["https://www.uniraj.ac.in", "https://jaipur.dcourts.gov.in", "https://jaipurpolice.rajasthan.gov.in"]
         }
     },
     "asr": { name: "Amritsar", hindi: "अमृतसर", state: "Punjab", pop: "2,490,656",
         sources: {
-            "Admin": ["https://amritsar.gov.in", "https://amritsar.gov.in/whoswho/"],
+            "Admin": ["https://amritsar.gov.in", "https://amritsar.gov.in/whos-who/", "https://amritsar.gov.in/directory/"],
             "Tourism": ["https://punjabtourism.punjab.gov.in", "https://amritsar.gov.in/tourist-places/"],
             "Services": ["https://online.gndu.ac.in", "https://amritsar.dcourts.gov.in", "https://amritsarpolice.gov.in"]
         }
     },
     "vns": { name: "Varanasi", hindi: "वाराणसी", state: "Uttar Pradesh", pop: "3,676,841",
         sources: {
-            "Admin": ["https://varanasi.nic.in", "https://varanasi.nic.in/whoswho/"],
+            "Admin": ["https://varanasi.nic.in", "https://varanasi.nic.in/whoswho/", "https://varanasi.nic.in/directory/"],
             "Tourism": ["https://www.uptourism.gov.in", "https://varanasi.nic.in/tourist-places/"],
-            "Services": ["https://www.bhu.ac.in", "https://varanasipolice.gov.in", "https://varanasi.dcourts.gov.in"]
-        }
-    },
-    "ddn": { name: "Dehradun", hindi: "देहरादून", state: "Uttarakhand", pop: "1,696,694",
-        sources: {
-            "Admin": ["https://dehradun.gov.in", "https://dehradun.nic.in/about-district/whos-who/"],
-            "Tourism": ["https://uttarakhandtourism.gov.in", "https://dehradun.gov.in/tourist-places/"],
-            "Services": ["https://www.doonuniversity.ac.in", "https://dehradunpolice.uk.gov.in", "https://dehradun.dcourts.gov.in"]
-        }
-    },
-    "indore": { name: "Indore", hindi: "इन्दौर", state: "Madhya Pradesh", pop: "3,276,697",
-        sources: {
-            "Admin": ["https://indore.nic.in", "https://indore.nic.in/whoswho/"],
-            "Tourism": ["https://www.mptourism.com", "https://indore.nic.in/tourist-places/"],
-            "Services": ["https://www.dauniv.ac.in", "https://indorepolice.gov.in", "https://indore.dcourts.gov.in"]
-        }
-    },
-    "jaipur": { name: "Jaipur", hindi: "जयपुर", state: "Rajasthan", pop: "6,626,178",
-        sources: {
-            "Admin": ["https://jaipur.rajasthan.gov.in", "https://jaipur.rajasthan.gov.in/whoswho/"],
-            "Tourism": ["https://www.tourism.rajasthan.gov.in", "https://jaipur.rajasthan.gov.in/tourist-places/"],
-            "Services": ["https://www.uniraj.ac.in", "https://jaipurpolice.rajasthan.gov.in", "https://jaipur.dcourts.gov.in"]
-        }
-    },
-    "ranchi": { name: "Ranchi", hindi: "राँची", state: "Jharkhand", pop: "2,914,253",
-        sources: {
-            "Admin": ["https://ranchi.nic.in", "https://ranchi.nic.in/whos-who/"],
-            "Tourism": ["https://tourism.jharkhand.gov.in", "https://ranchi.nic.in/tourist-places/"],
-            "Services": ["https://www.ranchiuniversity.ac.in", "https://ranchipolice.jharkhand.gov.in", "https://ranchi.dcourts.gov.in"]
-        }
-    },
-    "palwal": { name: "Palwal", hindi: "पलवल", state: "Haryana", pop: "1,042,708",
-        sources: {
-            "Admin": ["https://palwal.gov.in", "https://palwal.gov.in/whoswho/"],
-            "Tourism": ["https://palwal.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/palwal/"]
-        }
-    },
-    "fbd": { name: "Faridabad", hindi: "फरीदाबाद", state: "Haryana", pop: "1,809,733",
-        sources: {
-            "Admin": ["https://faridabad.gov.in", "https://faridabad.gov.in/whoswho/"],
-            "Tourism": ["https://faridabad.gov.in/tourist-places/", "https://haryanatourism.gov.in/destination/faridabad/"]
-        }
-    },
-    "pkl": { name: "Panchkula", hindi: "पंचकुला", state: "Haryana", pop: "5,61,293",
-        sources: {
-            "Admin": ["https://panchkula.nic.in", "https://panchkula.nic.in/whoswho/"],
-            "Tourism": ["https://panchkula.nic.in/tourist-places/", "https://haryanatourism.gov.in/destination/panchkula/"]
+            "Services": ["https://www.bhu.ac.in", "https://varanasi.dcourts.gov.in", "https://varanasipolice.gov.in"]
         }
     }
 };
@@ -208,7 +212,6 @@ function render() {
     Object.entries(districts).forEach(([key, d]) => {
         const card = document.createElement('div');
         card.className = 'card';
-        // Correcting Link Pattern
         const botUrl = `https://${key}.citymitra.app/city.html`;
         card.innerHTML = `
             <h2>${d.name}</h2>
@@ -225,7 +228,7 @@ function render() {
 
 function openSources(key) {
     const d = districts[key];
-    document.getElementById('panelTitle').innerText = `${d.name} Elaborated Data Sources`;
+    document.getElementById('panelTitle').innerText = `${d.name} Data Sources`;
     const content = document.getElementById('panelContent');
     content.innerHTML = '';
 
