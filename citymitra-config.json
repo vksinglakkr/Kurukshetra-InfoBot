@@ -145,13 +145,13 @@
     "govtPages": {
       "attractions": "https://karnal.gov.in/tourist-places/",
       "knowAbout": "https://karnal.gov.in/about-karnal/",
-      "aboutDistrict": "https://karnal.gov.in/about-karnal/",
+      "aboutDistrict": "https://karnal.gov.in/demography/",
       "whereToStay": "https://karnal.gov.in/where-to-stay/",
       "whoswho": "https://karnal.gov.in/about-district/whos-who/",
       "directory": "https://karnal.gov.in/directory/",
       "adminSetup": "https://karnal.gov.in/administrative-setup/",
       "politicalSetup": "",
-      "censusData": "https://karnal.gov.in/about-karnal/"
+      "censusData": "https://karnal.gov.in/demography/"
     },
     "serpapi": {
       "tourismSite1": "site:haryanatourism.gov.in karnal",
@@ -197,7 +197,7 @@
       "person_fallback": "https://karnal.gov.in/about-district/whos-who/",
       "village_admin": "https://karnal.gov.in/directory/",
       "admin_structure": "https://karnal.gov.in/administrative-setup/",
-      "demographic": "https://karnal.gov.in/about-karnal/",
+      "demographic": "https://karnal.gov.in/demography/",
       "accommodation": "https://karnal.gov.in/where-to-stay/",
       "tourism_general": "https://karnal.gov.in/tourist-places/",
       "police": "https://karnal.haryanapolice.gov.in/",
