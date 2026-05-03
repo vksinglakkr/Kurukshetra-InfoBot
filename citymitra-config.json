@@ -44,7 +44,7 @@
       "censusData": "https://kurukshetra.gov.in/know-about-kurukshetra/"
     },
     "serpapi": {
-      "tourismSite1": "site:https://kurukshetra.gov.in/kurukshetraattractions/",
+      "tourismSite1": "site:kurukshetra.gov.in/kurukshetraattractions/",
       "tourismSite2": "site:kurukshetra.gov.in -inurl:class- -inurl:recruitment -inurl:tender -inurl:download -inurl:gallery",
       "tourismSite3": "(site:48koskurukshetra.com OR site:kurukshetra.gov.in) -inurl:class- -inurl:recruitment -inurl:tender",
       "generalSite": "site:kurukshetra.gov.in OR site:48koskurukshetra.com",
@@ -333,7 +333,7 @@
     },
     "urls": {
       "districtGovt": "https://sirsa.gov.in",
-      "tourismPortal": "https://haryanatourism.gov.in",
+      "tourismPortal": "https://sirsa.gov.in/culture-heritage",
       "stateHaryanaTourism": "https://haryanatourism.gov.in",
       "university": "https://cdlu.ac.in",
       "districtCourt": "https://sirsa.dcourts.gov.in",
@@ -356,7 +356,7 @@
       "censusData": "https://sirsa.gov.in/about-district/demography/"
     },
     "serpapi": {
-      "tourismSite1": "site:haryanatourism.gov.in sirsa",
+      "tourismSite1": "site:sirsa.gov.in/culture-heritage/",
       "tourismSite2": "site:sirsa.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
       "tourismSite3": "site:sirsa.gov.in OR site:haryanatourism.gov.in",
       "generalSite": "site:sirsa.gov.in",
@@ -384,8 +384,8 @@
       "districtContext": "Sirsa district, Haryana, India. It is the largest district of Haryana by area, named after the Shirish tree, and is known for Tara Baba Kutia and its agricultural prominence."
     },
     "tourismSites": {
-      "primaryPortal": "haryanatourism.gov.in",
-      "secondaryPortal": "sirsa.gov.in",
+      "primaryPortal": "sirsa.gov.in/culture-heritage/",
+      "secondaryPortal": "haryanatourism.gov.in",
       "broadQueryPrimary": "https://haryanatourism.gov.in/destination/sirsa/",
       "broadQuerySecondary": "https://sirsa.gov.in/culture-heritage/",
       "generalListPrimary": "https://haryanatourism.gov.in/destination/sirsa/",
