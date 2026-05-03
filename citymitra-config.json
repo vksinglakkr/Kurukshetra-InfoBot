@@ -1122,7 +1122,7 @@
     },
     "urls": {
       "districtGovt": "https://amritsar.nic.in",
-      "tourismPortal": "https://punjabtourism.punjab.gov.in",
+      "tourismPortal": "https://amritsar.nic.in/tourist-places/",
       "stateTourism": "https://punjabtourism.punjab.gov.in",
       "university": "https://online.gndu.ac.in",
       "districtCourt": "https://amritsar.dcourts.gov.in",
@@ -1145,7 +1145,7 @@
       "censusData": "https://amritsar.nic.in/demography/"
     },
     "serpapi": {
-      "tourismSite1": "site:punjabtourism.punjab.gov.in amritsar",
+      "tourismSite1": "site:amritsar.nic.in/tourist-places/",
       "tourismSite2": "site:amritsar.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
       "tourismSite3": "site:amritsar.nic.in OR site:punjabtourism.punjab.gov.in",
       "generalSite": "site:amritsar.nic.in",
@@ -1173,16 +1173,16 @@
       "districtContext": "Amritsar is the spiritual center of Sikhism. Famous for the Harmandir Sahib, Wagah Border, and Jallianwala Bagh."
     },
     "tourismSites": {
-      "primaryPortal": "punjabtourism.punjab.gov.in",
-      "secondaryPortal": "amritsar.nic.in",
-      "broadQueryPrimary": "https://punjabtourism.punjab.gov.in/destination/amritsar",
-      "broadQuerySecondary": "https://amritsar.nic.in/tourist-places/",
-      "generalListPrimary": "https://punjabtourism.punjab.gov.in",
-      "generalListSecondary": "https://amritsar.nic.in/tourist-places/"
+      "primaryPortal": "amritsar.nic.in/tourist-places/",
+      "secondaryPortal": "punjabtourism.punjab.gov.in",
+      "broadQueryPrimary": "https://amritsar.nic.in/tourist-places/",
+      "broadQuerySecondary": "https://punjabtourism.punjab.gov.in/destination/amritsar/",
+      "generalListPrimary": "https://amritsar.nic.in/tourist-places/",
+      "generalListSecondary": "https://punjabtourism.punjab.gov.in"
     },
     "perspectiveFallbackUrls": {
-      "historical": { "primary": "https://amritsar.nic.in/about-district/", "secondary": "https://amritsar.nic.in/tourist-places/" },
-      "general": { "primary": "https://punjabtourism.punjab.gov.in/", "secondary": "https://amritsar.nic.in/tourist-places/" }
+      "historical": { "primary": "https://amritsar.nic.in/tourist-places/", "secondary": "https://amritsar.nic.in/about-district/" },
+      "general": { "primary": "https://amritsar.nic.in/tourist-places/", "secondary": "https://punjabtourism.punjab.gov.in/" }
     },
     "hardcodedPageLinks": {
       "person_fallback": "https://amritsar.nic.in/whos-who/",
