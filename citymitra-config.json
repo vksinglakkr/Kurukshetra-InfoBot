@@ -1027,7 +1027,7 @@
     },
     "urls": {
       "districtGovt": "https://jaipur.rajasthan.gov.in",
-      "tourismPortal": "https://www.tourism.rajasthan.gov.in",
+      "tourismPortal": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
       "stateTourism": "https://www.tourism.rajasthan.gov.in",
       "university": "https://www.uniraj.ac.in",
       "districtCourt": "https://jaipur.dcourts.gov.in",
@@ -1050,7 +1050,7 @@
       "censusData": "https://jaipur.rajasthan.gov.in/demography/"
     },
     "serpapi": {
-      "tourismSite1": "site:tourism.rajasthan.gov.in jaipur",
+      "tourismSite1": "site:jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
       "tourismSite2": "site:jaipur.rajasthan.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
       "tourismSite3": "site:jaipur.rajasthan.gov.in OR site:tourism.rajasthan.gov.in",
       "generalSite": "site:jaipur.rajasthan.gov.in",
@@ -1078,16 +1078,16 @@
       "districtContext": "Jaipur is the capital of Rajasthan, part of the Golden Triangle. Famous for Hawa Mahal, Amer Fort, and its UNESCO heritage city center."
     },
     "tourismSites": {
-      "primaryPortal": "tourism.rajasthan.gov.in",
-      "secondaryPortal": "jaipur.rajasthan.gov.in",
-      "broadQueryPrimary": "https://www.tourism.rajasthan.gov.in/jaipur.html",
-      "broadQuerySecondary": "https://jaipur.rajasthan.gov.in/tourist-places/",
-      "generalListPrimary": "https://www.tourism.rajasthan.gov.in",
-      "generalListSecondary": "https://jaipur.rajasthan.gov.in/tourist-places/"
+      "primaryPortal": "jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
+      "secondaryPortal": "tourism.rajasthan.gov.in",
+      "broadQueryPrimary": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
+      "broadQuerySecondary": "https://www.tourism.rajasthan.gov.in/jaipur.html",
+      "generalListPrimary": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
+      "generalListSecondary": "https://www.tourism.rajasthan.gov.in"
     },
     "perspectiveFallbackUrls": {
-      "historical": { "primary": "https://jaipur.rajasthan.gov.in/about-district/", "secondary": "https://jaipur.rajasthan.gov.in/tourist-places/" },
-      "general": { "primary": "https://www.tourism.rajasthan.gov.in/", "secondary": "https://jaipur.rajasthan.gov.in/tourist-places/" }
+      "historical": { "primary": "https://jaipur.rajasthan.gov.in/about-district/", "secondary": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29" },
+      "general": { "primary": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29", "secondary": "https://www.tourism.rajasthan.gov.in/" }
     },
     "hardcodedPageLinks": {
       "person_fallback": "https://jaipur.rajasthan.gov.in/whoswho/",
@@ -1095,7 +1095,7 @@
       "admin_structure": "https://jaipur.rajasthan.gov.in/administrative-setup/",
       "demographic": "https://jaipur.rajasthan.gov.in/demography/",
       "accommodation": "https://jaipur.rajasthan.gov.in/accommodation/",
-      "tourism_general": "https://jaipur.rajasthan.gov.in/tourist-places/",
+      "tourism_general": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
       "police": "https://jaipurpolice.rajasthan.gov.in/",
       "court": "https://jaipur.dcourts.gov.in/"
     },
