@@ -1217,7 +1217,7 @@
     },
     "urls": {
       "districtGovt": "https://varanasi.nic.in",
-      "tourismPortal": "https://www.uptourism.gov.in",
+      "tourismPortal": "https://varanasi.nic.in/tourist-places/",
       "stateTourism": "https://www.uptourism.gov.in",
       "university": "https://www.bhu.ac.in",
       "districtCourt": "https://varanasi.dcourts.gov.in",
@@ -1240,7 +1240,7 @@
       "censusData": "https://varanasi.nic.in/demography/"
     },
     "serpapi": {
-      "tourismSite1": "site:uptourism.gov.in varanasi",
+      "tourismSite1": "site:varanasi.nic.in/tourist-places/",
       "tourismSite2": "site:varanasi.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
       "tourismSite3": "site:varanasi.nic.in OR site:uptourism.gov.in",
       "generalSite": "site:varanasi.nic.in",
@@ -1268,16 +1268,16 @@
       "districtContext": "Varanasi is one of the oldest living cities. Famous for Kashi Vishwanath Temple, Ganga Ghats, and the Banarasi Saree industry."
     },
     "tourismSites": {
-      "primaryPortal": "uptourism.gov.in",
-      "secondaryPortal": "varanasi.nic.in",
-      "broadQueryPrimary": "https://www.uptourism.gov.in/destination/varanasi",
-      "broadQuerySecondary": "https://varanasi.nic.in/tourist-places/",
-      "generalListPrimary": "https://www.uptourism.gov.in",
-      "generalListSecondary": "https://varanasi.nic.in/tourist-places/"
+      "primaryPortal": "varanasi.nic.in",
+      "secondaryPortal": "uptourism.gov.in",
+      "broadQueryPrimary": "https://varanasi.nic.in/tourist-places/",
+      "broadQuerySecondary": "https://www.uptourism.gov.in/destination/varanasi/",
+      "generalListPrimary": "https://varanasi.nic.in/tourist-places/",
+      "generalListSecondary": "https://www.uptourism.gov.in"
     },
     "perspectiveFallbackUrls": {
       "historical": { "primary": "https://varanasi.nic.in/about-district/", "secondary": "https://varanasi.nic.in/tourist-places/" },
-      "general": { "primary": "https://www.uptourism.gov.in/", "secondary": "https://varanasi.nic.in/tourist-places/" }
+      "general": { "primary": "https://varanasi.nic.in/tourist-places/", "secondary": "https://www.uptourism.gov.in/" }
     },
     "hardcodedPageLinks": {
       "person_fallback": "https://varanasi.nic.in/whoswho/",
