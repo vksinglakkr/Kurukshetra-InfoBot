@@ -347,13 +347,13 @@
     "govtPages": {
       "attractions": "https://sirsa.gov.in/culture-heritage/",
       "knowAbout": "https://sirsa.gov.in/about-district/demography/",
-      "aboutDistrict": "https://sirsa.gov.in/about-district/",
+      "aboutDistrict": "https://sirsa.gov.in/history/",
       "whereToStay": "https://sirsa.gov.in/accommodation/",
       "whoswho": "https://sirsa.gov.in/whos-who/",
       "directory": "https://sirsa.gov.in/directory/",
       "adminSetup": "https://sirsa.gov.in/about-district/administrative-setup/",
       "politicalSetup": "",
-      "censusData": "https://sirsa.gov.in/about-district/demography/"
+      "censusData": "https://sirsa.gov.in/demography/"
     },
     "serpapi": {
       "tourismSite1": "site:sirsa.gov.in/culture-heritage/",
@@ -399,7 +399,7 @@
       "person_fallback": "https://sirsa.gov.in/whos-who/",
       "village_admin": "https://sirsa.gov.in/directory/",
       "admin_structure": "https://sirsa.gov.in/about-district/administrative-setup/",
-      "demographic": "https://sirsa.gov.in/about-district/demography/",
+      "demographic": "https://sirsa.gov.in/demography/",
       "accommodation": "https://sirsa.gov.in/accommodation/",
       "tourism_general": "https://sirsa.gov.in/culture-heritage/",
       "police": "https://sirsa.haryanapolice.gov.in/",
@@ -548,7 +548,7 @@
     },
     "govtPages": {
       "attractions": "https://faridabad.nic.in/places-of-interest/",
-      "knowAbout": "https://faridabad.nic.in/demography/",
+      "knowAbout": "https://faridabad.nic.in/history/",
       "aboutDistrict": "https://faridabad.nic.in/about-district/",
       "whereToStay": "https://faridabad.nic.in/accommodation/",
       "whoswho": "https://faridabad.nic.in/whos-who/",
@@ -650,7 +650,7 @@
     "govtPages": {
       "attractions": "https://panchkula.nic.in/tourist-places/",
       "knowAbout": "https://panchkula.nic.in/demography/",
-      "aboutDistrict": "https://panchkula.nic.in/about-district/",
+      "aboutDistrict": "https://panchkula.nic.in/history/",
       "whereToStay": "https://panchkula.nic.in/accommodation/",
       "whoswho": "https://panchkula.nic.in/whos-who/",
       "directory": "https://panchkula.nic.in/directory/",
@@ -845,8 +845,8 @@
     },
     "govtPages": {
       "attractions": "https://indore.nic.in/tourist-places/",
-      "knowAbout": "https://indore.nic.in/demography/",
-      "aboutDistrict": "https://indore.nic.in/about-district/",
+      "knowAbout": "https://indore.nic.in/en/history/",
+      "aboutDistrict": "https://indore.nic.in/en/about-district/",
       "whereToStay": "https://indore.nic.in/accommodation/",
       "whoswho": "https://indore.nic.in/whoswho/",
       "directory": "https://indore.nic.in/directory/",
@@ -940,14 +940,14 @@
     },
     "govtPages": {
       "attractions": "https://dehradun.gov.in/tourist-places/",
-      "knowAbout": "https://dehradun.gov.in/demography/",
-      "aboutDistrict": "https://dehradun.gov.in/about-district/",
+      "knowAbout": "https://dehradun.nic.in/history/",
+      "aboutDistrict": "https://dehradun.nic.in/history/",
       "whereToStay": "https://dehradun.gov.in/accommodation/",
       "whoswho": "https://dehradun.nic.in/about-district/whos-who/",
       "directory": "https://dehradun.gov.in/directory/",
       "adminSetup": "https://dehradun.gov.in/administrative-setup/",
       "politicalSetup": "",
-      "censusData": "https://dehradun.gov.in/demography/"
+      "censusData": "https://dehradun.nic.in/population/"
     },
     "serpapi": {
       "tourismSite1": "site:dehradun.gov.in/tourist-places/",
@@ -993,7 +993,7 @@
       "person_fallback": "https://dehradun.nic.in/about-district/whos-who/",
       "village_admin": "https://dehradun.gov.in/directory/",
       "admin_structure": "https://dehradun.gov.in/administrative-setup/",
-      "demographic": "https://dehradun.gov.in/demography/",
+      "demographic": "https://dehradun.nic.in/population/",
       "accommodation": "https://dehradun.gov.in/accommodation/",
       "tourism_general": "https://dehradun.gov.in/tourist-places/",
       "police": "https://dehradunpolice.uk.gov.in/",
@@ -1039,13 +1039,13 @@
     "govtPages": {
       "attractions": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
       "knowAbout": "https://jaipur.rajasthan.gov.in/demography/",
-      "aboutDistrict": "https://jaipur.rajasthan.gov.in/about-district/",
+      "aboutDistrict": "https://jaipur.rajasthan.gov.in/sm/jankalyan-category-and-entry-type/12177/37/4/1",
       "whereToStay": "https://jaipur.rajasthan.gov.in/accommodation/",
       "whoswho": "https://jaipur.rajasthan.gov.in/whoswho/",
       "directory": "https://jaipur.rajasthan.gov.in/directory/",
       "adminSetup": "https://jaipur.rajasthan.gov.in/administrative-setup/",
       "politicalSetup": "",
-      "censusData": "https://jaipur.rajasthan.gov.in/demography/"
+      "censusData": "https://jaipur.rajasthan.gov.in/sm/jankalyan-category-and-entry-type/12179/37/1/4"
     },
     "serpapi": {
       "tourismSite1": "site:jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
@@ -1091,7 +1091,7 @@
       "person_fallback": "https://jaipur.rajasthan.gov.in/whoswho/",
       "village_admin": "https://jaipur.rajasthan.gov.in/directory/",
       "admin_structure": "https://jaipur.rajasthan.gov.in/administrative-setup/",
-      "demographic": "https://jaipur.rajasthan.gov.in/demography/",
+      "demographic": "https://jaipur.rajasthan.gov.in/sm/jankalyan-category-and-entry-type/12179/37/1/4",
       "accommodation": "https://jaipur.rajasthan.gov.in/accommodation/",
       "tourism_general": "https://jaipur.rajasthan.gov.in/pages/sm/district-info-detail/12184/37/29",
       "police": "https://jaipurpolice.rajasthan.gov.in/",
@@ -1133,8 +1133,8 @@
     },
     "govtPages": {
       "attractions": "https://amritsar.nic.in/tourist-places/",
-      "knowAbout": "https://amritsar.nic.in/demography/",
-      "aboutDistrict": "https://amritsar.nic.in/about-district/",
+      "knowAbout": "https://amritsar.nic.in/history/",
+      "aboutDistrict": "https://amritsar.nic.in/history/",
       "whereToStay": "https://amritsar.nic.in/accommodation/",
       "whoswho": "https://amritsar.nic.in/whos-who/",
       "directory": "https://amritsar.nic.in/directory/",
@@ -1228,7 +1228,7 @@
     },
     "govtPages": {
       "attractions": "https://varanasi.nic.in/tourist-places/",
-      "knowAbout": "https://varanasi.nic.in/demography/",
+      "knowAbout": "https://varanasi.nic.in/history/",
       "aboutDistrict": "https://varanasi.nic.in/about-district/",
       "whereToStay": "https://varanasi.nic.in/accommodation/",
       "whoswho": "https://varanasi.nic.in/whoswho/",
