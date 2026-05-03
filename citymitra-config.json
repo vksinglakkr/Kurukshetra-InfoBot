@@ -832,7 +832,7 @@
     },
     "urls": {
       "districtGovt": "https://indore.nic.in",
-      "tourismPortal": "https://www.mptourism.com",
+      "tourismPortal": "https://indore.nic.in/tourist-places/",
       "stateTourism": "https://www.mptourism.com",
       "university": "https://www.dauniv.ac.in",
       "districtCourt": "https://indore.dcourts.gov.in",
@@ -855,7 +855,7 @@
       "censusData": "https://indore.nic.in/demography/"
     },
     "serpapi": {
-      "tourismSite1": "site:mptourism.com indore",
+      "tourismSite1": "site:indore.nic.in/tourist-places/",
       "tourismSite2": "site:indore.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
       "tourismSite3": "site:indore.nic.in OR site:mptourism.com",
       "generalSite": "site:indore.nic.in",
@@ -883,16 +883,16 @@
       "districtContext": "Indore is the cleanest city in India. Famous for Rajwada Palace, Sarafa Bazaar street food, and the Holkar legacy."
     },
     "tourismSites": {
-      "primaryPortal": "mptourism.com",
-      "secondaryPortal": "indore.nic.in",
-      "broadQueryPrimary": "https://www.mptourism.com/destination-indore.php",
-      "broadQuerySecondary": "https://indore.nic.in/tourist-places/",
-      "generalListPrimary": "https://www.mptourism.com",
-      "generalListSecondary": "https://indore.nic.in/tourist-places/"
+      "primaryPortal": "indore.nic.in/tourist-places/",
+      "secondaryPortal": "mptourism.com",
+      "broadQueryPrimary": "https://indore.nic.in/tourist-places/",
+      "broadQuerySecondary": "https://www.mptourism.com/destination-indore.php",
+      "generalListPrimary": "https://indore.nic.in/tourist-places/",
+      "generalListSecondary": "https://www.mptourism.com"
     },
     "perspectiveFallbackUrls": {
       "historical": { "primary": "https://indore.nic.in/about-district/", "secondary": "https://indore.nic.in/tourist-places/" },
-      "general": { "primary": "https://www.mptourism.com/", "secondary": "https://indore.nic.in/tourist-places/" }
+      "general": { "primary": "https://indore.nic.in/tourist-places/", "secondary": "https://www.mptourism.com/" }
     },
     "hardcodedPageLinks": {
       "person_fallback": "https://indore.nic.in/whoswho/",
