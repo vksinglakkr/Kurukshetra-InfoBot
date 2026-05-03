@@ -1046,7 +1046,7 @@
       "whoswho": "https://jaipur.rajasthan.gov.in/whoswho/",
       "directory": "https://jaipur.rajasthan.gov.in/directory/",
       "adminSetup": "https://jaipur.rajasthan.gov.in/administrative-setup/",
-      "politicalSetup": "https://jaipur.rajasthan.gov.in/",
+      "politicalSetup": "",
       "censusData": "https://jaipur.rajasthan.gov.in/demography/"
     },
     "serpapi": {
