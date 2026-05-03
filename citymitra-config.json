@@ -453,7 +453,7 @@
       "whoswho": "https://palwal.gov.in/whoswho/",
       "directory": "https://palwal.gov.in/directory/",
       "adminSetup": "https://palwal.gov.in/administrative-setup/",
-      "politicalSetup": "https://palwal.gov.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://palwal.gov.in/demography/"
     },
     "serpapi": {
@@ -554,7 +554,7 @@
       "whoswho": "https://faridabad.nic.in/whos-who/",
       "directory": "https://faridabad.nic.in/directory/",
       "adminSetup": "https://faridabad.nic.in/administrative-setup/",
-      "politicalSetup": "https://faridabad.nic.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://faridabad.nic.in/demography/"
     },
     "serpapi": {
@@ -655,7 +655,7 @@
       "whoswho": "https://panchkula.nic.in/whos-who/",
       "directory": "https://panchkula.nic.in/directory/",
       "adminSetup": "https://panchkula.nic.in/administrative-setup/",
-      "politicalSetup": "https://panchkula.nic.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://panchkula.nic.in/demography/"
     },
     "serpapi": {
@@ -755,7 +755,7 @@
       "whoswho": "https://ranchi.nic.in/whos-who/",
       "directory": "https://ranchi.nic.in/directory/",
       "adminSetup": "https://ranchi.nic.in/administrative-setup/",
-      "politicalSetup": "https://ranchi.nic.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://ranchi.nic.in/demography/"
     },
     "serpapi": {
@@ -851,7 +851,7 @@
       "whoswho": "https://indore.nic.in/whoswho/",
       "directory": "https://indore.nic.in/directory/",
       "adminSetup": "https://indore.nic.in/administrative-setup/",
-      "politicalSetup": "https://indore.nic.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://indore.nic.in/demography/"
     },
     "serpapi": {
@@ -946,7 +946,7 @@
       "whoswho": "https://dehradun.nic.in/about-district/whos-who/",
       "directory": "https://dehradun.gov.in/directory/",
       "adminSetup": "https://dehradun.gov.in/administrative-setup/",
-      "politicalSetup": "https://dehradun.gov.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://dehradun.gov.in/demography/"
     },
     "serpapi": {
@@ -1046,7 +1046,7 @@
       "whoswho": "https://jaipur.rajasthan.gov.in/whoswho/",
       "directory": "https://jaipur.rajasthan.gov.in/directory/",
       "adminSetup": "https://jaipur.rajasthan.gov.in/administrative-setup/",
-      "politicalSetup": "https://jaipur.rajasthan.gov.in/political-setup/",
+      "politicalSetup": "https://jaipur.rajasthan.gov.in/",
       "censusData": "https://jaipur.rajasthan.gov.in/demography/"
     },
     "serpapi": {
@@ -1121,7 +1121,7 @@
       "appDomain": "https://amritsar-citymitra.app"
     },
     "urls": {
-      "districtGovt": "https://amritsar.gov.in",
+      "districtGovt": "https://amritsar.nic.in",
       "tourismPortal": "https://punjabtourism.punjab.gov.in",
       "stateTourism": "https://punjabtourism.punjab.gov.in",
       "university": "https://online.gndu.ac.in",
@@ -1134,21 +1134,21 @@
       "googleMapsDistrict": "http://googleusercontent.com/maps.google.com/?q=Amritsar"
     },
     "govtPages": {
-      "attractions": "https://amritsar.gov.in/tourist-places/",
-      "knowAbout": "https://amritsar.gov.in/demography/",
-      "aboutDistrict": "https://amritsar.gov.in/about-district/",
-      "whereToStay": "https://amritsar.gov.in/accommodation/",
-      "whoswho": "https://amritsar.gov.in/whos-who/",
-      "directory": "https://amritsar.gov.in/directory/",
-      "adminSetup": "https://amritsar.gov.in/administrative-setup/",
-      "politicalSetup": "https://amritsar.gov.in/political-setup/",
-      "censusData": "https://amritsar.gov.in/demography/"
+      "attractions": "https://amritsar.nic.in/tourist-places/",
+      "knowAbout": "https://amritsar.nic.in/demography/",
+      "aboutDistrict": "https://amritsar.nic.in/about-district/",
+      "whereToStay": "https://amritsar.nic.in/accommodation/",
+      "whoswho": "https://amritsar.nic.in/whos-who/",
+      "directory": "https://amritsar.nic.in/directory/",
+      "adminSetup": "https://amritsar.nic.in/administrative-setup/",
+      "politicalSetup": "",
+      "censusData": "https://amritsar.nic.in/demography/"
     },
     "serpapi": {
       "tourismSite1": "site:punjabtourism.punjab.gov.in amritsar",
-      "tourismSite2": "site:amritsar.gov.in -inurl:class- -inurl:recruitment -inurl:tender",
-      "tourismSite3": "site:amritsar.gov.in OR site:punjabtourism.punjab.gov.in",
-      "generalSite": "site:amritsar.gov.in",
+      "tourismSite2": "site:amritsar.nic.in -inurl:class- -inurl:recruitment -inurl:tender",
+      "tourismSite3": "site:amritsar.nic.in OR site:punjabtourism.punjab.gov.in",
+      "generalSite": "site:amritsar.nic.in",
       "contextSuffix": "Amritsar Punjab"
     },
     "googleSheets": {
@@ -1174,23 +1174,23 @@
     },
     "tourismSites": {
       "primaryPortal": "punjabtourism.punjab.gov.in",
-      "secondaryPortal": "amritsar.gov.in",
+      "secondaryPortal": "amritsar.nic.in",
       "broadQueryPrimary": "https://punjabtourism.punjab.gov.in/destination/amritsar",
-      "broadQuerySecondary": "https://amritsar.gov.in/tourist-places/",
+      "broadQuerySecondary": "https://amritsar.nic.in/tourist-places/",
       "generalListPrimary": "https://punjabtourism.punjab.gov.in",
-      "generalListSecondary": "https://amritsar.gov.in/tourist-places/"
+      "generalListSecondary": "https://amritsar.nic.in/tourist-places/"
     },
     "perspectiveFallbackUrls": {
-      "historical": { "primary": "https://amritsar.gov.in/about-district/", "secondary": "https://amritsar.gov.in/tourist-places/" },
-      "general": { "primary": "https://punjabtourism.punjab.gov.in/", "secondary": "https://amritsar.gov.in/tourist-places/" }
+      "historical": { "primary": "https://amritsar.nic.in/about-district/", "secondary": "https://amritsar.nic.in/tourist-places/" },
+      "general": { "primary": "https://punjabtourism.punjab.gov.in/", "secondary": "https://amritsar.nic.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://amritsar.gov.in/whos-who/",
-      "village_admin": "https://amritsar.gov.in/directory/",
-      "admin_structure": "https://amritsar.gov.in/administrative-setup/",
-      "demographic": "https://amritsar.gov.in/demography/",
-      "accommodation": "https://amritsar.gov.in/accommodation/",
-      "tourism_general": "https://amritsar.gov.in/tourist-places/",
+      "person_fallback": "https://amritsar.nic.in/whos-who/",
+      "village_admin": "https://amritsar.nic.in/directory/",
+      "admin_structure": "https://amritsar.nic.in/administrative-setup/",
+      "demographic": "https://amritsar.nic.in/demography/",
+      "accommodation": "https://amritsar.nic.in/accommodation/",
+      "tourism_general": "https://amritsar.nic.in/tourist-places/",
       "police": "https://amritsarpolice.gov.in/",
       "court": "https://amritsar.dcourts.gov.in/"
     },
@@ -1236,7 +1236,7 @@
       "whoswho": "https://varanasi.nic.in/whoswho/",
       "directory": "https://varanasi.nic.in/directory/",
       "adminSetup": "https://varanasi.nic.in/administrative-setup/",
-      "politicalSetup": "https://varanasi.nic.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://varanasi.nic.in/demography/"
     },
     "serpapi": {
