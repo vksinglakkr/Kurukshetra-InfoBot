@@ -44,10 +44,10 @@
       "censusData": "https://kurukshetra.gov.in/know-about-kurukshetra/"
     },
     "serpapi": {
-      "tourismSite1": "site:kkrtour.com",
+      "tourismSite1": "site:https://kurukshetra.gov.in/kurukshetraattractions/",
       "tourismSite2": "site:kurukshetra.gov.in -inurl:class- -inurl:recruitment -inurl:tender -inurl:download -inurl:gallery",
       "tourismSite3": "(site:48koskurukshetra.com OR site:kurukshetra.gov.in) -inurl:class- -inurl:recruitment -inurl:tender",
-      "generalSite": "site:kurukshetra.gov.in OR site:kkrtour.com",
+      "generalSite": "site:kurukshetra.gov.in OR site:48koskurukshetra.com",
       "contextSuffix": "Kurukshetra Haryana"
     },
     "googleSheets": {
@@ -72,14 +72,14 @@
       "districtContext": "Kurukshetra district, Haryana, India. Famous for Bhagavad Gita, Mahabharata battlefield, 48 Kos pilgrimage circuit, Brahma Sarovar, Jyotisar, International Gita Mahotsav."
     },
     "tourismSites": {
-      "primaryPortal": "kkrtour.com",
+      "primaryPortal": "48koskurukshetra.com",
       "secondaryPortal": "kurukshetra.gov.in",
       "tertiary48Kos": "48koskurukshetra.com",
-      "broadQueryPrimary": "https://kkrtour.com/viewall.html",
+      "broadQueryPrimary": "48koskurukshetra.com",
       "broadQuerySecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
-      "generalListPrimary": "https://kkrtour.com",
+      "generalListPrimary": "48koskurukshetra.com",
       "generalListSecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
-      "kkrTourListTemplate": "https://kkrtour.com/List.php?id={siteId}",
+      "kkrTourListTemplate": "https://48koskurukshetra.com",
       "48kosTemplate": "https://48koskurukshetra.com/{kosSite}/"
     },
     "perspectiveFallbackUrls": {
@@ -89,7 +89,7 @@
       "historical": { "primary": "https://kurukshetra.gov.in/about-district/", "secondary": "https://kurukshetra.gov.in/know-about-kurukshetra/" },
       "hindu": { "primary": "https://kkrtour.com/viewall.html", "secondary": "https://kurukshetra.gov.in/about-district/" },
       "parikrama": { "primary": "https://48koskurukshetra.com/", "secondary": "https://kurukshetra.gov.in/about-district/" },
-      "general": { "primary": "https://kkrtour.com/viewall.html", "secondary": "https://kurukshetra.gov.in/kurukshetraattractions/" }
+      "general": { "primary": "https://48koskurukshetra.com", "secondary": "https://kurukshetra.gov.in/kurukshetraattractions/" }
     },
     "hardcodedPageLinks": {
       "person_fallback": "https://kurukshetra.gov.in/political-setup-kurukshetra/",
