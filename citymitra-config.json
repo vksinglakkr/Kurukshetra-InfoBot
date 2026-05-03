@@ -150,7 +150,7 @@
       "whoswho": "https://karnal.gov.in/about-district/whos-who/",
       "directory": "https://karnal.gov.in/directory/",
       "adminSetup": "https://karnal.gov.in/administrative-setup/",
-      "politicalSetup": "https://karnal.gov.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://karnal.gov.in/about-karnal/"
     },
     "serpapi": {
@@ -194,7 +194,7 @@
       "general": { "primary": "https://haryanatourism.gov.in/destination/karnal/", "secondary": "https://karnal.gov.in/tourist-places/" }
     },
     "hardcodedPageLinks": {
-      "person_fallback": "https://karnal.gov.in/political-setup/",
+      "person_fallback": "https://karnal.gov.in/about-district/whos-who/",
       "village_admin": "https://karnal.gov.in/directory/",
       "admin_structure": "https://karnal.gov.in/administrative-setup/",
       "demographic": "https://karnal.gov.in/about-karnal/",
