@@ -251,7 +251,7 @@
       "whoswho": "https://ambala.gov.in/whoswho/",
       "directory": "https://ambala.gov.in/directory/",
       "adminSetup": "https://ambala.gov.in/administrative-setup/",
-      "politicalSetup": "https://ambala.gov.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://ambala.gov.in/demography/"
     },
     "serpapi": {
