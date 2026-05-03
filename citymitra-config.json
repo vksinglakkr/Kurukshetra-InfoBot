@@ -72,15 +72,15 @@
       "districtContext": "Kurukshetra district, Haryana, India. Famous for Bhagavad Gita, Mahabharata battlefield, 48 Kos pilgrimage circuit, Brahma Sarovar, Jyotisar, International Gita Mahotsav."
     },
     "tourismSites": {
-      "primaryPortal": "48koskurukshetra.com",
-      "secondaryPortal": "kurukshetra.gov.in",
-      "tertiary48Kos": "48koskurukshetra.com",
-      "broadQueryPrimary": "48koskurukshetra.com",
-      "broadQuerySecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
-      "generalListPrimary": "48koskurukshetra.com",
-      "generalListSecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
-      "kkrTourListTemplate": "https://48koskurukshetra.com",
-      "48kosTemplate": "https://48koskurukshetra.com/{kosSite}/"
+        "primaryPortal": "48koskurukshetra.com",
+        "secondaryPortal": "kurukshetra.gov.in",
+        "tertiary48Kos": "48koskurukshetra.com",
+        "broadQueryPrimary": "https://48koskurukshetra.com", 
+        "broadQuerySecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
+        "generalListPrimary": "https://48koskurukshetra.com", 
+        "generalListSecondary": "https://kurukshetra.gov.in/kurukshetraattractions/",
+        "kkrTourListTemplate": "https://48koskurukshetra.com",
+        "48kosTemplate": "https://48koskurukshetra.com/{kosSite}/"
     },
     "perspectiveFallbackUrls": {
       "buddhist": { "primary": "https://kurukshetra.gov.in/about-district/", "secondary": "https://kurukshetra.gov.in/kurukshetraattractions/" },
