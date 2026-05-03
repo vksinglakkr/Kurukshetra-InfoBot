@@ -232,7 +232,7 @@
     },
     "urls": {
       "districtGovt": "https://ambala.gov.in",
-      "tourismPortal": "https://haryanatourism.gov.in",
+      "tourismPortal": "https://ambala.gov.in/tourist-places/",
       "stateHaryanaTourism": "https://haryanatourism.gov.in",
       "university": "",
       "districtCourt": "https://ambala.dcourts.gov.in",
@@ -283,16 +283,16 @@
       "districtContext": "Ambala district, Haryana, India. Known as the Twin City, famous for its large cantonment, scientific instruments industry, and cloth market."
     },
     "tourismSites": {
-      "primaryPortal": "haryanatourism.gov.in",
+      "primaryPortal": "ambala.gov.in/tourist-places/",
       "secondaryPortal": "ambala.gov.in",
-      "broadQueryPrimary": "https://haryanatourism.gov.in/destination/ambala/",
+      "broadQueryPrimary": "https://ambala.gov.in/tourist-places/",
       "broadQuerySecondary": "https://ambala.gov.in/tourist-places/",
       "generalListPrimary": "https://haryanatourism.gov.in/destination/ambala/",
       "generalListSecondary": "https://ambala.gov.in/tourist-places/"
     },
     "perspectiveFallbackUrls": {
       "historical": { "primary": "https://ambala.gov.in/about-district/", "secondary": "https://ambala.gov.in/tourist-places/" },
-      "general": { "primary": "https://haryanatourism.gov.in/destination/ambala/", "secondary": "https://ambala.gov.in/tourist-places/" }
+      "general": { "primary": "https://ambala.gov.in/tourist-places/", "secondary": "https://haryanatourism.gov.in/destination/ambala/" }
     },
     "hardcodedPageLinks": {
       "person_fallback": "https://ambala.gov.in/political-setup/",
