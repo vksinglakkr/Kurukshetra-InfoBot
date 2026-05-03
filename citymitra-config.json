@@ -352,7 +352,7 @@
       "whoswho": "https://sirsa.gov.in/whos-who/",
       "directory": "https://sirsa.gov.in/directory/",
       "adminSetup": "https://sirsa.gov.in/about-district/administrative-setup/",
-      "politicalSetup": "https://sirsa.gov.in/political-setup/",
+      "politicalSetup": "",
       "censusData": "https://sirsa.gov.in/about-district/demography/"
     },
     "serpapi": {
